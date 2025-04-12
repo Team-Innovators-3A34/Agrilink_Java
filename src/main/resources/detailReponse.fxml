@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.controllers.DetailReponseController"
+            styleClass="detail-view"
+            stylesheets="@detailreponsess.css">
+
+
+
+    <center>
+        <GridPane hgap="30" vgap="25">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" prefWidth="180"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+            </columnConstraints>
+
+            <!-- Header -->
+            <VBox styleClass="header-box" GridPane.columnSpan="3" GridPane.rowIndex="0">
+                <Label text="Détails de la réponse" styleClass="title-label" alignment="CENTER"/>
+                <Separator prefWidth="1000" styleClass="header-separator"/>
+            </VBox>
+
+            <!-- Contenu -->
+            <Label text="Contenu :" styleClass="label-bold" GridPane.rowIndex="1"/>
+            <Label fx:id="contentLabel" styleClass="content-text" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <!-- Statut -->
+            <Label text="Statut :" styleClass="label-bold" GridPane.rowIndex="2"/>
+            <Label fx:id="statusLabel" styleClass="value-status" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <!-- Date -->
+            <Label text="Date :" styleClass="label-bold" GridPane.rowIndex="3"/>
+            <Label fx:id="dateLabel" styleClass="value-date" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <!-- Solution -->
+            <Label text="Solution :" styleClass="label-bold" GridPane.rowIndex="4"/>
+            <Label fx:id="solutionLabel" styleClass="value-type" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+            <padding>
+                <Insets top="40" right="60" bottom="40" left="60"/>
+            </padding>
+        </GridPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="20" styleClass="button-container">
+            <padding>
+                <Insets top="30" right="60" bottom="50" left="60"/>
+            </padding>
+            <Button fx:id="backButton" text="Retour à la liste" onAction="#handleBack" styleClass="back-button"/>
+        </HBox>
+    </bottom>
+</BorderPane>

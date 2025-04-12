@@ -1,0 +1,84 @@
+.detail-view {
+    -fx-background-color: #ffffff; /* Background color */
+    -fx-border-color: #e0e0e0; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 8px; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, #d3d3d3, 10, 0, 0, 2); /* Shadow effect */
+    -fx-padding: 20px; /* Padding around the container */
+}
+
+.title-label {
+    -fx-font-size: 28px; /* Title font size */
+    -fx-font-weight: 600; /* Bold weight */
+    -fx-text-fill: #2c3e50; /* Dark text color */
+    -fx-padding: 10 0; /* Padding around title */
+}
+
+.section-title {
+    -fx-font-size: 18px; /* Section title font size */
+    -fx-font-weight: 500; /* Medium weight */
+    -fx-text-fill: #34495e; /* Darker gray text */
+    -fx-padding: 8 0; /* Padding for section title */
+}
+
+.label-bold {
+    -fx-font-size: 14px; /* Bold label font size */
+    -fx-font-weight: 600; /* Bold weight */
+    -fx-text-fill: #7f8c8d; /* Gray text color */
+}
+
+.value-label {
+    -fx-font-size: 14px; /* Value label font size */
+    -fx-text-fill: #34495e; /* Darker text color */
+}
+
+.title-content {
+    -fx-font-size: 18px; /* Title content font size */
+    -fx-font-weight: 600; /* Bold weight */
+    -fx-text-fill: #2c3e50; /* Dark text color */
+}
+
+.content-text {
+    -fx-font-size: 14px; /* Content text font size */
+    -fx-text-fill: #5d6d7e; /* Gray text color */
+    -fx-padding: 5 0; /* Padding around content */
+}
+
+.value-status {
+    -fx-font-weight: 600; /* Bold weight for status */
+    -fx-text-fill: #27ae60; /* Green text for status */
+}
+
+.value-date {
+    -fx-text-fill: #8e44ad; /* Purple text for date */
+}
+
+.value-type {
+    -fx-text-fill: #f39c12; /* Orange text for type */
+    -fx-font-style: italic; /* Italic style */
+}
+
+.value-priority {
+    -fx-font-weight: 700; /* Bold weight for priority */
+    -fx-text-fill: #c0392b; /* Red text for priority */
+}
+
+.no-image {
+    -fx-font-style: italic; /* Italic style for no image label */
+    -fx-text-fill: #bdc3c7; /* Gray text color */
+    -fx-font-size: 16px; /* Font size for no image label */
+}
+
+.back-button {
+    -fx-background-color: #3498db; /* Button background color */
+    -fx-text-fill: white; /* Button text color */
+    -fx-font-size: 14px; /* Button font size */
+    -fx-padding: 10 25; /* Padding for button */
+    -fx-background-radius: 20px; /* Rounded corners */
+    -fx-cursor: hand; /* Hand cursor on hover */
+    -fx-effect: dropshadow(gaussian, #2980b9, 10, 0, 0, 2); /* Shadow effect */
+}
+
+.back-button:hover {
+    -fx-background-color: #2980b9; /* Darker background on hover */
+}

@@ -1,0 +1,74 @@
+.response-container {
+    -fx-background-color: #f8f9fa; /* Light background for the container */
+    -fx-padding: 20px; /* Padding around the container */
+}
+
+.main-title {
+    -fx-font-size: 24px; /* Title font size */
+    -fx-font-weight: 600; /* Bold weight */
+    -fx-text-fill: #2c3e50; /* Dark text color */
+}
+
+.subtitle {
+    -fx-font-size: 16px; /* Subtitle font size */
+    -fx-font-weight: 400; /* Normal weight */
+    -fx-text-fill: #6c757d; /* Gray text color */
+}
+
+.section-label {
+    -fx-font-size: 18px; /* Section label font size */
+    -fx-font-weight: 500; /* Medium weight */
+    -fx-text-fill: #34495e; /* Darker gray text */
+}
+
+.response-textarea {
+    -fx-font-size: 14px; /* Text area font size */
+    -fx-text-fill: #5d6d7e; /* Text color */
+    -fx-background-color: white; /* White background */
+    -fx-border-color: #e0e0e0; /* Light border color */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, #d3d3d3, 5, 0, 0, 2); /* Shadow effect */
+}
+
+.response-field {
+    -fx-font-size: 14px; /* Text field font size */
+    -fx-prompt-text-fill: #999; /* Prompt text color */
+    -fx-background-color: white; /* White background */
+    -fx-border-color: #e0e0e0; /* Light border color */
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
+.auto-checkbox {
+    -fx-font-size: 14px; /* Checkbox font size */
+    -fx-text-fill: #2c3e50; /* Checkbox text color */
+}
+
+.submit-button {
+    -fx-background-color: #2ecc71; /* Button background color */
+    -fx-text-fill: white; /* Button text color */
+    -fx-font-size: 16px; /* Button font size */
+    -fx-padding: 12px 40px; /* Padding for button */
+    -fx-background-radius: 25px; /* Rounded corners */
+    -fx-cursor: hand; /* Hand cursor on hover */
+    -fx-effect: dropshadow(gaussian, #27ae60, 8, 0, 0, 2); /* Shadow effect */
+}
+
+.submit-button:hover {
+    -fx-background-color: #27ae60; /* Darker background on hover */
+}
+
+
+.back-button {
+    -fx-background-color: #3498db; /* Blue background */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 10px 20px; /* Padding around the text */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-background-radius: 5px; /* Rounded corners for the background */
+    -fx-cursor: hand; /* Hand cursor on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1); /* Shadow effect */
+}
+
+.back-button:hover {
+    -fx-background-color: #2980b9; /* Darker blue on hover */
+}

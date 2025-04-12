@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.controllers.EditReponseController"
+            styleClass="response-container"
+            stylesheets="@response-style.css">
+    <content>
+        <GridPane hgap="30" vgap="25" styleClass="form-grid">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="30"/>
+                <ColumnConstraints percentWidth="70"/>
+            </columnConstraints>
+
+            <!-- Header -->
+            <VBox styleClass="header-box" GridPane.columnSpan="3" GridPane.rowIndex="0">
+                <Label text="Modifier la réponse" styleClass="main-title"/>
+                <Label fx:id="titleLabel" styleClass="subtitle"/>
+                <Separator prefWidth="1000" styleClass="header-separator"/>
+            </VBox>
+
+            <!-- Section Contenu -->
+            <Label text="Message" styleClass="section-label" GridPane.rowIndex="1"/>
+            <TextArea fx:id="contentTextArea"
+                      GridPane.columnIndex="1" GridPane.rowIndex="1"
+                      wrapText="true" prefRowCount="8" styleClass="response-textarea"/>
+
+            <!-- Section Solution -->
+            <Label text="Solution" styleClass="section-label" GridPane.rowIndex="2"/>
+            <TextField fx:id="solutionTextField"
+                       GridPane.columnIndex="1" GridPane.rowIndex="2"
+                       styleClass="response-field"/>
+
+            <!-- Section Date -->
+            <Label text="Date de réponse" styleClass="section-label" GridPane.rowIndex="3"/>
+            <DatePicker fx:id="datePicker"
+                        GridPane.columnIndex="1" GridPane.rowIndex="3"
+                        styleClass="response-field"/>
+
+            <!-- Options -->
+            <CheckBox fx:id="isAutoCheckBox" text="Réponse auto"
+                      GridPane.columnIndex="1" GridPane.rowIndex="4"
+                      styleClass="auto-checkbox" onAction="#toggleContentField"/>
+
+            <!-- Bouton Modifier -->
+            <Button text="Modifier la réponse" onAction="#handleEdit"
+                    GridPane.columnSpan="2" GridPane.rowIndex="5"
+                    styleClass="submit-button" GridPane.halignment="RIGHT"/>
+
+            <!-- Bouton Annuler -->
+            <Button text="Annuler" onAction="#handleCancel"
+                    GridPane.columnSpan="2" GridPane.rowIndex="6"
+                    styleClass="back-button" GridPane.halignment="RIGHT"/>
+
+            <padding>
+                <Insets top="40" right="60" bottom="40" left="60"/>
+            </padding>
+        </GridPane>
+    </content>
+</ScrollPane>

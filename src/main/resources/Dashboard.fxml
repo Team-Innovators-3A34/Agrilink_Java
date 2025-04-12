@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.controllers.DashboardController"
+            stylesheets="@dashboard.css">
+
+    <left>
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <Button text="Produit" styleClass="side-button"/>
+            <Button text="Recycle" styleClass="side-button"/>
+            <VBox spacing="5">
+                <Button text="Réclamation" onAction="#toggleReclamationMenu" styleClass="side-button"/>
+                <VBox fx:id="reclamationMenu" spacing="5" visible="false" managed="false" style="-fx-padding: 0 0 0 10;">
+                    <Button text="Liste Réclamation" onAction="#afficherListeReclamation" styleClass="side-button-small"/>
+                    <Button text="Liste Archive" onAction="#afficherListeArchive" styleClass="side-button-small"/>
+                    <Button text="liste categorie" onAction="#afficherListeCategorie" styleClass="side-button-small"/>
+                    <Button text="Add categorie" onAction="#afficherAddCategorie" styleClass="side-button-small"/>
+                </VBox>
+            </VBox>
+            <Button text="evenement" styleClass="side-button"/>
+            <Button text="Point Réclamation" styleClass="side-button"/>
+        </VBox>
+    </left>
+
+    <top>
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <HBox spacing="20" alignment="CENTER_LEFT">
+                <ImageView fitWidth="40" fitHeight="40" pickOnBounds="true">
+                    <Image url="@logo.png"/>
+                </ImageView>
+                <Label text="Tableau de Bord Gestion Réclamations" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Déconnexion" styleClass="nav-button"/>
+                <Button text="Paramètres" styleClass="nav-button"/>
+            </HBox>
+            <HBox spacing="15" alignment="CENTER_LEFT" styleClass="filter-bar">
+                <Label text="Période:"/>
+                <ComboBox fx:id="periodeComboBox" prefWidth="150"/>
+                <Label text="Statut:"/>
+                <ComboBox fx:id="statutComboBox" prefWidth="150"/>
+                <Label text="Type:"/>
+                <ComboBox fx:id="typeComboBox" prefWidth="150"/>
+                <Label text="Région:"/>
+                <ComboBox fx:id="regionComboBox" prefWidth="150"/>
+                <Button text="Appliquer Filtres" styleClass="filter-button" onAction="#appliquerFiltres"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="25" style="-fx-padding: 15;">
+            <VBox spacing="10">
+                <Label text="Liste des Réclamations" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <TableView fx:id="reclamationsTableView" minHeight="300" styleClass="data-table">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="60" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="userNameColumn" text="Nom de l'utilisateur" prefWidth="150" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="emailColumn" text="Email" prefWidth="150" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="titleColumn" text="Titre" prefWidth="150" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="contentColumn" text="Contenu" prefWidth="200" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="statusColumn" text="Statut" prefWidth="100" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="dateColumn" text="Date" prefWidth="100" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="priorityColumn" text="Priorité" prefWidth="100" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="stateColumn" text="État" prefWidth="100" style="-fx-alignment: CENTER;"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <GridPane hgap="20" vgap="20" styleClass="kpi-grid">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="20"/>
+                    <ColumnConstraints percentWidth="20"/>
+                    <ColumnConstraints percentWidth="20"/>
+                    <ColumnConstraints percentWidth="20"/>
+                    <ColumnConstraints percentWidth="20"/>
+                </columnConstraints>
+                <VBox spacing="5" alignment="CENTER" GridPane.columnIndex="0">
+                    <Label text="Total Réclamations" styleClass="kpi-label"/>
+                    <Label fx:id="totalReclamationsLabel" text="0" styleClass="kpi-value"/>
+                </VBox>
+                <VBox spacing="5" alignment="CENTER" GridPane.columnIndex="1">
+                    <Label text="En Cours" styleClass="kpi-label"/>
+                    <Label fx:id="enCoursLabel" text="0" styleClass="kpi-value"/>
+                </VBox>
+                <VBox spacing="5" alignment="CENTER" GridPane.columnIndex="2">
+                    <Label text="Résolues" styleClass="kpi-label"/>
+                    <Label fx:id="resoluesLabel" text="0" styleClass="kpi-value"/>
+                </VBox>
+                <VBox spacing="5" alignment="CENTER" GridPane.columnIndex="3">
+                    <Label text="Satisfaction" styleClass="kpi-label"/>
+                    <Label fx:id="satisfactionLabel" text="0%" styleClass="kpi-value"/>
+                </VBox>
+                <VBox spacing="5" alignment="CENTER" GridPane.columnIndex="4">
+                    <Label text="Temps Moyen" styleClass="kpi-label"/>
+                    <Label fx:id="tempsTraitementLabel" text="0h" styleClass="kpi-value"/>
+                </VBox>
+            </GridPane>
+
+            <GridPane hgap="20" vgap="20" styleClass="chart-grid">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50"/>
+                    <ColumnConstraints percentWidth="50"/>
+                </columnConstraints>
+                <BarChart fx:id="statutChart" prefHeight="300" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <xAxis>
+                        <CategoryAxis label="Statut"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Nombre"/>
+                    </yAxis>
+                    <title>Statut des Réclamations</title>
+                </BarChart>
+                <LineChart fx:id="evolutionChart" prefHeight="300" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <xAxis>
+                        <CategoryAxis label="Mois"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Nombre"/>
+                    </yAxis>
+                    <title>Évolution Mensuelle</title>
+                </LineChart>
+                <PieChart fx:id="categorieChart" prefHeight="300" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <AreaChart fx:id="delaiChart" prefHeight="300" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <xAxis>
+                        <CategoryAxis label="Période"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Heures"/>
+                    </yAxis>
+                    <title>Délais de Résolution</title>
+                </AreaChart>
+            </GridPane>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" style="-fx-padding: 10;" alignment="CENTER_LEFT">
+            <Label text="Prêt" styleClass="status-text"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Connecté en tant qu'Admin" styleClass="status-text"/>
+        </HBox>
+    </bottom>
+</BorderPane>

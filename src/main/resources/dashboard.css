@@ -1,0 +1,348 @@
+/* Définition des variables de couleurs */
+.root {
+    /* Couleurs primaires */
+    -fx-primary: #1976D2;
+    -fx-primary-light: #4791DB;
+    -fx-primary-dark: #115293;
+
+    /* Couleurs secondaires */
+    -fx-secondary: #455A64;
+    -fx-secondary-light: #718792;
+    -fx-secondary-dark: #1C313A;
+
+    /* Couleurs d'accentuation */
+    -fx-accent: #43A047;
+    -fx-accent-light: #76D275;
+    -fx-accent-dark: #00701A;
+
+    /* Couleurs de fond et de texte */
+    -fx-background: #F5F7FA;
+    -fx-card-background: #FFFFFF;
+    -fx-text-primary: #212121;
+    -fx-text-secondary: #757575;
+    -fx-text-light: #FFFFFF;
+
+    /* Couleurs d'état */
+    -fx-success: #2E7D32;
+    -fx-warning: #F9A825;
+    -fx-error: #D32F2F;
+    -fx-info: #1976D2;
+
+    /* Autres propriétés globales */
+    -fx-background-color: -fx-background;
+    -fx-font-family: "Segoe UI", "Roboto", sans-serif;
+}
+/* Style des boutons latéraux */
+.side-button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-text-light;
+    -fx-padding: 12 15;
+    -fx-background-radius: 4px;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+    -fx-cursor: hand;
+}
+
+.side-button:hover {
+    -fx-background-color: -fx-primary-dark;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);
+    -fx-translate-y: -1px;
+}
+
+.side-button-small {
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-text-light;
+    -fx-padding: 8 12;
+    -fx-background-radius: 3px;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.side-button-small:hover {
+    -fx-background-color: -fx-secondary-dark;
+}
+/* Typographie */
+.title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-secondary-dark;
+    -fx-padding: 0 0 10 0;
+}
+
+.subtitle {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-secondary;
+    -fx-padding: 0 0 5 0;
+}
+
+.text-regular {
+    -fx-font-size: 13px;
+    -fx-text-fill: -fx-text-primary;
+}
+
+.text-small {
+    -fx-font-size: 11px;
+    -fx-text-fill: -fx-text-secondary;
+}
+
+/* Application aux labels spécifiques */
+.kpi-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: -fx-text-secondary;
+}
+
+.kpi-value {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+}
+/* Table styles */
+.data-table {
+    -fx-background-color: -fx-card-background;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 2);
+    -fx-padding: 5px;
+}
+
+/* Table header style */
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: -fx-secondary-light;
+    -fx-size: 40px;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -fx-text-light;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 15;
+}
+
+/* Table row styles */
+.table-view .table-row-cell {
+    -fx-border-color: transparent transparent rgba(0,0,0,0.05) transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-cell-size: 50px;
+}
+
+/* Even and odd row colors */
+.table-view .table-row-cell:filled {
+    -fx-background-color: -fx-card-background;
+}
+
+.table-view .table-row-cell:filled:nth-child(odd) {
+    -fx-background-color: rgba(0,0,0,0.02);
+}
+
+/* Hover and selected row styles */
+.table-view .table-row-cell:hover {
+    -fx-background-color: rgba(25,118,210,0.08);
+}
+
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: rgba(25,118,210,0.15);
+    -fx-text-fill: -fx-text-primary;
+}
+
+.table-view .table-row-cell:filled:selected .text {
+    -fx-fill: -fx-text-primary;
+}
+
+/* Tableau cellules */
+.table-view .table-cell {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 5 15;
+    -fx-text-fill: -fx-text-primary;
+}
+/* Card style */
+.card {
+    -fx-background-color: -fx-card-background;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 2);
+}
+
+.card-header {
+    -fx-padding: 0 0 10 0;
+    -fx-border-color: transparent transparent rgba(0,0,0,0.05) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* KPI Grid */
+.kpi-grid {
+    -fx-padding: 10px;
+    -fx-spacing: 15px;
+}
+
+.kpi-card {
+    -fx-background-color: -fx-card-background;
+    -fx-background-radius: 8px;
+    -fx-padding: 15 10;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 1);
+    -fx-border-width: 0 0 0 5px;
+    -fx-border-color: -fx-primary;
+    -fx-border-radius: 0 0 0 8;
+}
+/* Navigation bar */
+.nav-bar {
+    -fx-background-color: -fx-card-background;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-background-radius: 0;
+}
+
+.nav-button {
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-text-light;
+    -fx-padding: 8 15;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-background-color: -fx-secondary-dark;
+}
+
+/* Filter bar style */
+.filter-bar {
+    -fx-background-color: -fx-card-background;
+    -fx-padding: 15px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 1);
+    -fx-spacing: 10px;
+}
+
+.filter-button {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: -fx-text-light;
+    -fx-padding: 8 15;
+    -fx-background-radius: 4px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.filter-button:hover {
+    -fx-background-color: -fx-accent-dark;
+}
+/* Charts styling */
+.chart-grid {
+    -fx-padding: 10px;
+    -fx-hgap: 20px;
+    -fx-vgap: 20px;
+}
+
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: -fx-card-background;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 2);
+    -fx-legend-visible: true;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-secondary-dark;
+}
+
+/* Bar chart */
+.chart-bar {
+    -fx-bar-fill: -fx-primary;
+    -fx-background-radius: 3px 3px 0 0;
+}
+
+/* Pie chart */
+.chart-pie {
+    -fx-border-color: derive(-fx-pie-color, 1%);
+    -fx-border-width: 0px;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: -fx-text-secondary;
+    -fx-fill: -fx-text-secondary;
+}
+
+.chart-pie-label {
+    -fx-fill: -fx-text-primary;
+    -fx-font-size: 12px;
+}
+
+/* Line chart */
+.chart-series-line {
+    -fx-stroke-width: 2px;
+    -fx-effect: null;
+}
+
+.default-color0.chart-series-line { -fx-stroke: -fx-primary; }
+.default-color1.chart-series-line { -fx-stroke: -fx-accent; }
+.default-color2.chart-series-line { -fx-stroke: -fx-secondary; }
+
+.chart-line-symbol {
+    -fx-background-radius: 5px;
+    -fx-padding: 3px;
+}
+/* Side menu */
+.side-menu {
+    -fx-background-color: -fx-secondary-dark;
+    -fx-padding: 20 15;
+    -fx-spacing: 8px;
+}
+
+.side-menu .label {
+    -fx-text-fill: rgba(255,255,255,0.8);
+    -fx-font-size: 12px;
+    -fx-padding: 5 0;
+}
+
+.menu-section {
+    -fx-padding: 5 0 15 0;
+}
+
+.menu-header {
+    -fx-text-fill: rgba(255,255,255,0.5);
+    -fx-font-size: 11px;
+    -fx-padding: 10 0 5 0;
+}
+/* Form components */
+.combo-box {
+    -fx-background-color: -fx-card-background;
+    -fx-border-color: rgba(0,0,0,0.1);
+    -fx-border-radius: 4px;
+    -fx-padding: 2px;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: -fx-text-primary;
+    -fx-padding: 5 10;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -fx-card-background;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);
+    -fx-padding: 2px;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: -fx-card-background;
+    -fx-padding: 8 15;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: rgba(25,118,210,0.08);
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected {
+    -fx-background-color: rgba(25,118,210,0.15);
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Label?>
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.controllers.ListCategorieController">
+    <top>
+        <Label text="Liste des Catégories" style="-fx-font-size: 20px; -fx-font-weight: bold;" BorderPane.alignment="CENTER"/>
+    </top>
+    <center>
+        <TableView fx:id="categoriesTableView">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="nomColumn" text="Nom" prefWidth="150"/>
+                <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="200"/>
+                <TableColumn fx:id="actionColumn" text="Action" prefWidth="150"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>
