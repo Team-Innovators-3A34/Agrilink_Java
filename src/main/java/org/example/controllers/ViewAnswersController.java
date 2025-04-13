@@ -135,7 +135,7 @@ public class ViewAnswersController implements Initializable {
                             // Demande de confirmation avant suppression
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Confirmation de suppression");
-                            alert.setHeaderText("Supprimer la réponse ?");
+                            alert.setHeaderText("Supprimer la réponses  ?");
                             alert.setContentText("Voulez-vous vraiment supprimer cette réponse ?");
 
                             alert.showAndWait().ifPresent(response -> {
