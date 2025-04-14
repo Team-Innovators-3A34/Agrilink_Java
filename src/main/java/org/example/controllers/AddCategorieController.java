@@ -60,7 +60,7 @@ public class AddCategorieController {
             root.getScene().setRoot(dashboardRoot);
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Erreure", "Impossible de charger le tableau de bord.");
+            showAlert("Erreur", "Impossible de charger le tableau de bord.");
         }
     }
 
