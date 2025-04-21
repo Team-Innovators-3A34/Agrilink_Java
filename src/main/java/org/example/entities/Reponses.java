@@ -61,7 +61,7 @@ public class Reponses {
                 ", date=" + date +
                 ", isAuto=" + isAuto +
                 ", reclamation=" + (reclamation != null ? reclamation.getId() : "null") +
-                ", statuss='" + status + '\'' +
+                ", status='" + status + '\'' +
                 ", solution='" + solution + '\'' +
                 '}';
     }
