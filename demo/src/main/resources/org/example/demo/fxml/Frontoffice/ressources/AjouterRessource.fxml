@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.AjouterRessource">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#146ec1" height="73.0" stroke="BLACK" strokeType="INSIDE" width="619.0" />
+      <Label layoutX="26.0" layoutY="28.0" text="Ajouter Ressource" textFill="#f7f5f5">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNom" layoutX="48.0" layoutY="122.0" promptText="nom" />
+      <TextField fx:id="txtMarque" layoutX="48.0" layoutY="178.0" promptText="marque" />
+      <TextField fx:id="txtDescription" layoutX="48.0" layoutY="248.0" />
+      <TextField fx:id="txtPrix" layoutX="48.0" layoutY="313.0" />
+      <TextField fx:id="txtStatus" layoutX="416.0" layoutY="122.0" />
+      <TextField fx:id="txtAdresse" layoutX="416.0" layoutY="313.0" />
+      <TextField fx:id="txtSuperficie" layoutX="416.0" layoutY="254.0" />
+      <TextField fx:id="txtType" layoutX="416.0" layoutY="187.0" />
+
+      <Button fx:id="ajout" layoutX="48.0" layoutY="359.0" mnemonicParsing="false" onAction="#ajouterRessource" prefHeight="26.0" prefWidth="134.0" text="confirmer" textFill="#451bec" />
+      <Label layoutX="48.0" layoutY="104.0" text="Nom de ressource" textFill="#e1dcdc">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="160.0" text="Marque" textFill="#dfd9d9">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="231.0" text="Description" textFill="#dcd8d8">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="296.0" text="Prix" textFill="#d7d3d3">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="416.0" layoutY="104.0" text="Status" textFill="#e1dbdb">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="416.0" layoutY="169.0" text="Type" textFill="#d7d7d7">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="413.0" layoutY="231.0" text="Superficie" textFill="#e1dcdc">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="416.0" layoutY="296.0" text="Adresse" textFill="#e1dede">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtImage" layoutX="290.0" layoutY="359.0" prefHeight="26.0" prefWidth="281.0" />
+      <Button fx:id="image" layoutX="479.0" layoutY="359.0" onAction="#selectImage" text="Choisir l'image" />
+
+
+   </children>
+</AnchorPane>

@@ -1,0 +1,149 @@
+.button.badge {
+    -fx-background-radius: 4;
+    -fx-padding: 4 8;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}
+.button.badge-info      { -fx-background-color: #17a2b8; }
+.button.badge-success   { -fx-background-color: #28a745; }
+.button.badge-warning   { -fx-background-color: #ffc107; -fx-text-fill: black; }
+.button.badge-danger    { -fx-background-color: #dc3545; }
+.button.badge-secondary { -fx-background-color: #6c757d; }
+
+
+
+/* TableView container */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 0;
+    -fx-clip: true; /* Important pour forcer le clip arrondi */
+}
+
+/* Header background arrondi en haut */
+.table-view .column-header-background {
+    -fx-background-color: #F4F5FA;
+    -fx-background-radius: 15px 15px 0 0;
+    -fx-border-radius: 15px 15px 0 0;
+    -fx-background-insets: 0;
+}
+
+/* Cellules */
+.table-view .table-cell {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 8px;
+    -fx-text-fill: #333;
+    -fx-font-size: 11px;
+    -fx-alignment: center; /* Center text in cells */
+}
+
+/* Lignes (utilisateur) plus hautes */
+.table-view .table-row-cell {
+    -fx-pref-height: 50px;
+    -fx-background-radius: 0 0 15px 15px;
+    -fx-border-radius: 0 0 15px 15px;
+}
+
+/* En-têtes */
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-pref-height: 40px;
+}
+
+/* Texte en-têtes */
+.table-view .column-header .label {
+    -fx-text-fill: #333;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 10px 20px;
+}
+.button {
+    -fx-background-color: #32BDEA;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+    -fx-padding: 6 16;
+    -fx-background-radius: 4;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+
+
+.button.badge {
+    -fx-background-radius: 4;
+    -fx-padding: 4 8;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}
+.button.badge-info      { -fx-background-color: #17a2b8; }
+.button.badge-success   { -fx-background-color: #28a745; }
+.button.badge-warning   { -fx-background-color: #ffc107; -fx-text-fill: black; }
+.button.badge-danger    { -fx-background-color: #dc3545; }
+.button.badge-secondary { -fx-background-color: #6c757d; }
+
+/* TableView container */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 0;
+    -fx-clip: true; /* Important pour forcer le clip arrondi */
+}
+
+/* Header background arrondi en haut */
+.table-view .column-header-background {
+    -fx-background-color: #F4F5FA;
+    -fx-background-radius: 15px 15px 0 0;
+    -fx-border-radius: 15px 15px 0 0;
+    -fx-background-insets: 0;
+}
+
+/* Cellules */
+.table-view .table-cell {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 8px;
+    -fx-text-fill: #333;
+    -fx-font-size: 11px;
+    -fx-alignment: center;
+}
+
+/* Lignes (utilisateur) plus hautes */
+.table-view .table-row-cell {
+    -fx-pref-height: 50px;
+    -fx-background-radius: 0 0 15px 15px;
+    -fx-border-radius: 0 0 15px 15px;
+}
+
+/* En-têtes */
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-pref-height: 40px;
+}
+
+/* Texte en-têtes */
+.table-view .column-header .label {
+    -fx-text-fill: #333;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 10px 20px;
+}
+
+/* Styles pour les classes bg-... et badge-... */
+.badge-info      { -fx-background-color: #32bdea; -fx-text-fill: white; }
+.bg-success, .badge-success   { -fx-background-color: #78c091; -fx-text-fill: white; }
+.bg-warning, .badge-warning   { -fx-background-color: #ff7e41; -fx-text-fill: white; }
+.bg-danger, .badge-danger     { -fx-background-color: #dc3545; -fx-text-fill: white; }
+.bg-primary, .badge-primary   { -fx-background-color: #007bff; -fx-text-fill: white; }
+.bg-secondary, .badge-secondary { -fx-background-color: #ff7e41; -fx-text-fill: white; }
