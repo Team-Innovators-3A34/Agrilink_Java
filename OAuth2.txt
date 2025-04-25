@@ -1,0 +1,2 @@
+ID client 167398771817-7lrcrae359lpdgt9o9spmi5ingqekv9m.apps.googleusercontent.com
+Code secret du client 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

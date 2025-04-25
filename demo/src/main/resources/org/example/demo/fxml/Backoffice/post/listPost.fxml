@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.backOffice.post.ListPostsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1">
+    <left>
+        <fx:include source="../sidebarBackoffice.fxml" />
+    </left>
+    <top>
+        <fx:include source="../topbarBackoffice.fxml" />
+    </top>
+   <center>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="1254.0" style="-fx-background-color: #FCFBFB;" stylesheets="@../../../../../../css/listUser.css" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#8a8282" layoutX="42.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="root" text="Post List">
+               <font>
+                  <Font name="Segoe UI Bold" size="17.0" />
+               </font>
+            </Text>
+             <TableView fx:id="usersTable" layoutX="42.0" layoutY="174.0" prefHeight="518.0" prefWidth="1162.0" styleClass="styled-table">
+                 <columns>
+                     <TableColumn fx:id="imageColumn" prefWidth="104.0" styleClass="table-column-header" text="Profile" />
+                     <TableColumn fx:id="emailColumn" prefWidth="126.4000244140625" styleClass="table-column-header" text="Email" />
+                     <TableColumn fx:id="nomprenomColumn" prefWidth="180" styleClass="table-column-header" text="Nom et Prenom" />
+                     <TableColumn fx:id="telephoneColumn" prefWidth="120" styleClass="table-column-header" text="Telephone" />
+                     <TableColumn fx:id="adressColumn" prefWidth="173.60003662109375" styleClass="table-column-header" text="Adresse" />
+                     <TableColumn fx:id="typeColumn" prefWidth="147.20001220703125" styleClass="table-column-header" text="Type" />
+                     <TableColumn fx:id="statusColumn" prefWidth="100" styleClass="table-column-header" text="Status" />
+                     <TableColumn fx:id="actionsColumn" prefWidth="207.9999755859376" styleClass="table-column-header" text="Actions" />
+                 </columns>
+             </TableView>
+
+
+             <Text fill="#8a8282" layoutX="1008.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField layoutX="1057.0" layoutY="125.0" styleClass="search-input" />
+            <Text fill="#8a8282" layoutX="42.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="root" text="This dashboard provides a comprehensive list of Agriculture Investors, Recycling Investors,">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Text>
+            <Text fill="#8a8282" layoutX="42.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="root" text="and Resource Investors. Easily manage and visualize investor data to optimize engagement and ensure successful investments.">
+               <font>
+                  <Font name="Segoe UI" size="13.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
+</VBox>

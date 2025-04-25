@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.backOffice.recyclingPoint.addRecyclingpoint">
+<left>
+<fx:include source="../sidebarBackoffice.fxml" />
+</left>
+<top>
+<fx:include source="../topbarBackoffice.fxml" />
+</top>
+   <center>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1270.0" style="-fx-background-color: #FCFBFB;" stylesheets="@../../../../../../css/addPage.css" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="40.0" layoutY="80.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="639.0" styleClass="form-card">
+               <children>
+                  <Text fx:id="title" fill="#676e8a" layoutX="38.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Recycling Point">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <VBox layoutX="32.0" layoutY="70.0" prefHeight="75.0" prefWidth="530.0">
+                     <children>
+                        <HBox prefHeight="75.0" prefWidth="530.0">
+                           <children>
+                              <VBox prefHeight="75.0" prefWidth="424.0">
+                                 <children>
+                                    <Label text="Nom Recycling Point:*">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                       <children>
+                                          <TextField fx:id="recyclingpointnomfield" prefHeight="28.0" prefWidth="383.0" promptText="Entrer le nom de l'evenement" styleClass="custom-textfield" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="460.0">
+                                 <children>
+                                    <Label text="Adresse:*">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                       <children>
+                                          <TextField fx:id="recyclingpointadressefield" prefHeight="28.0" prefWidth="411.0" promptText="Entrer l'adresse de l'evenement" styleClass="custom-textfield" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children></VBox>
+                  <HBox layoutX="32.0" layoutY="145.0" prefHeight="75.0" prefWidth="530.0">
+                     <children>
+                        <VBox prefHeight="75.0" prefWidth="424.0">
+                           <children>
+                              <Label text="Longitude:*">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                 <children>
+                                    <TextField fx:id="recyclingpointlongitudeField" prefHeight="28.0" prefWidth="378.0" promptText="Entrer la longitude" styleClass="custom-textfield" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="460.0">
+                           <children>
+                              <Label text="Latitude:*">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                 <children>
+                                    <TextField fx:id="recyclingpointlatitudeField" prefHeight="28.0" prefWidth="414.0" promptText="Entrer la latitude" styleClass="custom-textfield" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="32.0" layoutY="220.0" prefHeight="75.0" prefWidth="530.0">
+                     <children>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="460.0">
+                           <children>
+                              <Label text="Recycling Point type:*">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                 <children>
+                                    <ComboBox fx:id="recyclingpointypeField" prefHeight="26.0" prefWidth="840.0" styleClass="custom-combobox" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="75.0" prefWidth="487.0">
+                           <children>
+                              <Label text="Image:">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                 <children>
+                                    <TextField fx:id="recyclingpointimageField" prefHeight="28.0" prefWidth="817.0" promptText="Entrer l'iamge" styleClass="custom-textfield" />
+                                    <Button fx:id="btnUpload" prefHeight="33.0" prefWidth="0.0" text="Parcourir..." />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Button fx:id="btnrecyclingpointAjouter" layoutX="32.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#ajouterRecyclingpoint" text="Confirm" textFill="#42585e" />
+                  <Line endX="538.199951171875" layoutX="101.0" layoutY="51.0" startX="-100.0" stroke="#dee2e6" />
+                  <VBox layoutX="32.0" layoutY="295.0" prefHeight="173.0" prefWidth="532.0">
+                     <children>
+                        <Label text="Description:*">
+                           <VBox.margin>
+                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox minHeight="35.0" prefHeight="120.0" prefWidth="850.0" styleClass="input-container">
+                           <children>
+                              <TextArea fx:id="recyclingpointdescriptionField" prefHeight="188.0" prefWidth="505.0" styleClass="custom-textarea" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="774.0" layoutY="70.0" prefHeight="571.0" prefWidth="451.0">
+               <children>
+                  <WebView fx:id="mapView" prefHeight="572.0" prefWidth="451.0" />
+               </children></AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

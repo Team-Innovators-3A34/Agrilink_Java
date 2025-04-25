@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="226.0" prefWidth="186.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.profile.ressourceCard">
+   <children>
+
+      <!-- Bouton supprimer -->
+      <AnchorPane fx:id="deleteRessource" layoutX="74.0" layoutY="181.0" onMouseClicked="#onDeleteRessourceClicked" prefHeight="39.0" prefWidth="41.0" style="-fx-background-color: #fe9341; -fx-background-radius: 15px;">
+         <children>
+            <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="13.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../icons/trash.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <!-- Centered VBox for Image and Texts -->
+      <VBox alignment="TOP_CENTER" layoutX="0.0" layoutY="10.0" prefWidth="186.0" spacing="10.0">
+         <children>
+            <StackPane>
+               <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../../../../images/piclumen-1738086448060.png" />
+                  </image>
+                  <clip>
+                     <Rectangle arcHeight="100.0" arcWidth="100.0" height="70.0" width="70.0" />
+                  </clip>
+               </ImageView>
+            </StackPane>
+
+            <Text fx:id="ressourcenameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de la ressource">
+               <font>
+                  <Font name="Montserrat-Regular" size="15.0" />
+               </font>
+            </Text>
+
+            <Text fx:id="ressourcetypeText" fill="#adb5bd" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de ressource">
+               <font>
+                  <Font name="Montserrat-Regular" size="10.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+
+
+
+      <!-- Bouton modifier -->
+      <AnchorPane fx:id="updateRessource" layoutX="20.0" layoutY="181.0" onMouseClicked="#onUpdateRessourceClicked" prefHeight="39.0" prefWidth="41.0" style="-fx-background-color: #0055ff; -fx-background-radius: 15px;">
+         <children>
+            <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="13.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../icons/pencil%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <!-- Bouton voir -->
+      <AnchorPane fx:id="viewRessource" layoutX="129.0" layoutY="181.0" prefHeight="39.0" prefWidth="41.0" style="-fx-background-color: #0055ff; -fx-background-radius: 15px;">
+         <children>
+            <ImageView fitHeight="18.0" fitWidth="16.0" layoutX="12.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../icons/view.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="demanderRessource" layoutX="17.0" layoutY="181.0" onMouseClicked="#onDemandeRessourceClicked" prefHeight="39.0" prefWidth="107.0" style="-fx-background-color: #10D879; -fx-background-radius: 15px;">
+         <children>
+            <Text fill="WHITE" layoutX="26.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Demander" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ratingPane" layoutX="13.0" layoutY="135.0" prefHeight="39.0" prefWidth="163.0" visible="false">
+
+            <Slider fx:id="ratingSlider" blockIncrement="1" layoutY="12.0" majorTickUnit="1" max="5" min="1" prefHeight="14.0" prefWidth="97.0" showTickLabels="true" showTickMarks="true" value="3" />
+         <Button onAction="#onRateResourceClicked" prefHeight="26.0" prefWidth="24.0" />
+       
+      </AnchorPane>
+
+      <Button layoutX="133.0" layoutY="134.0" onAction="#onRateResourceClicked" prefHeight="26.0" prefWidth="30.0" />
+      <ImageView fitHeight="16.0" fitWidth="12.0" layoutX="142.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../icons/paper-plane.png" />
+         </image>
+      </ImageView>
+
+   </children>
+</AnchorPane>
