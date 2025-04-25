@@ -1,15 +1,20 @@
 package org.example.demo.controller.frontOffice.posts;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.demo.models.Posts;
+import org.example.demo.services.posts.HuggingFaceImageService;
 import org.example.demo.services.posts.PostsService;
 import org.example.demo.utils.sessionManager;
+import org.example.demo.utils.ConfigUtil;
 
+import javafx.scene.image.ImageView;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Files;
@@ -19,6 +24,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 
 public class AjouterPosts implements Initializable {
 
@@ -40,8 +46,20 @@ public class AjouterPosts implements Initializable {
     @FXML
     private Label imageErrorLabel;
 
+    @FXML
+    private Button generateImageButton;
+
+    @FXML
+    private ImageView previewImageView;
+
+    @FXML
+    private ProgressIndicator progressIndicator;
+
+
     private File selectedImageFile;
+    private String generatedImageFilename;
     private PostsService postsService = new PostsService();
+    private HuggingFaceImageService imageService;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,11 +71,87 @@ public class AjouterPosts implements Initializable {
         statusComboBox.getItems().addAll("active", "draft");
         statusComboBox.setValue("active"); // Set default value
 
+        // Initialize image service
+        imageService = new HuggingFaceImageService(ConfigUtil.getHuggingFaceApiKey());
+        // Hide progress indicator initially
+        if (progressIndicator != null) {
+            progressIndicator.setVisible(false);
+        }
+
         // Set up validation listeners
         titleField.textProperty().addListener((obs, oldVal, newVal) -> validateFields());
         typeComboBox.valueProperty().addListener((obs, oldVal, newVal) -> validateFields());
         descriptionField.textProperty().addListener((obs, oldVal, newVal) -> validateFields());
         statusComboBox.valueProperty().addListener((obs, oldVal, newVal) -> validateFields());
+    }
+
+    @FXML
+    private void generateImage(ActionEvent event) {
+        String description = descriptionField.getText();
+        if (description == null || description.trim().isEmpty()) {
+            showAlert("Validation Error", "Veuillez entrer une description pour générer une image.");
+            return;
+        }
+
+        // Show progress indicator
+        if (progressIndicator != null) {
+            progressIndicator.setVisible(true);
+        }
+        generateImageButton.setDisable(true);
+
+        // Create task for background processing
+        var task = imageService.generateImageFromDescriptionTask(description);
+
+        task.setOnSucceeded(e -> {
+            Platform.runLater(() -> {
+                try {
+                    generatedImageFilename = task.getValue();
+                    selectedImageFile = null; // Clear selected file since we're using generated image
+                    imageField.setText("AI Generated: " + generatedImageFilename);
+
+                    // Display the preview image
+                    displayImagePreview(generatedImageFilename);
+
+                    // Hide progress indicator
+                    if (progressIndicator != null) {
+                        progressIndicator.setVisible(false);
+                    }
+                    generateImageButton.setDisable(false);
+                } catch (Exception ex) {
+                    showAlert("Error", "Failed to load generated image: " + ex.getMessage());
+                    if (progressIndicator != null) {
+                        progressIndicator.setVisible(false);
+                    }
+                    generateImageButton.setDisable(false);
+                }
+            });
+        });
+
+        task.setOnFailed(e -> {
+            Platform.runLater(() -> {
+                showAlert("Error", "Failed to generate image: " + task.getException().getMessage());
+                if (progressIndicator != null) {
+                    progressIndicator.setVisible(false);
+                }
+                generateImageButton.setDisable(false);
+            });
+        });
+
+        // Start the task
+        new Thread(task).start();
+    }
+
+    private void displayImagePreview(String filename) {
+        try {
+            String imagePath = "file:src/main/resources/images/posts/" + filename;
+            Image image = new Image(imagePath);
+            if (previewImageView != null) {
+                previewImageView.setImage(image);
+                previewImageView.setVisible(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -155,6 +249,11 @@ public class AjouterPosts implements Initializable {
 
                 // Format image name as required by your model
                 imageFileName = "[\"" + imageFileName + "\"]";
+            }
+            // Handle AI generated image
+            else if (generatedImageFilename != null) {
+                // Format image name as required by your model
+                imageFileName = "[\"" + generatedImageFilename + "\"]";
             }
 
             // Create and save post

@@ -15,6 +15,7 @@ module org.example.demo {
     requires java.scripting;
     requires org.json;
     requires twilio;
+    requires java.desktop;
 
     opens org.example.demo.controller to javafx.fxml;
     opens org.example.demo.models to javafx.base;

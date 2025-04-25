@@ -3,106 +3,101 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
 
-<VBox prefHeight="300" prefWidth="400" spacing="15.0" style="-fx-background-color: #f8fafc; -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.posts.DetailsPosts">
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.posts.DetailsPosts">
+    <content>
+        <VBox spacing="15" style="-fx-background-color: #f0f2f5; -fx-padding: 20;">
+            <!-- Post Card -->
+            <VBox fx:id="postContainer" spacing="12" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                <padding>
+                    <Insets bottom="16" left="16" right="16" top="16" />
+                </padding>
 
-    <padding>
-        <Insets bottom="25" left="35" right="35" top="5" />
-    </padding>
+                <!-- Header: Profile + Post Date -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Circle fill="#7c7c7c" radius="20" />
 
-    <children>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label style="-fx-font-weight: bold;" text="Author" />
+                        <Label fx:id="createdAtLabel" style="-fx-text-fill: #777777; -fx-font-size: 12px;" />
+                    </VBox>
+                </HBox>
 
-        <!-- Titre principal -->
-        <Label style="-fx-text-fill: #005eff; -fx-font-size: 22px; -fx-font-weight: bold; -fx-padding: 0 0 10px 0;" text="Détails de la Publication">
-         <font>
-            <Font size="9.0" />
-         </font></Label>
+                <!-- Post Category Badge -->
+                <HBox spacing="5">
+                    <Label style="-fx-text-fill: #888888; -fx-font-size: 12px;" text="type :" />
+                    <Label fx:id="typeLabel" style="-fx-text-fill: #888888; -fx-font-size: 12px;" />
+                </HBox>
 
-        <!-- Carte contenant les informations -->
-        <VBox prefHeight="62.0" prefWidth="330.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
-            <GridPane hgap="15" vgap="12">
-                <columnConstraints>
-                    <ColumnConstraints prefWidth="150.0" />
-                    <ColumnConstraints hgrow="ALWAYS" prefWidth="1.0" />
-                </columnConstraints>
-                <children>
-                    <Label style="-fx-text-fill: #64748b; -fx-font-size: 14px; -fx-font-weight: 600;" text="Titre:" />
-                    <Label fx:id="titleLabel" style="-fx-text-fill: #334155; -fx-font-size: 14px;" GridPane.columnIndex="1" />
+                <HBox>
+                    <Label fx:id="statusLabel" style="-fx-background-color: #7F65DB; -fx-text-fill: white; -fx-background-radius: 12; -fx-padding: 3 12;" />
+                </HBox>
 
-                    <Label style="-fx-text-fill: #64748b; -fx-font-size: 14px; -fx-font-weight: 600;" text="Type:" GridPane.rowIndex="1" />
-                    <Label fx:id="typeLabel" style="-fx-text-fill: #334155; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <!-- Post Title -->
+                <Label fx:id="titleLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" wrapText="true" />
 
-                    <Label style="-fx-text-fill: #64748b; -fx-font-size: 14px; -fx-font-weight: 600;" text="Statut:" GridPane.rowIndex="2" />
-                    <Label fx:id="statusLabel" style="-fx-text-fill: #334155; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <!-- Post Content -->
+                <TextArea fx:id="descriptionTextArea" editable="false" prefRowCount="3" style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true" VBox.vgrow="NEVER" />
 
-                    <Label style="-fx-text-fill: #64748b; -fx-font-size: 14px; -fx-font-weight: 600;" text="Date de création:" GridPane.rowIndex="3" />
-                    <Label fx:id="createdAtLabel" style="-fx-text-fill: #334155; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                </children>
-            <rowConstraints>
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-            </rowConstraints>
-            </GridPane>
+                <!-- Post Image -->
+                <ImageView fx:id="postImageView" fitWidth="568" preserveRatio="true" />
+
+                <!-- Engagement Stats -->
+                <HBox spacing="10" style="-fx-padding: 5 0;">
+
+                    <!-- Like Button -->
+                    <Button fx:id="likeButton" onAction="#showReactionOptions" styleClass="reaction-button" text="React" />
+                    <Label style="-fx-text-fill: #65676B;" text="•" />
+                    <Label fx:id="commentsCountLabel" style="-fx-text-fill: #65676B; -fx-font-size: 13px;" text="0 comments" />
+                </HBox>
+
+                <!-- Engagement Section -->
+                <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-border-color: #eeeeee; -fx-border-width: 1 0 1 0; -fx-padding: 8 0;">
+                    <!-- Dynamic Reactions Container -->
+                    <HBox fx:id="reactionsContainer" alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS" />
+
+                    <!-- Comment Button -->
+                    <Button fx:id="commentToggleButton" onAction="#toggleCommentsSection" style="-fx-background-color: transparent;" styleClass="reaction-button">
+                        <graphic>
+                            <HBox alignment="CENTER" spacing="5">
+                                <Label style="-fx-font-size: 14px;" text="💬" />
+                                <Label style="-fx-text-fill: #777777;" text="Comment" />
+                            </HBox>
+                        </graphic>
+                    </Button>
+
+                    <!-- Share Button -->
+                    <Button fx:id="shareButton" styleClass="reaction-button" text="Share" />
+                </HBox>
+
+
+                <!-- Comments Section (Facebook Style) -->
+                <VBox fx:id="commentsSectionContainer" managed="false" spacing="10" visible="false">
+                    <!-- Comment Input Area with profile pic -->
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Circle fill="#7c7c7c" radius="16" />
+                        <HBox spacing="8" style="-fx-background-color: #f0f2f5; -fx-background-radius: 18; -fx-padding: 5;" HBox.hgrow="ALWAYS">
+                            <TextArea fx:id="newCommentTextArea" prefHeight="30" prefRowCount="1" promptText="Write a comment..." style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 5 0;" wrapText="true" HBox.hgrow="ALWAYS" />
+                            <Button fx:id="addCommentButton" onAction="#addComment" style="-fx-background-color: transparent; -fx-padding: 0; -fx-font-size: 16px;">
+                                <graphic>
+                                    <Label style="-fx-text-fill: #1877f2; -fx-font-weight: bold;" text="➤" />
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </HBox>
+
+                    <!-- Comments List -->
+                    <VBox fx:id="commentsContainer" spacing="10">
+                        <Label fx:id="noCommentsLabel" style="-fx-text-fill: #777777; -fx-font-style: italic;" text="No comments yet. Be the first to comment!" />
+                    </VBox>
+                </VBox>
+            </VBox>
         </VBox>
-
-        <!-- Description -->
-        <Label prefHeight="6.0" prefWidth="87.0" style="-fx-text-fill: #005eff; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 15px 0 5px 0;" text="Description">
-         <font>
-            <Font size="5.0" />
-         </font></Label>
-        <TextArea fx:id="descriptionTextArea" editable="false" prefHeight="59.0" prefWidth="469.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.03), 5, 0, 0, 1); -fx-padding: 10px;" wrapText="true" />
-
-        <!-- Image -->
-        <Label style="-fx-text-fill: #005eff; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 15px 0 5px 0;" text="Image">
-         <font>
-            <Font size="9.0" />
-         </font></Label>
-        <StackPane centerShape="false" minHeight="-Infinity" style="-fx-background-color: #f1f5f9; -fx-background-radius: 8;">
-            <ImageView fx:id="postImageView" fitHeight="50.0" fitWidth="80.0" preserveRatio="true" />
-        </StackPane>
-
-        <!-- Commentaires -->
-        <Label style="-fx-text-fill: #005eff; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 15px 0 5px 0;" text="Commentaires">
-         <font>
-            <Font size="7.0" />
-         </font></Label>
-
-        <TableView fx:id="commentsTable" prefHeight="900.0" prefWidth="362.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.03), 5, 0, 0, 1);">
-            <columns>
-                <TableColumn fx:id="commentIdColumn" prefWidth="50" style="-fx-alignment: CENTER;" text="ID" />
-                <TableColumn fx:id="commentContentColumn" prefWidth="320" text="Commentaire" />
-                <TableColumn fx:id="commentAuthorColumn" prefWidth="120" style="-fx-alignment: CENTER;" text="Auteur" />
-                <TableColumn fx:id="commentDateColumn" prefWidth="140" style="-fx-alignment: CENTER;" text="Date" />
-                <TableColumn fx:id="commentActionsColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment: CENTER;" text="Actions" />
-            </columns>
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-            </columnResizePolicy>
-        </TableView>
-
-        <!-- Ajouter un commentaire -->
-        <Label style="-fx-text-fill: #005eff; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 15px 0 5px 0;" text="Ajouter un commentaire">
-         <font>
-            <Font size="6.0" />
-         </font></Label>
-        <TextArea fx:id="newCommentTextArea" prefHeight="80" promptText="Écrivez votre commentaire ici..." style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.03), 5, 0, 0, 1); -fx-padding: 10px;" wrapText="true" />
-
-        <HBox alignment="CENTER_RIGHT" spacing="5">
-            <Button fx:id="addCommentButton" onAction="#addComment" style="-fx-background-color: #005eff; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 8 20; -fx-cursor: hand;" text="Publier" />
-        </HBox>
-
-    </children>
-</VBox>
+    </content>
+</ScrollPane>
