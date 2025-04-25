@@ -1,0 +1,111 @@
+.card {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0; /* Light gray border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2); /* Subtle shadow */
+    -fx-padding: 10px;
+    -fx-spacing: 10px; /* Vertical spacing between elements */
+    -fx-alignment: TOP_LEFT; /* Align content to the top-left */
+    -fx-pref-width: 230px; /* Add this */
+    -fx-pref-height: 280px;
+
+}
+
+.image-container {
+    -fx-pref-width: 100%; /* Make image container take full width */
+    -fx-pref-height: 150px; /* Adjust as needed */
+}
+
+.image-view {
+    -fx-fit-width: 100%;
+    -fx-fit-height: 100%;
+    -fx-preserve-ratio: true;
+    -fx-border-radius: 5px 5px 0 0; /* Rounded top corners */
+    -fx-background-radius: 5px 5px 0 0;
+}
+
+.details-container {
+    -fx-padding: 10px 0 0 0; /* Padding below the image */
+    -fx-spacing: 5px;
+}
+
+.date-container {
+    -fx-background-color: #f0f0f0; /* Light gray background */
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-alignment: CENTER;
+}
+
+.month-label {
+    -fx-font-size: 10px;
+    -fx-text-fill: #757575; /* Gray text */
+}
+
+.day-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #212121; /* Dark text */
+}
+
+.name-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #212121;
+}
+
+.location-icon {
+    -fx-fill: #757575;
+    -fx-font-family: "FontAwesome"; /* Assuming you are using FontAwesome */
+    -fx-font-size: 12px;
+}
+
+.location-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #757575;
+}
+
+.availability-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #4caf50; /* Green color for availability */
+}
+
+.button-container {
+    -fx-alignment: CENTER_RIGHT; /* Align buttons to the right */
+    -fx-spacing: 10px;
+    -fx-padding: 10px 0 0 0;
+}
+
+.view-button {
+    -fx-background-color: #ff9800; /* Orange color */
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 8px 15px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.view-button:hover {
+    -fx-background-color: #f57c00; /* Darker orange on hover */
+}
+
+.apply-button {
+    -fx-background-color: #2196f3; /* Blue color */
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 8px 15px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.apply-button:hover {
+    -fx-background-color: #1976d2; /* Darker blue on hover */
+}
+
+.eye-icon {
+    -fx-fill: white;
+    -fx-font-family: "FontAwesome"; /* Assuming you are using FontAwesome */
+    -fx-font-size: 12px;
+}

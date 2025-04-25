@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.backOffice.posts.AfficherPosts">
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1">
+        <left>
+            <fx:include source="../sidebarBackoffice.fxml" />
+        </left>
+        <top>
+            <fx:include source="../topbarBackoffice.fxml" />
+        </top>
+        <center>
+<AnchorPane prefHeight="750" prefWidth="1000" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox layoutX="10.0" layoutY="10.0" prefHeight="730.0" prefWidth="980.0" spacing="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #005eff; -fx-text-fill: white; -fx-padding: 15;" text="Liste des Publications" textAlignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#refreshPosts" style="-fx-background-color: #005eff; -fx-text-fill: white;" text="Rafraîchir">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#addNewPost" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Ajouter une Publication">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                    </padding>
+                </HBox>
+                <TableView fx:id="postsTable" prefHeight="600.0" prefWidth="980.0" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="60.0" text="ID" />
+                        <TableColumn fx:id="titleColumn" prefWidth="150.0" text="Titre" />
+                        <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Type" />
+                        <TableColumn fx:id="descriptionColumn" prefWidth="250.0" text="Description" />
+                        <TableColumn fx:id="createdAtColumn" prefWidth="120.0" text="Date de création" />
+                        <TableColumn fx:id="statusColumn" prefWidth="80.0" text="Statut" />
+                        <TableColumn fx:id="actionsColumn" prefWidth="120.0" text="Actions" />
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
+        </center>
+    </BorderPane>
+</VBox>
