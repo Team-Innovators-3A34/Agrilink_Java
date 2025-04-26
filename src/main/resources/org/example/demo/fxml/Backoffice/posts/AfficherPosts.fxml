@@ -2,17 +2,22 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.backOffice.posts.AfficherPosts">
-    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.backOffice.posts.AfficherPosts">
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0">
         <left>
             <fx:include source="../sidebarBackoffice.fxml" />
         </left>
@@ -20,47 +25,102 @@
             <fx:include source="../topbarBackoffice.fxml" />
         </top>
         <center>
-<AnchorPane prefHeight="750" prefWidth="1000" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <VBox layoutX="10.0" layoutY="10.0" prefHeight="730.0" prefWidth="980.0" spacing="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-            <children>
-                <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #005eff; -fx-text-fill: white; -fx-padding: 15;" text="Liste des Publications" textAlignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                </Label>
-                <HBox alignment="CENTER_RIGHT" spacing="10.0">
-                    <children>
-                        <Button mnemonicParsing="false" onAction="#refreshPosts" style="-fx-background-color: #005eff; -fx-text-fill: white;" text="Rafraîchir">
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="1254.0" style="-fx-background-color: #FCFBFB;" stylesheets="@../../../../../../css/listUser.css" BorderPane.alignment="CENTER">
+                <children>
+                    <HBox alignment="CENTER_LEFT" layoutX="42.0" layoutY="34.0" spacing="10.0">
+                        <Text fill="#32BDEA" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="root" text="Posts Management">
                             <font>
-                                <Font size="14.0" />
+                                <Font name="Segoe UI Bold" size="24.0" />
                             </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#addNewPost" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Ajouter une Publication">
+                        </Text>
+                    </HBox>
+
+                    <TableView fx:id="postsTable" layoutX="37.0" layoutY="188.0" prefHeight="468.0" prefWidth="1180.0" styleClass="styled-table">
+                        <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="60.0" styleClass="table-column-header" text="ID" />
+                            <TableColumn fx:id="titleColumn" prefWidth="190.0" styleClass="table-column-header" text="Title" />
+                            <TableColumn fx:id="typeColumn" prefWidth="120.0" styleClass="table-column-header" text="Type" />
+                            <TableColumn fx:id="descriptionColumn" prefWidth="350.0" styleClass="table-column-header" text="Description" />
+                            <TableColumn fx:id="createdAtColumn" prefWidth="150.0" styleClass="table-column-header" text="Creation Date" />
+                            <TableColumn fx:id="statusColumn" prefWidth="120.0" styleClass="table-column-header" text="Status" />
+                            <TableColumn fx:id="actionsColumn" prefWidth="190.0" styleClass="table-column-header" text="Actions" />
+                        </columns>
+                    </TableView>
+
+                    <!-- Filter Panel -->
+                    <VBox layoutX="37.0" layoutY="80.0" prefWidth="1180.0" spacing="10.0" style="-fx-background-color: #f5f7fa; -fx-padding: 10; -fx-background-radius: 10;">                        <HBox alignment="CENTER_LEFT" spacing="20.0">
+                        <Text fill="#5a6474" text="Advanced Filters">
                             <font>
-                                <Font size="14.0" />
+                                <Font name="System Bold" size="14.0" />
                             </font>
-                        </Button>
-                    </children>
-                    <padding>
-                        <Insets bottom="10.0" top="10.0" />
-                    </padding>
-                </HBox>
-                <TableView fx:id="postsTable" prefHeight="600.0" prefWidth="980.0" VBox.vgrow="ALWAYS">
-                    <columns>
-                        <TableColumn fx:id="idColumn" prefWidth="60.0" text="ID" />
-                        <TableColumn fx:id="titleColumn" prefWidth="150.0" text="Titre" />
-                        <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Type" />
-                        <TableColumn fx:id="descriptionColumn" prefWidth="250.0" text="Description" />
-                        <TableColumn fx:id="createdAtColumn" prefWidth="120.0" text="Date de création" />
-                        <TableColumn fx:id="statusColumn" prefWidth="80.0" text="Statut" />
-                        <TableColumn fx:id="actionsColumn" prefWidth="120.0" text="Actions" />
-                    </columns>
-                </TableView>
-            </children>
-        </VBox>
-    </children>
-</AnchorPane>
+                        </Text>
+                    </HBox>
+
+                        <HBox spacing="20.0">
+                            <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Text fill="#5a6474" text="Title:">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Text>
+                                <TextField fx:id="searchField" prefHeight="30.0" prefWidth="200.0" promptText="Search by title..." styleClass="search-input" />
+                            </HBox>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Text fill="#5a6474" text="Type:">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Text>
+                                <ComboBox fx:id="typeFilter" prefHeight="30.0" prefWidth="150.0" promptText="All Types" />
+                            </HBox>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Text fill="#5a6474" text="Status:">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Text>
+                                <ComboBox fx:id="statusFilter" prefHeight="30.0" prefWidth="150.0" promptText="All Status" />
+                            </HBox>
+                        </HBox>
+
+                        <HBox spacing="20.0">
+                            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                <Text fill="#5a6474" text="From Date:">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Text>
+                                <DatePicker fx:id="fromDatePicker" prefHeight="30.0" prefWidth="150.0" promptText="From date" />
+                            </HBox>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                <Text fill="#5a6474" text="To Date:">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Text>
+                                <DatePicker fx:id="toDatePicker" prefHeight="30.0" prefWidth="150.0" promptText="To date" />
+                            </HBox>
+
+                            <HBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                <Button fx:id="resetFiltersBtn" mnemonicParsing="false" onAction="#resetFilters" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="Reset Filters">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="applyFiltersBtn" mnemonicParsing="false" onAction="#applyFiltersAction" style="-fx-background-color: #32BDEA; -fx-text-fill: white;" text="Apply Filters">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Button>
+                            </HBox>
+                        </HBox>
+                    </VBox>
+
+                </children>
+            </AnchorPane>
         </center>
     </BorderPane>
 </VBox>
