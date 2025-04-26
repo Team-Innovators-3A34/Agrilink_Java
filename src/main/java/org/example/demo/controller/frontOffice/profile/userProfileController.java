@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import org.example.demo.models.Ressources;
 import org.example.demo.models.User;
 import org.example.demo.services.ressource.RessourcesService;
+import org.example.demo.utils.sessionManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -141,7 +142,7 @@ public class userProfileController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/fxml/Frontoffice/profile/ressourceCard.fxml"));
                     AnchorPane card = loader.load();
                     ressourceCard controller = loader.getController();
-                    controller.setRessource(ressource, user);
+                    controller.setRessource(ressource, sessionManager.getInstance().getUser());
                     card.setPrefWidth(190);
                     card.setPrefHeight(230);
                     ressourceList.add(card, column, row);

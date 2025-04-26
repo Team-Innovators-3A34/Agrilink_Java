@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class DemandesService implements IService <Demandes>  {
-    private Connection connection;
+    private static Connection connection;
 
     public DemandesService() {
         this.connection = dataBaseHelper.getInstance().getConnection();
@@ -35,6 +35,37 @@ public class DemandesService implements IService <Demandes>  {
             System.out.println("❌ Erreur lors de l'ajout de la demande : " + e.getMessage());
         }
     }
+    public static List<Demandes> getDemandesApprouveesByUserId(int userId) {
+        List<Demandes> liste = new ArrayList<>();
+        String sql = "SELECT * FROM demandes WHERE to_user_id = ? AND status = 'approuve'";
+
+        try (Connection conn =dataBaseHelper.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Demandes d = new Demandes();
+                d.setDemandeId(rs.getInt("demande_id"));
+                d.setMessage(rs.getString("message"));
+                d.setPriorite(rs.getString("priorite"));
+                d.setCreatedAt(rs.getDate("created_at").toLocalDate());
+                d.setExpireDate(rs.getDate("expire_date").toLocalDate());
+                d.setRessourceId(rs.getInt("ressource_id_id"));
+                d.setToUserId(rs.getInt("to_user_id"));
+                d.setStatus(rs.getString("status"));
+
+                liste.add(d);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erreur lors du chargement des demandes approuvées : " + e.getMessage());
+        }
+
+        return liste;
+    }
+
     @Override
     public void modifier(Demandes demande) {
         String sql = "UPDATE demandes SET expire_date=?, message=?, priorite=? WHERE demande_id=?";
@@ -117,7 +148,7 @@ public class DemandesService implements IService <Demandes>  {
     }
 
 
-    public List<Demandes> getDemandesByUserId(User user) {
+    public static List<Demandes> getDemandesByUserId(User user) {
         List<Demandes> demandes = new ArrayList<>();
         String sql = "SELECT * FROM demandes WHERE user_id_id = ?";
 
@@ -150,6 +181,62 @@ public class DemandesService implements IService <Demandes>  {
 
         return demandes;
     }
+    public  List<Demandes> getDemandesByUserId1(int user) {
+        List<Demandes> demandes = new ArrayList<>();
+        String sql = "SELECT * FROM demandes WHERE user_id_id = ?";
+
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, user);
+
+            ResultSet rs = ps.executeQuery(); // ✅ Use executeQuery() for SELECT
+
+            while (rs.next()) {
+                Demandes d = new Demandes();
+                d.setDemandeId(rs.getInt("demande_id"));
+                d.setCreatedAt(rs.getDate("created_at").toLocalDate());
+                d.setExpireDate(rs.getDate("expire_date").toLocalDate());
+                d.setMessage(rs.getString("message"));
+                d.setStatus(rs.getString("status")); // or "etat", depending on your DB
+                d.setPriorite(rs.getString("priorite"));
+                d.setNomDemandeur(rs.getString("nomdemandeur"));
+                d.setNomOwner(rs.getString("nomowner"));
+
+                demandes.add(d);
+            }
+
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println("❌ Erreur lors de la récupération des demandes : " + e.getMessage());
+        }
+
+        return demandes;
+    }
+   /* public static List<Demandes> getDemandesApprouveesByUserId(int userId) {
+        List<Demandes> demandes = new ArrayList<>();
+        String query = "SELECT * FROM demandes WHERE to_user_id = ? AND status = 'approuve'";
+
+        try (Connection conn = dataBaseHelper.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Demandes d = new Demandes();
+                d.setCreatedAt(rs.getDate("created_at").toLocalDate());
+                d.setExpireDate(rs.getDate("expire_date").toLocalDate());
+                demandes.add(d);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors du chargement des demandes approuvées : " + e.getMessage());
+        }
+
+        return demandes;
+    }*/
 
     public List<Demandes> getDemandesToAcceptByUserId(User user) {
         List<Demandes> demandes = new ArrayList<>();

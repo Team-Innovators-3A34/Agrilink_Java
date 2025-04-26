@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -46,7 +47,19 @@ public class userCard {
         this.user = user;
         username.setText(user.getNom());
         userEmail.setText(user.getEmail());
-        // Later you can set profile image, rating stars here too
+        String imageFileName = user.getImage();
+        if (imageFileName != null && !imageFileName.isEmpty()) {
+            String imagePath = "/images/" + imageFileName;
+            try {
+                Image image = new Image(getClass().getResource(imagePath).toString());
+                profileimage.setImage(image);
+            } catch (NullPointerException e) {
+                System.out.println("Image profile not found");
+            }
+        } else {
+            System.out.println("Image profile not found");
+        }
+        
     }
 
     @FXML

@@ -5,7 +5,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
@@ -29,7 +28,7 @@
       <VBox alignment="TOP_CENTER" layoutX="0.0" layoutY="10.0" prefWidth="186.0" spacing="10.0">
          <children>
             <StackPane>
-               <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="ressourceImage" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../../../../../../images/piclumen-1738086448060.png" />
                   </image>
@@ -83,17 +82,17 @@
       </AnchorPane>
       <AnchorPane fx:id="ratingPane" layoutX="13.0" layoutY="135.0" prefHeight="39.0" prefWidth="163.0" visible="false">
 
+         <Slider fx:id="ratingSlider" blockIncrement="1" layoutY="12.0" majorTickUnit="1" max="5" min="1" prefHeight="14.0" prefWidth="97.0" showTickLabels="true" showTickMarks="true" value="3" />
+         <Button onAction="#onRateResourceClicked" prefHeight="26.0" prefWidth="24.0" />
 
       </AnchorPane>
-      <HBox fx:id="starsBox" alignment="CENTER" spacing="5">
-         <ImageView fx:id="star1" fitHeight="30" fitWidth="30" onMouseClicked="#rate1" />
-         <ImageView fx:id="star2" fitHeight="30" fitWidth="30" onMouseClicked="#rate2" />
-         <ImageView fx:id="star3" fitHeight="30" fitWidth="30" onMouseClicked="#rate3" />
-         <ImageView fx:id="star4" fitHeight="30" fitWidth="30" onMouseClicked="#rate4" />
-         <ImageView fx:id="star5" fitHeight="30" fitWidth="30" onMouseClicked="#rate5" />
-      </HBox>
-      <Button onAction="#onRateResourceClicked" text="Soumettre" />
-      <Slider fx:id="ratingSlider" blockIncrement="1" layoutX="25.0" layoutY="148.0" majorTickUnit="1" max="5" min="1" showTickLabels="true" showTickMarks="true" value="3" />
+
+      <Button layoutX="133.0" layoutY="134.0" onAction="#onRateResourceClicked" prefHeight="26.0" prefWidth="30.0" />
+      <ImageView fitHeight="16.0" fitWidth="12.0" layoutX="142.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../icons/paper-plane.png" />
+         </image>
+      </ImageView>
 
    </children>
 </AnchorPane>

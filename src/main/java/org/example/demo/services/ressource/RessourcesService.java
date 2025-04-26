@@ -13,6 +13,21 @@ public class RessourcesService implements IService<Ressources> {
     public RessourcesService() {
         this.connection = dataBaseHelper.getInstance().getConnection();
     }
+    public void updateRatingInDatabase(int ressourceId, double newRating) {
+        String sql = "UPDATE ressource SET rating = ? WHERE id = ?";
+
+        try (Connection conn = dataBaseHelper.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDouble(1, newRating); // ou stmt.setInt si rating est entier
+            stmt.setInt(2, ressourceId);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la mise à jour du rating : " + e.getMessage());
+        }
+    }
+
 
     @Override
     public void ajouter(Ressources ressource) {
@@ -86,6 +101,7 @@ public class RessourcesService implements IService<Ressources> {
     }
 
     @Override
+
     public List<Ressources> rechercher() {
         List<Ressources> ressources = new ArrayList<>();
         String sql = "SELECT * FROM ressources";
@@ -108,6 +124,10 @@ public class RessourcesService implements IService<Ressources> {
                         rs.getDouble("superficie"),
                         rs.getString("adresse")
                 );
+                // 💥 Ajout des valeurs manquantes
+                ressource.setRating(rs.getDouble("rating"));
+                ressource.setRatingCount(rs.getInt("rating_count"));
+
                 ressources.add(ressource);
             }
             System.out.println("✅ Recherche terminée, " + ressources.size() + " ressources trouvées.");
@@ -116,6 +136,7 @@ public class RessourcesService implements IService<Ressources> {
         }
         return ressources;
     }
+
 
     public void ajouter(int i, String type, String description, String status, String nom, String marque, String prix, String superficie, String adresse) {
     }
@@ -165,6 +186,10 @@ public class RessourcesService implements IService<Ressources> {
                         rs.getDouble("superficie"),
                         rs.getString("adresse")
                 );
+                // 💥 Ajout des valeurs manquantes
+                ressource.setRating(rs.getDouble("rating"));
+                ressource.setRatingCount(rs.getInt("rating_count"));
+
                 ressources.add(ressource);
             }
             System.out.println("✅ Recherche terminée, " + ressources.size() + " ressources trouvées pour l'utilisateur ID " + userId);

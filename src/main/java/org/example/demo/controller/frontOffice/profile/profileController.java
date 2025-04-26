@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -48,7 +49,11 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Year;
+import java.time.YearMonth;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.time.LocalDateTime;
 
@@ -154,6 +159,7 @@ public class profileController {
     @FXML
     private Button downloadPdfButton;
 
+
     User user = new User();
     RessourcesService ressourcesService = new RessourcesService();
     ReclamationService reclamationService = new ReclamationService();
@@ -206,7 +212,7 @@ public class profileController {
         ///////////////////////////////////////
         // LOAD RESSOURCES
         // List<Ressources> ressources = ressourcesService.RessourceParUser(user.getId());
-        List<Ressources> ressources = ressourcesService.rechercher();
+        List<Ressources> ressources = ressourcesService.RessourceParUser(sessionManager.getInstance().getUser().getId());
         int column = 0, row = 0;
         ressourceList.getChildren().clear();
         for (Ressources ressource : ressources) {
@@ -946,6 +952,119 @@ public class profileController {
 
     public void addPointClicked(){
         HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/pointRecyclage/addRecyclingPoint.fxml");
+    }
+
+    //fonctionelle
+    public void afficherCalendrierAvecDemandes(List<Demandes> demandes, Dialog<Void> dialog) {
+        VBox conteneur = new VBox(30);
+        conteneur.setPadding(new Insets(20));
+        conteneur.setStyle("-fx-background-color: #1e1e1e;"); // Thème sombre
+
+        Year anneeActuelle = Year.now();
+
+        for (int mois = 1; mois <= 12; mois++) {
+            YearMonth moisActuel = YearMonth.of(anneeActuelle.getValue(), mois);
+
+            Label labelMois = new Label(moisActuel.getMonth().getDisplayName(TextStyle.FULL, Locale.FRENCH).toUpperCase());
+            labelMois.setStyle("-fx-font-size: 22px; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
+
+            GridPane calendrier = new GridPane();
+            calendrier.setHgap(10);
+            calendrier.setVgap(10);
+            calendrier.setPadding(new Insets(10));
+
+            String[] jours = {"Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"};
+            for (int i = 0; i < jours.length; i++) {
+                Label jourHeader = new Label(jours[i]);
+                jourHeader.setStyle("-fx-text-fill: #aaaaaa; -fx-font-size: 14px;");
+                calendrier.add(jourHeader, i, 0);
+            }
+
+            LocalDate premierJour = moisActuel.atDay(1);
+            int decalage = premierJour.getDayOfWeek().getValue();
+            int joursDansMois = moisActuel.lengthOfMonth();
+
+            int ligne = 1;
+            int colonne = decalage - 1;
+
+            for (int jour = 1; jour <= joursDansMois; jour++) {
+                LocalDate dateCourante = moisActuel.atDay(jour);
+
+                Label jourLabel = new Label(String.valueOf(jour));
+                jourLabel.setStyle("-fx-text-fill: white; -fx-font-size: 13px;");
+                jourLabel.setPadding(new Insets(5));
+
+                StackPane cellule = new StackPane(jourLabel);
+                cellule.setPrefSize(60, 40);
+                cellule.setStyle("-fx-background-color: #2a2a2a; -fx-border-color: #444444; -fx-border-radius: 5; -fx-background-radius: 5;");
+                cellule.setEffect(new DropShadow(2, Color.BLACK));
+
+                cellule.setOnMouseEntered(e -> cellule.setStyle(cellule.getStyle() + "-fx-scale-x: 1.03; -fx-scale-y: 1.03; -fx-background-color: #383838;"));
+                cellule.setOnMouseExited(e -> cellule.setStyle(cellule.getStyle().replace("-fx-scale-x: 1.03; -fx-scale-y: 1.03; -fx-background-color: #383838;", "")));
+
+                for (Demandes demande : demandes) {
+                    if ((dateCourante.isEqual(demande.getCreatedAt()) || dateCourante.isAfter(demande.getCreatedAt())) &&
+                            (dateCourante.isEqual(demande.getExpireDate()) || dateCourante.isBefore(demande.getExpireDate()))) {
+
+                        String couleur = getCouleurParRessource(demande.getRessourceId());
+                        cellule.setStyle(couleur + " -fx-border-radius: 5; -fx-background-radius: 5;");
+                        Tooltip tooltip = new Tooltip("Demande du " + demande.getCreatedAt() + " au " + demande.getExpireDate());
+                        Tooltip.install(cellule, tooltip);
+                        break;
+                    }
+                }
+
+                calendrier.add(cellule, colonne, ligne);
+                colonne++;
+                if (colonne > 6) {
+                    colonne = 0;
+                    ligne++;
+                }
+            }
+
+            conteneur.getChildren().addAll(labelMois, calendrier);
+        }
+
+        ScrollPane scrollPane = new ScrollPane(conteneur);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setStyle("-fx-background: #1e1e1e;");
+
+        dialog.getDialogPane().setContent(scrollPane);
+    }
+
+
+    @FXML
+    private void onAfficherCalendrierClick(ActionEvent event) {
+        List<Demandes> demandes = DemandesService.getDemandesApprouveesByUserId(5);
+
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("📅 Calendrier des Demandes Approuvées");
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setFitToWidth(true);
+
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.setContent(scrollPane);
+        dialogPane.setPrefWidth(800);
+        dialogPane.setPrefHeight(600);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        afficherCalendrierAvecDemandes(demandes, dialog); // avec Dialog en paramètre
+
+        dialog.showAndWait();
+    }
+
+
+    private String getCouleurParRessource(int ressourceId) {
+        switch (ressourceId) {
+            case 1:
+                return "-fx-background-color: lightblue; -fx-border-color: darkblue;";
+            case 2:
+                return "-fx-background-color: lightyellow; -fx-border-color: goldenrod;";
+            case 3:
+                return "-fx-background-color: lightcoral; -fx-border-color: darkred;";
+            default:
+                return "-fx-background-color: lightgray; -fx-border-color: gray;";
+        }
     }
 
 }

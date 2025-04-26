@@ -14,12 +14,13 @@ import javafx.stage.FileChooser;
 import org.example.demo.HelloApplication;
 import org.example.demo.models.Ressources;
 import org.example.demo.models.User;
-import org.example.demo.services.ressource.TextValidator;
+import org.example.demo.services.ressource.LanguageToolValidator;
 import org.example.demo.services.ressource.RessourcesService;
 import org.example.demo.utils.sessionManager;
 
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class addRessources implements Initializable {
@@ -94,6 +95,8 @@ public class addRessources implements Initializable {
     void ajouterRessource(ActionEvent event) {
         try {
             String description = txtDescription.getText();
+
+            // 🛑 Vérification de champs vides
             if (txtNom.getText().isEmpty() || txtType.getValue() == null ||
                     txtStatus.getValue() == null || txtAdresse.getText().isEmpty() ||
                     txtDescription.getText().isEmpty() || txtPrix.getText().isEmpty() ||
@@ -106,16 +109,27 @@ public class addRessources implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            // ✅ Vérification sémantique de la description via Hugging Face
-            if (!TextValidator.isValidDescription(description)) {
+
+            // ✅ Vérification sémantique via RapidAPI
+            List<String> erreurs = LanguageToolValidator.getDescriptionErrors(description);
+            if (erreurs.size() > 2) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Description invalide");
-                alert.setHeaderText(null);
-                alert.setContentText("La description saisie n'est pas assez significative. Veuillez entrer un texte clair et compréhensible.");
+                alert.setTitle("Description incorrecte");
+                alert.setHeaderText("La description contient trop d'erreurs :");
+
+                StringBuilder content = new StringBuilder();
+                for (String erreur : erreurs) {
+                    content.append(erreur).append("\n\n");
+                }
+
+                alert.setContentText(content.toString());
                 alert.showAndWait();
                 return;
             }
 
+
+
+            // 🔢 Vérification des valeurs numériques
             double prix = Double.parseDouble(txtPrix.getText());
             double superficie = Double.parseDouble(txtSuperficie.getText());
 
@@ -123,16 +137,16 @@ public class addRessources implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Valeurs incorrectes");
                 alert.setHeaderText(null);
-                alert.setContentText("Le Prix et la Superficie ne doivent pas être négatifs.");
+                alert.setContentText("Le Prix et la Superficie doivent être des valeurs positives.");
                 alert.showAndWait();
                 return;
             }
 
             if (ressourceAModifier == null) {
-                // Ajout
+                // ➕ Ajout d'une nouvelle ressource
                 Ressources r = new Ressources(
                         txtType.getValue(),
-                        txtDescription.getText(),
+                        description,
                         txtStatus.getValue(),
                         txtNom.getText(),
                         txtMarque.getText(),
@@ -142,33 +156,26 @@ public class addRessources implements Initializable {
                         txtImage.getText()
                 );
 
-                System.out.println(txtImage.getText());
                 r.setUserId(user.getId());
                 ps.ajouter(r);
                 HelloApplication.succes("Ressource ajoutée avec succès !");
                 HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/profile/profile.fxml");
 
             } else {
-                // Modification
-
+                // ✏️ Modification d'une ressource existante
                 ressourceAModifier.setName(txtNom.getText());
                 ressourceAModifier.setType(txtType.getValue());
                 ressourceAModifier.setStatus(txtStatus.getValue());
                 ressourceAModifier.setAdresse(txtAdresse.getText());
-                ressourceAModifier.setDescription(txtDescription.getText());
+                ressourceAModifier.setDescription(description);
                 ressourceAModifier.setPrixLocation(prix);
                 ressourceAModifier.setMarque(txtMarque.getText());
                 ressourceAModifier.setSuperficie(superficie);
                 ressourceAModifier.setImage(txtImage.getText());
 
                 ps.modifier(ressourceAModifier);
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Succès");
-                alert.setHeaderText(null);
                 HelloApplication.succes("Ressource modifiée avec succès !");
                 HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/profile/profile.fxml");
-
             }
 
         } catch (NumberFormatException e) {
@@ -179,12 +186,13 @@ public class addRessources implements Initializable {
             alert.showAndWait();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur SQL");
+            alert.setTitle("Erreur");
             alert.setHeaderText(null);
-            alert.setContentText(e.getMessage());
+            alert.setContentText("Une erreur est survenue : " + e.getMessage());
             alert.showAndWait();
         }
     }
+
 
     @FXML
     void selectImage(ActionEvent event) {
@@ -193,12 +201,39 @@ public class addRessources implements Initializable {
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
 
-        File file = fileChooser.showOpenDialog(null);
+        File selectedFile = fileChooser.showOpenDialog(null);
 
-        if (file != null) {
-            txtImage.setText(file.getAbsolutePath());
+        if (selectedFile != null) {
+            try {
+                // 📁 Destination folder
+                File destDir = new File("src/main/resources/images"); // Adjust the path if needed
+                if (!destDir.exists()) {
+                    destDir.mkdirs();
+                }
+
+                // 📂 Destination file (same name as selected)
+                File destFile = new File(destDir, selectedFile.getName());
+
+                // 🛠️ Copy file
+                java.nio.file.Files.copy(
+                        selectedFile.toPath(),
+                        destFile.toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING
+                );
+
+                // 📝 Set only the filename in the TextField
+                txtImage.setText(selectedFile.getName());
+
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Erreur lors de la copie de l'image : " + e.getMessage());
+                alert.showAndWait();
+            }
         }
     }
+
 
     @FXML
     void backtosettings(MouseEvent event) {
