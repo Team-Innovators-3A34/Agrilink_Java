@@ -35,17 +35,22 @@ import org.example.demo.services.claim.ReclamationService;
 import org.example.demo.services.recyclingpoint.recyclingpointService;
 import org.example.demo.services.ressource.DemandesService;
 import org.example.demo.services.ressource.RessourcesService;
+import org.example.demo.services.user.userService;
 import org.example.demo.utils.sessionManager;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDateTime;
+
 
 import javafx.collections.ObservableList;
 import javafx.scene.layout.*;
@@ -141,6 +146,9 @@ public class profileController {
     @FXML
     private Button btnDisponibilite;
 
+    @FXML
+    private final userService userService = new userService();
+
 
     User user = new User();
     RessourcesService ressourcesService = new RessourcesService();
@@ -150,8 +158,17 @@ public class profileController {
 
     @FXML
     public void initialize() {
+        System.out.println(sessionManager.getInstance().getUser().getId()+"iddddddddddd");
+        // Verify injection
+        if (postsContainer == null) {
+            System.err.println("Error: postsContainer not injected!");
+            return;
+        }
         loadPosts();
         user = sessionManager.getInstance().getUser();
+
+        // Load posts - even if this returns empty, the buttons should still show
+        refreshPosts(null);
         //  btnDisponibilite.setOnAction(e -> afficherPopupCalendrier());
 
         if (user.getRoles().equals("[\"ROLE_RECYCLING_INVESTOR\",\"ROLE_USER\"]")) {
@@ -537,6 +554,7 @@ public class profileController {
 
 
     private VBox createFacebookStylePost(Posts post) {
+        User postAuthor = this.userService.getUserById(post.getUser_id_id());
         // Main post container
         VBox postCard = new VBox();
         postCard.setStyle("-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);");
@@ -566,9 +584,10 @@ public class profileController {
         VBox nameDate = new VBox();
         nameDate.setSpacing(2);
 
-        // Name (using title as name)
-        Label nameLabel = new Label(post.getTitle());
-        nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+        // Name (using user's name)
+        Label nameLabel = new Label(postAuthor.getNom() + " " + postAuthor.getPrenom());
+        nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: black;");
+        System.out.println("Setting name label to: " + nameLabel.getText());
 
         // Date (using created_at)
         Label dateLabel = new Label(post.getCreated_at());

@@ -10,6 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.demo.models.Posts;
 import org.example.demo.services.posts.HuggingFaceImageService;
+import org.example.demo.services.posts.HuggingFaceTipService;
 import org.example.demo.services.posts.PostsService;
 import org.example.demo.utils.sessionManager;
 import org.example.demo.utils.ConfigUtil;
@@ -55,6 +56,10 @@ public class AjouterPosts implements Initializable {
     @FXML
     private ProgressIndicator progressIndicator;
 
+    @FXML
+    private Button generateTip;
+
+    private HuggingFaceTipService tipService;
 
     private File selectedImageFile;
     private String generatedImageFilename;
@@ -83,6 +88,32 @@ public class AjouterPosts implements Initializable {
         typeComboBox.valueProperty().addListener((obs, oldVal, newVal) -> validateFields());
         descriptionField.textProperty().addListener((obs, oldVal, newVal) -> validateFields());
         statusComboBox.valueProperty().addListener((obs, oldVal, newVal) -> validateFields());
+
+        tipService = new HuggingFaceTipService();
+    }
+
+    @FXML
+    private void generateAgricultureTip() {
+        progressIndicator.setVisible(true);
+
+        CompletableFuture<String> future = tipService.generateAgricultureTip();
+        future.thenAccept(tip -> {
+            Platform.runLater(() -> {
+                descriptionField.setText(tip);
+                progressIndicator.setVisible(false);
+            });
+        }).exceptionally(ex -> {
+            Platform.runLater(() -> {
+                // Handle error
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Failed to generate agriculture tip");
+                alert.setContentText("Please try again later: " + ex.getMessage());
+                alert.showAndWait();
+                progressIndicator.setVisible(false);
+            });
+            return null;
+        });
     }
 
     @FXML

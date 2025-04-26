@@ -567,5 +567,42 @@ public class userService implements userInterface {
         return null;
     }
 
+    //added by chirine to display the user's name on posts
+    public User getUserById(int userId) {
+        Connection conn = dataBaseHelper.getInstance().getConnection();
+        String query = "SELECT * FROM user WHERE id = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("adresse"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("telephone"),
+                        rs.getString("roles"),
+                        rs.getString("status"),
+                        rs.getString("description"),
+                        rs.getString("bio"),
+                        rs.getString("image"),
+                        rs.getString("account_verification"),
+                        rs.getString("country"),
+                        rs.getString("city"),
+                        rs.getFloat("longitude"),
+                        rs.getFloat("latitude"),
+                        rs.getBoolean("is2_fa"),
+                        rs.getInt("score"),
+                        rs.getTimestamp("create_at").toLocalDateTime()
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

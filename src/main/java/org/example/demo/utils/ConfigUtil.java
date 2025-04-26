@@ -33,4 +33,8 @@ public class ConfigUtil {
         loadProperties();
         return properties.getProperty("huggingface.api.key");
     }
+    public static String getHuggingFaceApiKeyTip() {
+        loadProperties();
+        return properties.getProperty("huggingface.api.keyfortip");
+    }
 }

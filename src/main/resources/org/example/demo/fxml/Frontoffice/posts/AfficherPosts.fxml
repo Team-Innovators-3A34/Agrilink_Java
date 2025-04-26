@@ -72,6 +72,12 @@
                                                    text="Description"
                                                    wrapText="true" />
 
+                                            <Label fx:id="agricultureTipLabel"
+                                                   text="💡 Conseil agricole : Exemple"
+                                                   style="-fx-background-color: #eafbe7; -fx-text-fill: #1a7f37; -fx-padding: 8; -fx-font-style: italic; -fx-background-radius: 10; -fx-font-size: 14px;"
+                                                   wrapText="true"
+                                                   visible="false" />
+
                                             <StackPane fx:id="imageContainer" alignment="CENTER" style="-fx-border-color: #e4e6eb; -fx-border-radius: 4;">
                                                 <children>
                                                     <ImageView fx:id="postImageView" fitHeight="250.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" />

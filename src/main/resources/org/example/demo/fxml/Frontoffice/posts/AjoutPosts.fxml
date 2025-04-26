@@ -52,7 +52,8 @@
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Button fx:id="generateImageButton" onAction="#generateImage" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Générer Image AI" />
                 <ProgressIndicator fx:id="progressIndicator" visible="false" />
-
+                <Button fx:id="generateTip" onAction="#generateAgricultureTip" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Générer un conseil agricole" />
+                <ProgressIndicator fx:id="progressIndicator" visible="false" />
             </HBox>
 
             <HBox alignment="CENTER_RIGHT" spacing="10">
