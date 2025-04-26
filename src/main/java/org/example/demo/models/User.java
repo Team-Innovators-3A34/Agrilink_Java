@@ -93,6 +93,27 @@ public class User {
         this.imagetable = new SimpleStringProperty(image);
     }
 
+    public User(int id ,String email, String nom, String prenom, String adresse, String roles, String telephone, String accountVerification, String image) {
+        this.email = email;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.roles = roles;
+        this.telephone = telephone;
+        this.accountVerification = accountVerification;
+        this.image = image;
+        this.id=id;
+
+        this.emailtable = new SimpleStringProperty(email);
+        this.adressetable = new SimpleStringProperty(adresse);
+        this.nomtable = new SimpleStringProperty(nom);
+        this.prenomtable = new SimpleStringProperty(prenom);
+        this.telephonetable = new SimpleStringProperty(telephone);
+        this.rolestable = new SimpleStringProperty(roles);
+        this.accountVerificationtable = new SimpleStringProperty(accountVerification);
+        this.imagetable = new SimpleStringProperty(image);
+    }
+
     public StringProperty emailProperty() {
         return emailtable == null ? emailtable = new SimpleStringProperty() : emailtable;
     }

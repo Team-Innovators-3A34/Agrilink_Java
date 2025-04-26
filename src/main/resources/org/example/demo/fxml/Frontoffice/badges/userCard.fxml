@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="259.0" prefWidth="184.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.badges.userCard">
+   <children>
+      <!-- Centered VBox for Image and Texts -->
+      <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="14.0" prefHeight="122.0" prefWidth="163.0" spacing="10.0">
+         <children>
+            <StackPane>
+               <ImageView fx:id="profileimage" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../../../../images/piclumen-1738086448060.png" />
+                  </image>
+                  <clip>
+                     <Rectangle arcHeight="100.0" arcWidth="100.0" height="70.0" width="70.0" />
+                  </clip>
+               </ImageView>
+            </StackPane>
+
+            <Text fx:id="username" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de la ressource">
+               <font>
+                  <Font name="Montserrat-Regular" size="15.0" />
+               </font>
+            </Text>
+
+            <Text fx:id="userEmail" fill="#adb5bd" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de ressource">
+               <font>
+                  <Font name="Montserrat-Regular" size="10.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+
+      <!-- Bouton voir -->
+      <AnchorPane fx:id="viewProfile" layoutX="20.0" layoutY="206.0" onMouseClicked="#openProfile" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: #0055ff; -fx-background-radius: 15px;">
+         <children>
+            <Text fill="WHITE" layoutX="55.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ratingPane" layoutX="13.0" layoutY="135.0" prefHeight="39.0" prefWidth="163.0" visible="false">
+
+
+      </AnchorPane>
+
+   </children>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</AnchorPane>

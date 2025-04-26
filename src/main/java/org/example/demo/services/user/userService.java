@@ -442,7 +442,7 @@ public class userService implements userInterface {
                 String image = rs.getString("image");
 
                 // Create a new User object and add it to the list
-                users.add(new User(email, nom, prenom, adresse, roles, telephone, accountVerification, image));
+                users.add(new User(id,email, nom, prenom, adresse, roles, telephone, accountVerification, image));
             }
         } catch (SQLException e) {
             e.printStackTrace();

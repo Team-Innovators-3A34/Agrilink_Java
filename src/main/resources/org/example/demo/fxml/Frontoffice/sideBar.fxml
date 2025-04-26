@@ -49,7 +49,7 @@
                         <Insets left="5.0" top="7.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox layoutX="10.0" layoutY="27.0" prefHeight="22.0" prefWidth="190.0" styleClass="h">
+                  <HBox layoutX="10.0" layoutY="27.0" onMouseClicked="#onBadgeCllicked" prefHeight="22.0" prefWidth="190.0" styleClass="h">
                      <children>
                         <AnchorPane prefHeight="33.0" prefWidth="42.0">
                            <children>

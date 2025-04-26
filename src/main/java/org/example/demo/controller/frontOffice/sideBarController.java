@@ -42,6 +42,10 @@ public class sideBarController {
         HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/event/listEvent.fxml");
     }
 
+    public void onBadgeCllicked() {
+        HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/badges/badges.fxml");
+    }
+
 
 
 
