@@ -386,6 +386,7 @@
                      </tabs>
                   </TabPane>
                   <Line endX="522.0" layoutX="132.0" layoutY="201.0" startX="-100.0" stroke="#e1e1e1" />
+                  <Button fx:id="downloadPdfButton" layoutX="541.0" layoutY="144.0" styleClass="download-button" text="Download PDF" />
                </children></AnchorPane>
          </children>
       </AnchorPane>

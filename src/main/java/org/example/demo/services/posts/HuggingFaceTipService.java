@@ -56,7 +56,7 @@ public class HuggingFaceTipService {
 
                             result.complete(tip);
                         } else {
-                            result.completeExceptionally(new RuntimeException("Failed to parse response: " + responseBody));
+                            result.completeExceptionally(new RuntimeException("Failed to get response: " + responseBody));
                         }
                     } catch (Exception e) {
                         result.completeExceptionally(e);

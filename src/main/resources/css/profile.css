@@ -144,3 +144,8 @@
     -fx-background-color: transparent;
     -fx-background-radius: 0;
 }
+.download-button {
+    -fx-background-color: #FFA500;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+}

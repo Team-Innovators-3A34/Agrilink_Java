@@ -13,7 +13,6 @@ public class HuggingFaceImageService {
 
     public HuggingFaceImageService(String apiKey) {
         this.apiKey = apiKey;
-        // Create directory if it doesn't exist
         File directory = new File(uploadDir);
         if (!directory.exists()) {
             directory.mkdirs();
@@ -31,7 +30,6 @@ public class HuggingFaceImageService {
 
     public String generateImageFromDescription(String description) throws IOException {
         URL url = new URL("https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0");
-        // URL url = new URL("https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Authorization", "Bearer " + apiKey);
@@ -41,7 +39,7 @@ public class HuggingFaceImageService {
         // Create JSON request
         String jsonRequest = "{\"inputs\":\"" + description + "\"}";
 
-        // Send request
+        // Send it
         try (OutputStream os = connection.getOutputStream()) {
             byte[] input = jsonRequest.getBytes(StandardCharsets.UTF_8);
             os.write(input, 0, input.length);
@@ -52,12 +50,11 @@ public class HuggingFaceImageService {
             throw new IOException("Failed to generate image: HTTP error code " + connection.getResponseCode());
         }
 
-        // Generate unique filename using the same format as in your AjouterPosts class
+        // Generate unique filename nafs format AjouterPosts class
         String timestamp = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         String filename = "AI-" + timestamp + ".jpg";
         String filePath = uploadDir + filename;
 
-        // Save image data
         try (InputStream inputStream = connection.getInputStream();
              FileOutputStream outputStream = new FileOutputStream(filePath)) {
             byte[] buffer = new byte[4096];

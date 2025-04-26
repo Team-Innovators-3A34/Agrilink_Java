@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.demo.HelloApplication;
@@ -57,6 +58,7 @@ import javafx.scene.layout.*;
 import org.example.demo.models.Posts;
 import org.example.demo.services.posts.IService;
 import org.example.demo.services.posts.PostsService;
+import org.example.demo.services.posts.ProfilePdfGeneratorService;
 
 public class profileController {
     @FXML
@@ -149,12 +151,14 @@ public class profileController {
     @FXML
     private final userService userService = new userService();
 
+    @FXML
+    private Button downloadPdfButton;
 
     User user = new User();
     RessourcesService ressourcesService = new RessourcesService();
     ReclamationService reclamationService = new ReclamationService();
     recyclingpointService recyclingpointservice =new recyclingpointService();
-
+    private ProfilePdfGeneratorService pdfGeneratorService;
 
     @FXML
     public void initialize() {
@@ -169,6 +173,9 @@ public class profileController {
 
         // Load posts - even if this returns empty, the buttons should still show
         refreshPosts(null);
+        // Initialize the PDF service
+        pdfGeneratorService = new ProfilePdfGeneratorService();
+        downloadPdfButton.setOnAction(this::handleDownloadPdf);
         //  btnDisponibilite.setOnAction(e -> afficherPopupCalendrier());
 
         if (user.getRoles().equals("[\"ROLE_RECYCLING_INVESTOR\",\"ROLE_USER\"]")) {
@@ -857,6 +864,77 @@ public class profileController {
                 showError("Error deleting post: " + e.getMessage());
             }
         }
+    }
+
+    @FXML
+    private void handleDownloadPdf(ActionEvent event) {
+        try {
+            // Get the user's posts and resources
+            List<Posts> posts = postsService.rechercher().stream()
+                    .filter(post -> post.getUser_id_id() == user.getId())
+                    .toList();
+
+            List<Ressources> resources = ressourcesService.rechercher().stream()
+                    .filter(resource -> resource.getUserId() == user.getId())
+                    .toList();
+
+            // Generate temporary PDF file
+            String tempPdfPath = pdfGeneratorService.generateProfilePdf(user, posts, resources);
+
+            // Set up file chooser
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Profile PDF");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("PDF Files", "*.pdf")
+            );
+
+            // Set suggested filename with user name
+            String fileName = String.format(
+                    "profile_%s_%s.pdf",
+                    user.getNom().toLowerCase(),
+                    user.getPrenom().toLowerCase()
+            );
+            fileChooser.setInitialFileName(fileName);
+
+            // Show save dialog
+            Stage stage = (Stage) downloadPdfButton.getScene().getWindow();
+            File destinationFile = fileChooser.showSaveDialog(stage);
+
+            if (destinationFile != null) {
+                // Copy from temp file to user selected location
+                Files.copy(
+                        Paths.get(tempPdfPath),
+                        destinationFile.toPath(),
+                        StandardCopyOption.REPLACE_EXISTING
+                );
+
+                // Show success message
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "PDF Generated",
+                        "Profile PDF was successfully generated and saved."
+                );
+
+                // Cleanup temp file
+                Files.deleteIfExists(Paths.get(tempPdfPath));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "PDF Generation Failed",
+                    "An error occurred while generating the PDF: " + e.getMessage()
+            );
+        }
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     private void showError(String message) {

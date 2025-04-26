@@ -16,6 +16,8 @@ module org.example.demo {
     requires org.json;
     requires twilio;
     requires java.desktop;
+    requires itextpdf;
+    requires org.apache.commons.io;
 
     opens org.example.demo.controller to javafx.fxml;
     opens org.example.demo.models to javafx.base;

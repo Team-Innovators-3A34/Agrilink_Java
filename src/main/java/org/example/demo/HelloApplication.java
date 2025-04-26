@@ -29,10 +29,10 @@ public class HelloApplication extends Application {
         //userService.login("monsef.boughdiri@esprit.tn", "Mehdiboughdiri75");//point investor
         //userService.login("jemaimedmalek@gmail.com", "Mehdiboughdiri75");//admin
         userService.login("aaa@esprit.tn", "Aaabbb123");
-        changeScene("/org/example/demo/fxml/Frontoffice/HomePage.fxml");
+        //changeScene("/org/example/demo/fxml/Frontoffice/HomePage.fxml");
         //changeScene("/org/example/demo/fxml/Frontoffice/posts/AjoutPosts.fxml");
         //changeScene("/org/example/demo/fxml/Security/Login.fxml");
-        //changeScene("/org/example/demo/fxml/Backoffice/recyclingPoint/listproduit.fxml");
+        changeScene("/org/example/demo/fxml/Backoffice/recyclingPoint/listproduit.fxml");
         //changeScene("/org/example/demo/fxml/Frontoffice/pointRecyclage/addRecyclingPoint.fxml");
         primaryStage.show();
     }

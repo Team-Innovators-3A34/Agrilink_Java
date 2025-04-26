@@ -37,4 +37,7 @@ public class ConfigUtil {
         loadProperties();
         return properties.getProperty("huggingface.api.keyfortip");
     }
+    public static String getTemporaryFilePath() {
+        return System.getProperty("java.io.tmpdir");
+    }
 }
