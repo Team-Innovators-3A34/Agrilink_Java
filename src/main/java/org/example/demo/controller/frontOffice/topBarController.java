@@ -39,4 +39,7 @@ public class topBarController {
     public void OnProfileClicked(){
         HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/profile/profile.fxml");
     }
+    public void onFeaturesClicked(){
+        HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/features/features.fxml");
+    }
 }

@@ -57,7 +57,7 @@
       </ImageView>
       <Circle fill="#f3f3f3" layoutX="687.0" layoutY="43.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
       <Circle fill="#f3f3f3" layoutX="741.0" layoutY="43.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="#f3f3f3" layoutX="800.0" layoutY="43.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fill="#f3f3f3" layoutX="800.0" layoutY="43.0" onMouseClicked="#onFeaturesClicked" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
       <Circle fill="#f3f3f3" layoutX="855.0" layoutY="43.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
       <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="676.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>

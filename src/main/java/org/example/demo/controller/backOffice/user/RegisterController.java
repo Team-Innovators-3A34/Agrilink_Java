@@ -3,6 +3,7 @@ package org.example.demo.controller.backOffice.user;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import org.example.demo.services.user.GeoLocationService;
 import org.mindrot.jbcrypt.BCrypt;
 import javafx.scene.control.TextField;
 import org.example.demo.HelloApplication;
@@ -113,8 +114,18 @@ RegisterController implements Initializable {
                 return;
         }
 
+        GeoLocationService geoLocationService = new GeoLocationService();
+        String[] geoCoordinates = geoLocationService.getLatitudeLongitude();
+        String latitude = geoCoordinates[0];
+        String longitude = geoCoordinates[1];
+        String city = geoCoordinates[2];
+        String country = geoCoordinates[3];
         User user = new User(email, adresse, nom, prenom, telephone, roleValue, hashedPassword);
         user.setImage(image);
+        user.setLatitude(Float.parseFloat(latitude));
+        user.setLongitude(Float.parseFloat(longitude));
+        user.setCity(city);
+        user.setCountry(country);
         if (userService.Register(user)) {
             HelloApplication.succes("Votre compte a ete cree! merci de le verifier avec votre mail!");
             HelloApplication.changeScene("/org/example/demo/fxml/Security/Login.fxml");

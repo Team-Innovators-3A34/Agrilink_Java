@@ -37,6 +37,7 @@ module org.example.demo {
     opens org.example.demo.controller.frontOffice.claim to javafx.fxml;
     opens org.example.demo.controller.frontOffice.pointRecyclage to javafx.fxml;
     opens org.example.demo.controller.frontOffice.posts to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.features to javafx.fxml;
 
 
 }

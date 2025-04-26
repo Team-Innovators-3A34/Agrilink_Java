@@ -202,7 +202,7 @@ public class userService implements userInterface {
         }
 
         Connection conn = dataBaseHelper.getInstance().getConnection();
-        String query = "INSERT INTO user (email,nom,prenom,adresse,roles,telephone,status,account_verification,is2_fa,score,password,image,create_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user (email,nom,prenom,adresse,roles,telephone,status,account_verification,is2_fa,score,password,image,create_at,longitude,latitude,country,city) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, user.getEmail());
@@ -218,13 +218,18 @@ public class userService implements userInterface {
             stmt.setString(11, user.getPassword());
             stmt.setString(12, user.getImage());
             stmt.setTimestamp(13, new Timestamp(System.currentTimeMillis()));
+            stmt.setFloat(14, user.getLongitude());
+            stmt.setFloat(15, user.getLatitude());
+            stmt.setString(16, user.getCountry());
+            stmt.setString(17, user.getCity());
+
             stmt.executeUpdate();
             return true;
 
         }catch (SQLException e) {
             e.printStackTrace();
         }
-            return false;
+        return false;
     }
 
     public boolean checkUniqueEmail(String email) {
