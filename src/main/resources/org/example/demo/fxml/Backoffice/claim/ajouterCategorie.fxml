@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/20.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.demo.controller.backOffice.claim.AjouterCategorieController"
+            prefHeight="690.0" prefWidth="1270.0"
+            style="-fx-background-color: #FCFBFB;"
+            stylesheets="@../../../../../../css/addPage.css">
+    <children>
+        <AnchorPane layoutX="22.0" layoutY="14.0"
+                    prefHeight="300.0" prefWidth="1256.0"
+                    styleClass="form-card">
+            <children>
+                <Text layoutX="38.0" layoutY="36.0" fill="#676e8a"
+                      text="Ajouter la Catégorie">
+                    <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                    </font>
+                </Text>
+                <!-- Champ Nom -->
+                <HBox layoutX="38.0" layoutY="72.0" prefHeight="75.0" prefWidth="1202.0">
+                    <children>
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label text="Category Name*" />
+                                <TextField fx:id="catName" prefWidth="400.0"
+                                           promptText="Entrer le nom de la catégorie" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <!-- Champ Description -->
+                <HBox layoutX="38.0" layoutY="160.0" prefHeight="75.0" prefWidth="1202.0">
+                    <children>
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label text="Category Description*" />
+                                <TextArea fx:id="catDescription" prefWidth="400.0" prefHeight="50.0"
+                                          promptText="Entrer la description de la catégorie" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <Button fx:id="btnAjouter" layoutX="38.0" layoutY="250.0"
+                        mnemonicParsing="false" text="Add Category" />
+                <Line layoutX="101.0" layoutY="51.0" startX="-100.0" endX="1155.0" endY="0"
+                      stroke="#dee2e6" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="84.0" prefWidth="1535.0" style="-fx-background-color: white;" stylesheets="@../../../../../css/sidebar.css" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.topBarController">
+   <children>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="68.0" layoutY="17.0" onMouseClicked="#OnProfileClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../images/piclumen-1738086448060.png" />
+         </image>
+         <clip>
+            <Rectangle arcHeight="100.0" arcWidth="100.0" height="50.0" width="50.0" />
+         </clip>
+      </ImageView>
+      <HBox layoutX="306.0" layoutY="25.0" prefHeight="37.0" prefWidth="280.0" style="-fx-border-radius: 20px;" styleClass="search-backoffice-field" stylesheets="@../../../../../css/test.css">
+         <children>
+            <ImageView fitHeight="16.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../icons/magnifying-glass.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="6.0" right="1.0" />
+               </HBox.margin>
+            </ImageView>
+            <TextField fx:id="usernameField" prefHeight="30.0" prefWidth="253.0" promptText="Search Here ..." styleClass="custom-textfield">
+               <HBox.margin>
+                  <Insets top="0.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <ImageView fx:id="profileimage" fitHeight="50.0" fitWidth="50.0" layoutX="1436.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../images/YDPL6555.JPG" />
+         </image>
+         <clip>
+            <Rectangle arcHeight="100.0" arcWidth="100.0" height="50.0" width="50.0" />
+         </clip>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="1378.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../icons/bell.png" />
+         </image>
+      </ImageView>
+      <Circle fill="#f3f3f3" layoutX="630.0" layoutY="42.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="619.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../icons/home.png" />
+         </image>
+      </ImageView>
+      <Circle fill="#f3f3f3" layoutX="687.0" layoutY="43.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fill="#f3f3f3" layoutX="741.0" layoutY="43.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fill="#f3f3f3" layoutX="800.0" layoutY="43.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fill="#f3f3f3" layoutX="855.0" layoutY="43.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="676.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../icons/tik-tok.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="844.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../icons/virtual-reality.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="729.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../icons/audio.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="789.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../icons/application.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
