@@ -78,7 +78,7 @@ public class DetailsPosts {
         commentAuthorColumn.setCellValueFactory(new PropertyValueFactory<>("user_commented_id")); // Using your field name
         commentDateColumn.setCellValueFactory(new PropertyValueFactory<>("created_at"));
 
-        // Format the content column to limit text length
+
         commentContentColumn.setCellFactory(column -> {
             return new TableCell<Comment, String>() {
                 @Override
