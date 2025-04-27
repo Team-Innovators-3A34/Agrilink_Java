@@ -161,7 +161,7 @@ public class AfficherPosts {
 
         // Right side: action buttons
         HBox actionsBox = new HBox();
-    //  actionsBox.setAlignment(Pos.CENTER_RIGHT);
+        actionsBox.setAlignment(Pos.CENTER_RIGHT);
         actionsBox.setSpacing(5);
         actionsBox.setPadding(new Insets(8));
 

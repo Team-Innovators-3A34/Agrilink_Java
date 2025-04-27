@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import org.example.demo.controller.frontOffice.profile.profileController;
 import org.example.demo.models.Comment;
 import org.example.demo.models.Posts;
 import org.example.demo.services.posts.CommentService;
@@ -99,12 +100,12 @@ public class DetailsPosts {
         // Add edit and delete buttons to the actions column
         addButtonsToCommentsTable();
     }
-
     public void setPost(Posts post) {
         this.currentPost = post;
         displayPostDetails();
         loadComments();
     }
+
 
     private void displayPostDetails() {
         if (currentPost != null) {

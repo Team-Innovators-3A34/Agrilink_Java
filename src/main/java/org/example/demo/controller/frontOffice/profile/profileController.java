@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -573,7 +570,7 @@ public class profileController {
 
         // Left side: profile and name
         HBox headerBox = new HBox();
-        //headerBox.setAlignment(Pos.CENTER_LEFT);
+        headerBox.setAlignment(Pos.CENTER_LEFT);
         headerBox.setSpacing(10);
         headerBox.setPadding(new Insets(12, 12, 5, 12));
 
@@ -811,19 +808,33 @@ public class profileController {
 
     private void openPostDetails(Posts post) {
         try {
+            // Load the DetailsPosts.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo/fxml/Frontoffice/posts/DetailsPosts.fxml"));
-            Parent root = loader.load();
+            Node detailsView = loader.load();
 
-            DetailsPosts controller = loader.getController();
-            controller.setPost(post);
+            // Get the controller and set the post data
+            DetailsPosts detailsController = loader.getController();
+            detailsController.setPost(post);
 
-            Stage stage = new Stage();
-            stage.setTitle("Détails de la Publication");
-            stage.setScene(new Scene(root));
-            stage.show();
+            // Pass a reference to this controller to allow going back
+            detailsController.setParentController(this);
+
+            // Clear the current postsContainer content and add the details view
+            postsContainer.getChildren().clear();
+            postsContainer.getChildren().add(detailsView);
+
         } catch (IOException e) {
-            showError("Error opening details view: " + e.getMessage());
+            e.printStackTrace();
+            System.out.println("Failed to load DetailsPosts.fxml: " + e.getMessage());
         }
+    }
+
+    public void showPostsList() {
+        // Clear the container
+        postsContainer.getChildren().clear();
+
+        // Reload your posts list
+        loadPosts(); // This should be your existing method that loads posts
     }
 
     private void openModifierPosts(Posts post) {

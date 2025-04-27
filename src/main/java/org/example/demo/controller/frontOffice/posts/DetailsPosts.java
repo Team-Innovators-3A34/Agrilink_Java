@@ -22,12 +22,15 @@ import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.example.demo.controller.frontOffice.profile.profileController;
 import org.example.demo.models.Comment;
 import org.example.demo.models.Posts;
 import org.example.demo.models.Reaction;
+import org.example.demo.models.User;
 import org.example.demo.services.posts.CommentService;
 import org.example.demo.services.posts.IService;
 import org.example.demo.services.posts.ReactionService;
+import org.example.demo.services.user.userService;
 import org.example.demo.utils.sessionManager;
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
@@ -106,9 +109,16 @@ public class DetailsPosts {
     private Map<String, String> reactionEmojis;
     private Map<String, Integer> reactionCounts;
 
+    @FXML private Label authorLabel;
+
     private Posts currentPost;
+    private profileController parentController;
     private IService<Comment> commentService = new CommentService();
     private Comment commentBeingEdited = null;
+    User user = new User();
+
+    @FXML
+    private final userService userService = new userService();
 
     @FXML
     public void initialize() {
@@ -451,7 +461,20 @@ public class DetailsPosts {
         this.currentPost = post;
         displayPostDetails();
         loadComments();
+        updateReactionCounts();
+        updateReactionDisplay();
 
+    }
+
+    public void setParentController(profileController parentController) {
+        this.parentController = parentController;
+    }
+
+    @FXML
+    private void goBack() {
+        if (parentController != null) {
+            parentController.showPostsList();
+        }
     }
 
     private void displayPostDetails() {
@@ -461,6 +484,29 @@ public class DetailsPosts {
             statusLabel.setText(currentPost.getStatus());
             createdAtLabel.setText(currentPost.getCreated_at());
             descriptionTextArea.setText(currentPost.getDescription());
+
+            // Set Author Name
+            if (currentPost.getUser_id_id() != 0) { // ou currentPost.getId_user() si ton getter s'appelle comme ça
+                try {
+                    User postAuthor = userService.getUserById(currentPost.getUser_id_id()); // Utilise TA méthode ici
+                    if (postAuthor != null) {
+                        String authorName = postAuthor.getNom() + " " + postAuthor.getPrenom();
+                        authorLabel.setText(authorName);
+                        authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;"); // Make text bold and black
+                        System.out.println("Author set to: " + authorName);
+                    } else {
+                        authorLabel.setText("Unknown Author");
+                        authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;"); // Make text bold and black even for unknown author
+                    }
+                } catch (Exception e) {
+                    System.err.println("Erreur en récupérant l'auteur : " + e.getMessage());
+                    authorLabel.setText("Unknown Author");
+                    authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;"); // Make text bold and black in case of error
+                }
+            } else {
+                authorLabel.setText("Unknown Author");
+                authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;"); // Make text bold and black when there's no user
+            }
 
             // Load image if available
             if (currentPost.getImages() != null && !currentPost.getImages().isEmpty()) {
@@ -718,4 +764,5 @@ public class DetailsPosts {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }
