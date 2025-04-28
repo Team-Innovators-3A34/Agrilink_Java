@@ -43,6 +43,18 @@ public class userCard {
 
     private User user;
 
+    @FXML
+    private ImageView badge1;
+
+    @FXML
+    private ImageView badge2;
+
+    @FXML
+    private ImageView badge3;
+
+    @FXML
+    private Text score;
+
     public void setUser(User user) {
         this.user = user;
         username.setText(user.getNom());
@@ -59,7 +71,26 @@ public class userCard {
         } else {
             System.out.println("Image profile not found");
         }
-        
+
+        score.setText(String.valueOf(user.getScore()));
+
+        badge1.setVisible(false);
+        badge2.setVisible(false);
+        badge3.setVisible(false);
+
+        // Score logic for badges
+        System.out.println(user.getScore());
+        if (user.getScore() <= 100) {
+            badge1.setVisible(true);
+        } else if (user.getScore() <= 180) {
+            badge1.setVisible(true);
+            badge2.setVisible(true);
+        } else {
+            badge1.setVisible(true);
+            badge2.setVisible(true);
+            badge3.setVisible(true);
+        }
+
     }
 
     @FXML

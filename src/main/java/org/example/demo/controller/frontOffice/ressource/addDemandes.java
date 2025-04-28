@@ -12,6 +12,7 @@ import org.example.demo.models.Ressources;
 import org.example.demo.models.User;
 import org.example.demo.services.ressource.DemandesService;
 import org.example.demo.services.ressource.SmsService;
+import org.example.demo.services.user.userService;
 import org.example.demo.utils.sessionManager;
 
 import java.time.LocalDate;
@@ -35,6 +36,7 @@ public class addDemandes {
     private TextArea txtMessage;
     private Ressources ressourceId;
     private final DemandesService demandeService = new DemandesService();
+    private final userService us  = new userService();
 
     private Demandes selectedDemande = null;
 
@@ -100,6 +102,7 @@ public class addDemandes {
                 String contenuSms = "Votre demande a été enregistrée avec priorité : " + priorite;
                 SmsService.envoyerSms(numeroTest, contenuSms);
                 demandeService.ajouter(demande);
+                us.updateUserScore(user.getEmail(),10);
                 HelloApplication.succes("Demande ajoutée avec succès !");
             }
 

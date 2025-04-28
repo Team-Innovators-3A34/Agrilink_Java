@@ -61,7 +61,7 @@ public class ressourceCard {
     @FXML private HBox starsBox;
 
     @FXML
-    private ImageView ressourceImage;
+    private ImageView cardRessource;
 
 
     private int selectedRating = 0;
@@ -100,18 +100,20 @@ public class ressourceCard {
 
         ressourcenameText.setText(r.getName());
         ressourcetypeText.setText(r.getType());
-        String imageFileName = ressource.getImage();
+
+        String imageFileName = r.getImage();
         if (imageFileName != null && !imageFileName.isEmpty()) {
             String imagePath = "/images/" + imageFileName;
             try {
                 Image image = new Image(getClass().getResource(imagePath).toString());
-                ressourceImage.setImage(image);
+                cardRessource.setImage(image);
             } catch (NullPointerException e) {
-                System.out.println("Image ressource not found");
+                System.out.println("Image profile not found");
             }
         } else {
-            System.out.println("Image ressource not found");
+            System.out.println("Image profile not found");
         }
+
 
 
         if (currentUser.getId() == ressource.getUserId()) {
@@ -273,6 +275,23 @@ public class ressourceCard {
     public void setRefreshCallback(Runnable callback) {
         this.refreshCallback = callback;  // Set the callback from profileController
     }
+    @FXML
+    void onViewRessourceClicked() {
+        try {
+            HelloApplication.changeSceneWithController(
+                    "/org/example/demo/fxml/Frontoffice/ressources/details.fxml",
+                    controller -> {
+                        if (controller instanceof Details) {
+                            ((Details) controller).setRessource(ressource);
+                        }
+                    }
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @FXML
     void onDeleteRessourceClicked() {

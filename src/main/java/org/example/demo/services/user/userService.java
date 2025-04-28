@@ -442,7 +442,7 @@ public class userService implements userInterface {
                 String image = rs.getString("image");
 
                 // Create a new User object and add it to the list
-                users.add(new User(id,email, nom, prenom, adresse, roles, telephone, accountVerification, image));
+                users.add(new User(id,email, nom, prenom, adresse, roles, telephone, accountVerification, image,score));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -686,5 +686,24 @@ public class userService implements userInterface {
 
         return false;
     }
+
+    public boolean updateUserScore(String email, int score) {
+        Connection conn = dataBaseHelper.getInstance().getConnection();
+        String query = "UPDATE user SET score = ? WHERE email = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, score);
+            stmt.setString(2, email);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0; // ✅ Return true if update successful
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false; // ❌ In case of error
+    }
+
 
 }

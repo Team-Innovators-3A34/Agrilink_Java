@@ -137,40 +137,53 @@ public class profileDetail {
 
     @FXML
     void updateProfileImage() {
-        // Open file chooser for image selection
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
-        File selectedFile = fileChooser.showOpenDialog(null); // You can pass the current stage here instead of null
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
-            // Get the selected file path
-            String newImageName = selectedFile.getName();
-            String imagePath = "/images/" + newImageName;  // Adjust path if necessary
-
-            // Save the image locally
             try {
-                Path destinationPath = Path.of("C:/Users/user/Desktop/ESPRIT/javafx/demo/src/main/resources/images", newImageName); // Specify where to save the image
-                Files.copy(selectedFile.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+                // 📁 Dossier destination dans resources
+                File destDir = new File("src/main/resources/images");
+                if (!destDir.exists()) {
+                    destDir.mkdirs();
+                }
 
-                // Update the ImageView with the new image
-                Image image = new Image(destinationPath.toUri().toString());
+                // 📂 Fichier de destination
+                File destFile = new File(destDir, selectedFile.getName());
+
+                // 🛠️ Copier l'image
+                Files.copy(
+                        selectedFile.toPath(),
+                        destFile.toPath(),
+                        StandardCopyOption.REPLACE_EXISTING
+                );
+
+                // 🖼️ Charger l'image depuis le fichier copié
+                Image image = new Image(destFile.toURI().toString());
                 profileimage.setImage(image);
 
-                // Update the user's image in the database
-                if (userService.updateProfileImage(user, newImageName)) {
-                    user.setImage(newImageName);
-                    HelloApplication.succes("Image du profil mise à jour!");
+                // ✅ Mise à jour en base de données
+                if (userService.updateProfileImage(user, selectedFile.getName())) {
+                    user.setImage(selectedFile.getName());
+                    HelloApplication.succes("Image du profil mise à jour !");
                     topBarController.refreshProfileImage();
-
                 } else {
                     HelloApplication.error("Erreur lors de la mise à jour de l'image du profil.");
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
-                HelloApplication.error("Erreur lors de la sélection de l'image.");
+                HelloApplication.error("Erreur lors de la sauvegarde de l'image : " + e.getMessage());
             }
         }
     }
+
+
+
 
 
 }

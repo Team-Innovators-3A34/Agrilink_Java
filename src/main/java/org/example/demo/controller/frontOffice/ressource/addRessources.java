@@ -16,6 +16,7 @@ import org.example.demo.models.Ressources;
 import org.example.demo.models.User;
 import org.example.demo.services.ressource.LanguageToolValidator;
 import org.example.demo.services.ressource.RessourcesService;
+import org.example.demo.services.user.userService;
 import org.example.demo.utils.sessionManager;
 
 import java.io.File;
@@ -64,6 +65,7 @@ public class addRessources implements Initializable {
     private ComboBox<String> txtType;
 
     private final RessourcesService ps = new RessourcesService();
+    private final userService us = new userService();
 
     private Ressources ressourceAModifier = null;
 
@@ -158,6 +160,7 @@ public class addRessources implements Initializable {
 
                 r.setUserId(user.getId());
                 ps.ajouter(r);
+                us.updateUserScore(user.getEmail(),10);
                 HelloApplication.succes("Ressource ajoutée avec succès !");
                 HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/profile/profile.fxml");
 

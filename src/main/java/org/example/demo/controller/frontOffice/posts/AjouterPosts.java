@@ -12,6 +12,7 @@ import org.example.demo.models.Posts;
 import org.example.demo.services.posts.HuggingFaceImageService;
 import org.example.demo.services.posts.HuggingFaceTipService;
 import org.example.demo.services.posts.PostsService;
+import org.example.demo.services.user.userService;
 import org.example.demo.utils.sessionManager;
 import org.example.demo.utils.ConfigUtil;
 
@@ -65,6 +66,7 @@ public class AjouterPosts implements Initializable {
     private String generatedImageFilename;
     private PostsService postsService = new PostsService();
     private HuggingFaceImageService imageService;
+    private final userService us = new userService();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -297,6 +299,8 @@ public class AjouterPosts implements Initializable {
             post.setImages(imageFileName);
 
             postsService.ajouter(post);
+            us.updateUserScore(sessionManager.getInstance().getUser().getEmail(),10);
+
 
             showAlert("Success", "Publication ajoutée avec succès!");
             clearFields();

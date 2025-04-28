@@ -41,7 +41,7 @@
       </VBox>
 
       <!-- Bouton voir -->
-      <AnchorPane fx:id="viewProfile" layoutX="20.0" layoutY="206.0" onMouseClicked="#openProfile" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: #0055ff; -fx-background-radius: 15px;">
+      <AnchorPane fx:id="viewProfile" layoutX="20.0" layoutY="226.0" onMouseClicked="#openProfile" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: #0055ff; -fx-background-radius: 15px;">
          <children>
             <Text fill="WHITE" layoutX="55.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile">
                <font>
@@ -54,6 +54,47 @@
 
 
       </AnchorPane>
+      <AnchorPane layoutX="20.0" layoutY="172.0" prefHeight="54.0" prefWidth="156.0">
+         <children>
+            <ImageView fx:id="badge1" fitHeight="40.0" fitWidth="45.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../images/badge1.png" />
+               </image>
+               <clip>
+                  <Rectangle arcHeight="100.0" arcWidth="100.0" height="40.0" width="40.0" />
+               </clip>
+            </ImageView>
+
+            <ImageView fx:id="badge2" fitHeight="40.0" fitWidth="40.0" layoutX="58.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../images/badge2.png" />
+               </image>
+               <clip>
+                  <Rectangle arcHeight="100.0" arcWidth="100.0" height="40.0" width="40.0" />
+               </clip>
+            </ImageView>
+
+            <ImageView fx:id="badge3" fitHeight="40.0" fitWidth="40.0" layoutX="102.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../images/badge3.png" />
+               </image>
+               <clip>
+                  <Rectangle arcHeight="100.0" arcWidth="100.0" height="40.0" width="40.0" />
+               </clip>
+            </ImageView>
+
+         </children>
+      </AnchorPane>
+      <Text layoutX="58.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score :">
+         <font>
+            <Font name="Montserrat-Regular" size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="score" fill="#adb5bd" layoutX="113.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Montserrat-Regular" size="10.0" />
+         </font>
+      </Text>
 
    </children>
    <padding>
