@@ -1,0 +1,151 @@
+/* Style for the TabPane */
+.tab-pane {
+    -fx-tab-min-width: 0; /* Allow tabs to shrink */
+    -fx-tab-max-width: Infinity; /* Allow tabs to expand */
+    -fx-tab-min-height: 40px; /* Adjust as needed */
+    -fx-tab-max-height: 40px; /* Adjust as needed */
+    -fx-padding: 0;
+    -fx-border-width: 0 0 2px 0; /* Bottom border for the active indicator */
+    -fx-border-color: transparent; /* Initially transparent */
+}
+
+/* Style for the Tab Headers */
+.tab-header-area {
+    -fx-background-color: white; /* Background of the tab header area */
+    -fx-border-width: 0;
+    -fx-padding: 0 10px 0 10px; /* Horizontal padding around tabs */
+    -fx-alignment: CENTER_LEFT; /* Align tabs to the left */
+}
+
+.tab-header-background {
+    -fx-background-color: transparent; /* Make the default background transparent */
+}
+
+/* Style for each Tab */
+.tab {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0 15px 0 15px; /* Horizontal padding within each tab */
+}
+
+.tab:selected {
+    -fx-background-color: transparent;
+}
+
+.tab-label {
+    -fx-text-fill: #777; /* Default text color */
+    -fx-font-size: 10px; /* Adjust as needed */
+    -fx-font-weight: bold; /* Make the text bold */
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #222; /* Text color when selected */
+}
+
+/* Style for the active tab indicator (bottom border) */
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-border-color: #222; /* Color of the active indicator */
+    -fx-border-width: 0 0 2px 0;
+}
+
+/* Style for the tab content area */
+.tab-content-area {
+    -fx-background-color: #f6f6f6;
+    -fx-border-width: 0;
+}
+
+.tab-content {
+    -fx-padding: 20px; /* Padding inside the tab content */
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.table-column {
+    -fx-alignment: center-left; /* Align column headers and content to the left */
+    -fx-padding: 8 10 8 10; /* Top, Right, Bottom, Left padding for cells */
+}
+
+.table-column:first-column {
+    -fx-alignment: center; /* Center the content of the first column (#) */
+}
+
+.column-header-background {
+    -fx-background-color: transparent; /* Make header background transparent */
+    -fx-border-width: 0 0 1px 0; /* Bottom border for header separator */
+    -fx-border-color: #d3d3d3; /* Light gray separator color */
+}
+
+.column-header {
+    -fx-background-color: transparent;
+    -fx-padding: 8 10 8 10; /* Padding for header text */
+}
+
+.column-header .label {
+    -fx-text-fill: black; /* Dark blue header text color */
+    -fx-font-weight: bold;
+    -fx-font-size: 14px; /* Adjust font size as needed */
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 8 10 8 10;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: transparent; /* Optional: different background for odd rows */
+}
+
+.table-row-cell:even {
+    -fx-background-color: transparent; /* Optional: different background for even rows */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: transparent; /* No background color on selection */
+    -fx-text-fill: black; /* Ensure text is readable on selection if needed */
+}
+
+/* Style for when the table is empty */
+.table-view:empty .placeholder {
+    -fx-label-padding: 10;
+}
+
+.table-view:empty .placeholder .label {
+    -fx-text-fill: #777; /* Gray color for "Vous n'avez aucune réclamation." */
+    -fx-font-style: italic;
+    -fx-font-size: 14px; /* Adjust font size as needed */
+}
+
+/* Remove default scrollbars (optional, if you want a cleaner look) */
+.scroll-pane {
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-thumb {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+}
+.download-button {
+    -fx-background-color: #FFA500;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+}

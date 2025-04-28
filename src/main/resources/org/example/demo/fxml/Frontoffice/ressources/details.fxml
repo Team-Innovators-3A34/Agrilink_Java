@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.profile.Details">
+   <children>
+      <BorderPane prefHeight="800.0" prefWidth="1535.0">
+         <top>
+            <fx:include source="../topBar.fxml" />
+         </top>
+         <left>
+            <fx:include source="../sideBar.fxml" />
+         </left>
+         <right>
+            <fx:include source="../rightBar.fxml" />
+         </right>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eaf3fc;" stylesheets="@../../../../../../css/settings.css">
+               <children>
+                  <AnchorPane layoutX="265.0" layoutY="30.0" prefHeight="500.0" prefWidth="512.0" style="-fx-background-color: white;">
+                     <children>
+                        <VBox prefHeight="496.0" prefWidth="511.0">
+                           <children>
+                              <AnchorPane prefHeight="62.0" prefWidth="511.0" style="-fx-background-color: #0055ff;">
+                                 <children>
+                                    <Text fx:id="title" fill="WHITE" layoutX="26.0" layoutY="36.0" text="Détails de Ressource">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="433.0" prefWidth="511.0">
+                                 <children>
+                                    <VBox layoutX="20.0" layoutY="20.0" spacing="10.0">
+                                       <children>
+                                          <ImageView fx:id="ressourceImageView" fitHeight="150.0" fitWidth="200.0" preserveRatio="true" />
+                                          <Text fx:id="typeText" fill="#515841">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="descriptionText" fill="#515841">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="statusText" fill="#515841">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="superficieText" fill="#515841">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="adresseText" fill="#515841">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="prixText" fill="#515841">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

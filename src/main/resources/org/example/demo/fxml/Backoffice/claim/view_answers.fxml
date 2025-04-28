@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.demo.controller.backOffice.claim.ViewAnswersController"
+            stylesheets="@../../../../../../css/listClaim.css">
+    <!-- Sidebar -->
+    <left>
+        <fx:include source="../sidebarBackoffice.fxml"/>
+    </left>
+
+    <!-- Topbar -->
+    <top>
+        <fx:include source="../topbarBackoffice.fxml"/>
+    </top>
+
+    <!-- Centre : Zone principale -->
+    <center>
+        <AnchorPane prefHeight="665.0" prefWidth="1254.0"
+                    style="-fx-background-color: #FCFBFB;">
+            <children>
+                <!-- Titre principal dynamique -->
+                <Label fx:id="reclamationTitleLabel"
+                       AnchorPane.leftAnchor="42.0"
+                       AnchorPane.topAnchor="52.0"
+                       style="-fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #8a8282;"/>
+                <!-- Description -->
+                <Label text="The claim list effectively dictates claim presentation and provides space to list your claims and offering in the most appealing way."
+                       AnchorPane.leftAnchor="42.0"
+                       AnchorPane.topAnchor="77.0"
+                       style="-fx-font-size: 13px; -fx-text-fill: #8a8282;"/>
+                <!-- Label Search -->
+                <Label text="Search:"
+                       AnchorPane.rightAnchor="200.0"
+                       AnchorPane.topAnchor="125.0"
+                       style="-fx-font-size: 14px; -fx-text-fill: #8a8282;"/>
+                <!-- Champ de recherche -->
+                <TextField fx:id="searchField"
+                           promptText="Filter by title..."
+                           styleClass="search-input"
+                           AnchorPane.rightAnchor="40.0"
+                           AnchorPane.topAnchor="120.0"
+                           prefWidth="150.0"/>
+                <!-- TableView pour afficher la liste des réponses -->
+                <TableView fx:id="answersTableView"
+                           AnchorPane.leftAnchor="42.0"
+                           AnchorPane.rightAnchor="42.0"
+                           AnchorPane.topAnchor="174.0"
+                           AnchorPane.bottomAnchor="42.0"
+                           styleClass="styled-table">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="" prefWidth="50"/>
+                        <TableColumn fx:id="contentColumn" text="Contenu" prefWidth="300"/>
+                        <TableColumn fx:id="statusColumn" text="Statut" prefWidth="100"/>
+                        <TableColumn fx:id="dateColumn" text="Date" prefWidth="150"/>
+                        <TableColumn fx:id="solutionColumn" text="Solution" prefWidth="200"/>
+                        <TableColumn fx:id="actionColumn" text="Actions" prefWidth="150"/>
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+    </center>
+
+    <!-- Bas : Bouton "Retour à la liste" -->
+    <bottom>
+        <HBox alignment="CENTER" spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Button text="Retour à la liste" onAction="#handleBack" styleClass="btn-retour"/>
+        </HBox>
+    </bottom>
+</BorderPane>
