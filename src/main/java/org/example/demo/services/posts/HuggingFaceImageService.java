@@ -36,10 +36,8 @@ public class HuggingFaceImageService {
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
 
-        // Create JSON request
+        // JSON request +send
         String jsonRequest = "{\"inputs\":\"" + description + "\"}";
-
-        // Send it
         try (OutputStream os = connection.getOutputStream()) {
             byte[] input = jsonRequest.getBytes(StandardCharsets.UTF_8);
             os.write(input, 0, input.length);
@@ -50,7 +48,7 @@ public class HuggingFaceImageService {
             throw new IOException("Failed to generate image: HTTP error code " + connection.getResponseCode());
         }
 
-        // Generate unique filename nafs format AjouterPosts class
+        // ngeneriw unique filename nafs format AjouterPosts class
         String timestamp = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         String filename = "AI-" + timestamp + ".jpg";
         String filePath = uploadDir + filename;

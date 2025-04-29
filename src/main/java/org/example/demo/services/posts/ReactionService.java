@@ -23,7 +23,6 @@ public class ReactionService implements IService<Reaction> {
 
         ps.executeUpdate();
 
-        // Get the auto-generated ID
         ResultSet rs = ps.getGeneratedKeys();
         if (rs.next()) {
             reaction.setId(rs.getInt(1));

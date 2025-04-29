@@ -12,10 +12,10 @@ public class ConfigUtil {
         if (properties == null) {
             properties = new Properties();
             try {
-                // Try to load from resources directory
+                //load from resources directory
                 InputStream input = ConfigUtil.class.getClassLoader().getResourceAsStream("config.properties");
 
-                // If file not found in resources, try another location
+                // ken l9inehech 8ady nda5el l path kol
                 if (input == null) {
                     input = new FileInputStream("src/main/resources/config.properties");
                 }
@@ -40,4 +40,9 @@ public class ConfigUtil {
     public static String getTemporaryFilePath() {
         return System.getProperty("java.io.tmpdir");
     }
+    public static String getSentimentApiKey() {
+        loadProperties();
+        return properties.getProperty("sentiment.api.key");
+    }
+
 }

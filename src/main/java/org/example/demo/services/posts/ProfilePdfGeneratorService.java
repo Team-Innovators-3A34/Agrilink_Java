@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ProfilePdfGeneratorService {
 
-    private static final float MARGIN = 36f; // 0.5 inch margins
+    private static final float MARGIN = 36f;
 
     public String generateProfilePdf(User user, List<Posts> posts, List<Ressources> resources) throws DocumentException, IOException {
         // esm lfile
@@ -86,7 +86,7 @@ public class ProfilePdfGeneratorService {
                 image.setAlignment(Element.ALIGN_CENTER);
                 headerCell.addElement(image);
             } catch (Exception e) {
-                // Image not available or couldn't be loaded
+                // Image not available
             }
         }
 
@@ -103,7 +103,7 @@ public class ProfilePdfGeneratorService {
         contactTable.getDefaultCell().setBackgroundColor(new BaseColor(240, 248, 255)); // Light blue background
         contactTable.getDefaultCell().setPadding(10);
 
-        // user information title
+        // user information
         Font sectionFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
         Paragraph contactTitle = new Paragraph("Contact Information", sectionFont);
 
@@ -276,7 +276,7 @@ public class ProfilePdfGeneratorService {
 
                         System.out.println("Trying to load image: " + imagePath);
 
-                        // Image loading with fallbacks - similar to your JavaFX implementation
+                        // Image loading with fallbacks
                         Image postImage = null;
                         boolean imageLoaded = false;
 
@@ -284,34 +284,34 @@ public class ProfilePdfGeneratorService {
                         try {
                             File imageFile = new File(imagePath);
                             if (imageFile.exists() && imageFile.isFile()) {
-                                System.out.println("Found image file on disk: " + imageFile.getAbsolutePath());
+                                //System.out.println("Found image file on disk: " + imageFile.getAbsolutePath());
                                 postImage = Image.getInstance(imageFile.getAbsolutePath());
                                 imageLoaded = true;
                             }
                         } catch (Exception e) {
-                            System.out.println("Failed to load as direct file: " + e.getMessage());
+                            //System.out.println("Failed to load as direct file: " + e.getMessage());
                         }
 
                         // Try 2: Resource path loading
                         if (!imageLoaded) {
                             try {
                                 String resourcePath = "/images/posts/" + imagePath;
-                                System.out.println("Trying resource path: " + resourcePath);
+                                //System.out.println("Trying resource path: " + resourcePath);
                                 InputStream resourceStream = getClass().getResourceAsStream(resourcePath);
 
                                 if (resourceStream != null) {
                                     postImage = Image.getInstance(IOUtils.toByteArray(resourceStream));
                                     imageLoaded = true;
-                                    System.out.println("Loaded from resources successfully");
+                                    //System.out.println("Loaded from resources successfully");
                                 } else {
-                                    System.out.println("Resource not found: " + resourcePath);
+                                    //System.out.println("Resource not found: " + resourcePath);
                                 }
                             } catch (Exception e) {
-                                System.out.println("Failed to load from resources: " + e.getMessage());
+                                //System.out.println("Failed to load from resources: " + e.getMessage());
                             }
                         }
 
-                        // If image was loaded by any method, add it to the PDF
+
                         if (imageLoaded && postImage != null) {
                             // Scale image to fit within the page width
                             float maxWidth = document.getPageSize().getWidth() - postCell.getPaddingLeft() - postCell.getPaddingRight() - 40;
@@ -325,7 +325,7 @@ public class ProfilePdfGeneratorService {
                             throw new Exception("Could not locate image file");
                         }
                     } catch (Exception e) {
-                        // Image failed to load, add placeholder text
+                        // image failed to load+placeholder text
                         Font placeholderFont = new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC, BaseColor.GRAY);
                         Paragraph imagePlaceholder = new Paragraph("Image could not be loaded: " + post.getImages(), placeholderFont);
                         imagePlaceholder.setAlignment(Element.ALIGN_CENTER);
@@ -337,8 +337,8 @@ public class ProfilePdfGeneratorService {
                 // Add status indicator
                 Font statusFont = new Font(Font.FontFamily.HELVETICA, 10);
                 BaseColor statusColor = "Active".equals(post.getStatus()) ?
-                        new BaseColor(66, 183, 42) : // Green for active
-                        BaseColor.GRAY;             // Gray for inactive
+                        new BaseColor(66, 183, 42) :
+                        BaseColor.GRAY;
                 statusFont.setColor(statusColor);
 
                 Paragraph statusText = new Paragraph("Status: " + post.getStatus(), statusFont);

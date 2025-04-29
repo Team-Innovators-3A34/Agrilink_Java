@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import org.example.demo.models.Posts;
 import org.example.demo.services.posts.HuggingFaceImageService;
 import org.example.demo.services.posts.HuggingFaceTipService;
+import org.example.demo.services.posts.PostSentimentAPI;
 import org.example.demo.services.posts.PostsService;
 import org.example.demo.utils.sessionManager;
 import org.example.demo.utils.ConfigUtil;
@@ -65,6 +66,7 @@ public class AjouterPosts implements Initializable {
     private String generatedImageFilename;
     private PostsService postsService = new PostsService();
     private HuggingFaceImageService imageService;
+    private PostSentimentAPI sentimentAPI = new PostSentimentAPI();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -295,6 +297,16 @@ public class AjouterPosts implements Initializable {
             post.setDescription(descriptionField.getText().trim());
             post.setStatus(statusComboBox.getValue());
             post.setImages(imageFileName);
+
+            // Analyze sentiment before saving
+            if (progressIndicator != null) {
+                progressIndicator.setVisible(true);
+            }
+
+            // Run sentiment analysis
+            PostSentimentAPI.SentimentResult sentimentResult = sentimentAPI.analyzeSentiment(descriptionField.getText().trim());
+            post.setSentiment(sentimentResult.getLabel());
+            post.setSentimentScore(sentimentResult.getScore());
 
             postsService.ajouter(post);
 

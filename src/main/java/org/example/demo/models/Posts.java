@@ -12,6 +12,14 @@ public class Posts {
     private String created_at;
     private String status;  // active/draft options
     private String images;  // JSON string of image paths
+    private String sentiment;
+    private double sentimentScore;
+
+    // Sentiment constants
+    public static final String SENTIMENT_POSITIVE = "Positive";
+    public static final String SENTIMENT_NEGATIVE = "Negative";
+    public static final String SENTIMENT_NEUTRAL = "Neutral";
+    public static final String SENTIMENT_UNKNOWN = "Unknown";
 
     // Add a list to store comments
     private List<Comment> comments = new ArrayList<>();
@@ -38,6 +46,8 @@ public class Posts {
     // Default constructor
     public Posts() {
         this.status = "active";
+        this.sentiment = SENTIMENT_UNKNOWN;
+        this.sentimentScore = 0.0;
     }
 
     // Constructor without id for new posts
@@ -48,6 +58,8 @@ public class Posts {
         this.description = description;
         this.status = status;
         this.images = images;
+        this.sentiment = SENTIMENT_UNKNOWN;
+        this.sentimentScore = 0.0;
     }
 
     // Full constructor
@@ -61,6 +73,8 @@ public class Posts {
         this.created_at = created_at;
         this.status = status;
         this.images = images;
+        this.sentiment = SENTIMENT_UNKNOWN;
+        this.sentimentScore = 0.0;
     }
 
     // Getters and Setters
@@ -128,6 +142,28 @@ public class Posts {
         this.images = images;
     }
 
+    public String getSentiment() {
+        return sentiment != null ? sentiment : SENTIMENT_UNKNOWN;
+    }
+
+    public void setSentiment(String sentiment) {
+        this.sentiment = sentiment;
+    }
+
+    public double getSentimentScore() {
+        return sentimentScore;
+    }
+
+    public void setSentimentScore(double sentimentScore) {
+        this.sentimentScore = sentimentScore;
+    }
+
+    // Helper method to update both sentiment and score together
+    public void updateSentiment(String sentimentCategory, double score) {
+        this.sentiment = sentimentCategory;
+        this.sentimentScore = score;
+    }
+
     // Helper methods for handling images
     public List<String> getImagesList() {
         if (images == null || images.isEmpty() || images.equals("[]")) {
@@ -175,6 +211,8 @@ public class Posts {
                 ", created_at='" + created_at + '\'' +
                 ", status='" + status + '\'' +
                 ", images='" + images + '\'' +
+                ", sentiment='" + sentiment + '\'' +
+                ", sentimentScore=" + sentimentScore +
                 '}';
     }
 }

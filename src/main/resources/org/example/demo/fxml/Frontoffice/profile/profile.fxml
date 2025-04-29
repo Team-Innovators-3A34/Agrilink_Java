@@ -168,7 +168,12 @@
                                                             </StackPane>
                                                             <VBox spacing="8.0">
                                                                <children>
-                                                                  <Label fx:id="typeLabel" style="-fx-background-color: #e7f3ff; -fx-text-fill: #005eff; -fx-padding: 2 8; -fx-background-radius: 10; -fx-font-size: 11px;" text="Type" />
+                                                                  <HBox spacing="10.0">
+                                                                     <children>
+                                                                        <Label fx:id="typeLabel" style="-fx-background-color: #e7f3ff; -fx-text-fill: #005eff; -fx-padding: 2 8; -fx-background-radius: 10; -fx-font-size: 11px;" text="Type" />
+                                                                        <Label fx:id="sentimentLabel" style="-fx-background-color: #f0f0f0; -fx-text-fill: #333333; -fx-padding: 2 8; -fx-background-radius: 10; -fx-font-size: 11px;" text="Sentiment" />
+                                                                     </children>
+                                                                  </HBox>
                                                                   <Label fx:id="descriptionLabel" style="-fx-font-size: 18; -fx-background-color: grey; -fx-text-fill: white;" text="Description" wrapText="true" />
                                                                   <StackPane fx:id="imageContainer" alignment="CENTER" style="-fx-border-color: #e4e6eb; -fx-border-radius: 4;">
                                                                      <children>

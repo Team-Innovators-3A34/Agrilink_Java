@@ -30,6 +30,7 @@ import org.example.demo.controller.frontOffice.posts.DetailsPosts;
 import org.example.demo.controller.frontOffice.posts.ModifierPosts;
 import org.example.demo.models.*;
 import org.example.demo.services.claim.ReclamationService;
+import org.example.demo.services.posts.PostSentimentAPI;
 import org.example.demo.services.recyclingpoint.recyclingpointService;
 import org.example.demo.services.ressource.DemandesService;
 import org.example.demo.services.ressource.RessourcesService;
@@ -156,6 +157,7 @@ public class profileController {
     ReclamationService reclamationService = new ReclamationService();
     recyclingpointService recyclingpointservice =new recyclingpointService();
     private ProfilePdfGeneratorService pdfGeneratorService;
+    private PostSentimentAPI sentimentAPI = new PostSentimentAPI();
 
     @FXML
     public void initialize() {
@@ -495,6 +497,16 @@ public class profileController {
 
             // Get all posts from the service
             List<Posts> posts = postsService.rechercher();
+            // Analyze sentiment for each post
+            for (Posts post : posts) {
+                if (post.getSentiment() == null || post.getSentiment().equals(Posts.SENTIMENT_UNKNOWN)) {
+                    // Use the new method that updates the post directly
+                    sentimentAPI.analyzeAndUpdatePostSentiment(post);
+
+                    // Update the post in the database with the sentiment
+                    postsService.modifier(post);
+                }
+            }
             postsList.addAll(posts);
 
             // Create post cards with staggered animations
@@ -508,6 +520,7 @@ public class profileController {
             }
         } catch (SQLException e) {
             showError("Error loading posts: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -634,9 +647,34 @@ public class profileController {
         Label typeLabel = new Label(post.getType());
         typeLabel.setStyle("-fx-background-color: #e7f3ff; -fx-text-fill: #1877f2; -fx-padding: 2 8; -fx-background-radius: 10; -fx-font-size: 11px;");
 
+        // post sentiment
+        Label sentimentLabel = new Label("Sentiment: " + (post.getSentiment() != null ? post.getSentiment() : "Unknown"));
+        String sentimentColor;
+        switch (post.getSentiment() != null ? post.getSentiment().toLowerCase() : "") {
+            case "positive":
+                sentimentColor = "#4CAF50"; // Green
+                break;
+            case "negative":
+                sentimentColor = "#F44336"; // Red
+                break;
+            case "neutral":
+                sentimentColor = "#9E9E9E"; // Gray
+                break;
+            default:
+                sentimentColor = "#9E9E9E"; // Gray for unknown
+        }
+
+// Style both labels
+        sentimentLabel.setStyle("-fx-background-color: " + sentimentColor + "20; -fx-text-fill: " + sentimentColor +
+                "; -fx-padding: 2 8; -fx-background-radius: 10; -fx-font-size: 11px;");
+
+        HBox tagsBox = new HBox(10);
+        tagsBox.getChildren().addAll(typeLabel, sentimentLabel);
+        //title
         Label TitreLabel = new Label(post.getTitle());
         TitreLabel.setWrapText(true);
         TitreLabel.setStyle("-fx-font-size: 13px; -fx-background-color: #ffffff; -fx-text-fill: black;");
+
 
         // Description
 
@@ -646,7 +684,7 @@ public class profileController {
 
 // Test temporaire pour forcer la taille
         descriptionLabel.setPrefHeight(60);
-        contentBox.getChildren().addAll(typeLabel, descriptionLabel,TitreLabel);
+        contentBox.getChildren().addAll(tagsBox, descriptionLabel,TitreLabel);
 
         // Image section (if available)
         if (post.getImages() != null && !post.getImages().isEmpty() && !post.getImages().equals("null")) {

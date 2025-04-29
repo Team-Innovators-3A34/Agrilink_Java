@@ -126,10 +126,9 @@ public class DetailsPosts {
         commentsSectionContainer.setVisible(false);
         commentsSectionContainer.setManaged(false);
 
-        // Initialize the comment textarea to expand as user types
         newCommentTextArea.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER && !event.isShiftDown()) {
-                event.consume(); // prevent newline
+                event.consume();
                 addComment(new ActionEvent());
             }
         });
@@ -155,10 +154,10 @@ public class DetailsPosts {
         reactionEmojis.put("instructif", "💡");
         reactionEmojis.put("drole", "😂");
 
-        // Initialize reaction counts
+        // reaction counts
         reactionCounts = new HashMap<>();
 
-        // Set up reaction button click handler
+        // click handler
         if (likeButton != null) {
             likeButton.setOnAction(this::showReactionOptions);
         }
@@ -166,44 +165,43 @@ public class DetailsPosts {
 
     @FXML
     private void showShareOptions(ActionEvent event) {
-        // Create a new stage for the share options
         Stage shareStage = new Stage();
         shareStage.initModality(Modality.APPLICATION_MODAL);
         shareStage.initStyle(StageStyle.DECORATED);
         shareStage.setTitle("Share Post");
         shareStage.setResizable(false);
 
-        // Create a container for the share options
+        // container lel share options
         VBox shareContainer = new VBox(10);
         shareContainer.setAlignment(Pos.CENTER);
         shareContainer.setPadding(new Insets(20));
         shareContainer.setStyle("-fx-background-color: #f2f2f2;");
 
-        // Header
+
         Label titleLabel = new Label("Share this post");
         titleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16px;");
 
-        // Share options
+        // our options
         HBox shareOptions = new HBox(15);
         shareOptions.setAlignment(Pos.CENTER);
         shareOptions.setPadding(new Insets(10));
 
-        // Facebook share button
+        // Fb
         Button facebookButton = new Button("Facebook");
         facebookButton.setStyle("-fx-background-color: #3b5998; -fx-text-fill: white;");
         facebookButton.setOnAction(e -> shareToFacebook());
 
-        // LinkedIn share button
+        // LinkedIn
         Button linkedInButton = new Button("LinkedIn");
         linkedInButton.setStyle("-fx-background-color: #0077b5; -fx-text-fill: white;");
         linkedInButton.setOnAction(e -> shareToLinkedIn());
 
-        // WhatsApp share button
+        // WhatsApp
         Button whatsAppButton = new Button("WhatsApp");
         whatsAppButton.setStyle("-fx-background-color: #25D366; -fx-text-fill: white;");
         whatsAppButton.setOnAction(e -> shareToWhatsApp());
 
-        // Copy link button
+        // Copy link
         Button copyLinkButton = new Button("Copy Link");
         copyLinkButton.setStyle("-fx-background-color: #444444; -fx-text-fill: white;");
         copyLinkButton.setOnAction(e -> {
@@ -211,7 +209,7 @@ public class DetailsPosts {
             showAlert(Alert.AlertType.INFORMATION, "Link Copied", "Link has been copied to clipboard.");
         });
 
-        // Add buttons to container
+        //buttons in container
         shareOptions.getChildren().addAll(facebookButton, linkedInButton, whatsAppButton, copyLinkButton);
 
         // Close button
@@ -221,7 +219,6 @@ public class DetailsPosts {
         // Add all elements to main container
         shareContainer.getChildren().addAll(titleLabel, shareOptions, closeButton);
 
-        // Set the scene and show the stage
         Scene scene = new Scene(shareContainer);
         shareStage.setScene(scene);
         shareStage.show();
@@ -253,8 +250,7 @@ public class DetailsPosts {
         clipboard.setContents(stringSelection, null);
     }
 
-    // Add this to your class
-    private static final String BASE_URL = "http://localhost:8080"; // Could be changed in production
+    private static final String BASE_URL = "http://localhost:8080"; //najem nbadelha
 
     private String generatePostUrl() {
         if (currentPost != null) {
@@ -282,7 +278,6 @@ public class DetailsPosts {
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 Desktop.getDesktop().browse(new URI(url));
             } else {
-                // If desktop browsing is not supported, try a different approach
                 Runtime runtime = Runtime.getRuntime();
                 runtime.exec("xdg-open " + url);
             }
@@ -294,17 +289,17 @@ public class DetailsPosts {
     //reaction section
     @FXML
     private void showReactionOptions(ActionEvent event) {
-        // Create a popup for reactions
+        // popup for reactions
         Popup reactionPopup = new Popup();
         reactionPopup.setAutoHide(true);
 
-        // Create a container for reaction buttons
+        // container for reaction buttons
         HBox reactionOptions = new HBox(10);
         reactionOptions.setAlignment(Pos.CENTER);
         reactionOptions.setPadding(new Insets(10));
         reactionOptions.setStyle("-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);");
 
-        // Create buttons for each reaction type
+        // buttons for each reaction type
         for (Map.Entry<String, String> entry : reactionEmojis.entrySet()) {
             String type = entry.getKey();
             String emoji = entry.getValue();
@@ -313,10 +308,10 @@ public class DetailsPosts {
             reactionOptions.getChildren().add(reactionBtn);
         }
 
-        // Add the container to the popup
+        // zid lcontainer lel popup
         reactionPopup.getContent().add(reactionOptions);
 
-        // Show the popup below the like button
+        // Show the popup
         Node source = (Node) event.getSource();
         Window window = source.getScene().getWindow();
         reactionPopup.show(window,
@@ -327,10 +322,8 @@ public class DetailsPosts {
     private Button createReactionButton(String type, String emoji) {
         Button button = new Button(emoji);
 
-        // 👉 Changer la police, taille et poids
         button.setFont(Font.font("Segoe UI Emoji", FontWeight.BOLD, 22));
 
-        // 👉 Style plus moderne
         button.setStyle("-fx-background-color: transparent; -fx-text-fill: #333;");
 
         // Hover effect
@@ -348,7 +341,6 @@ public class DetailsPosts {
         // Click action
         button.setOnAction(e -> addReaction(type));
 
-        // Tooltip
         Tooltip tooltip = new Tooltip(capitalizeFirstLetter(type));
         Tooltip.install(button, tooltip);
 
@@ -358,32 +350,30 @@ public class DetailsPosts {
 
     private void addReaction(String type) {
         try {
-            // Check if the user has already reacted to this post
+            // nchoufou ken luser has already reacted to this post
             int userId = sessionManager.getInstance().getUser().getId();
             List<Reaction> existingReactions = reactionService.getReactionsByPostAndUser(currentPost.getId(), userId);
 
             if (!existingReactions.isEmpty()) {
-                // User has already reacted - update the reaction
+                // ken ey : update the reaction
                 Reaction existingReaction = existingReactions.get(0);
                 existingReaction.setType(type);
                 reactionService.modifier(existingReaction);
             } else {
-                // Create new reaction
+                // sinn create new reaction
                 Reaction reaction = new Reaction();
                 reaction.setPost_id(currentPost.getId());
                 reaction.setUser_id(userId);
                 reaction.setType(type);
 
-                // Set current timestamp
+                //timestamp
                 LocalDateTime now = LocalDateTime.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 reaction.setCreated_at(now.format(formatter));
 
-                // Save the reaction
                 reactionService.ajouter(reaction);
             }
 
-            // Update reaction display
             updateReactionCounts();
             updateReactionDisplay();
 
@@ -394,10 +384,10 @@ public class DetailsPosts {
 
     private void updateReactionCounts() {
         try {
-            // Clear current counts
+            // na7y current count
             reactionCounts.clear();
 
-            // Get all reactions for this post
+            // get all reactions for this post
             List<Reaction> reactions = reactionService.getReactionsByPostId(currentPost.getId());
 
             // Count reactions by type
@@ -411,10 +401,9 @@ public class DetailsPosts {
     }
 
     private void updateReactionDisplay() {
-        // Clear existing reaction display
         reactionsContainer.getChildren().clear();
 
-        // Display top 3 reactions with counts
+        // 5aly top 3 reactions with counts
         List<Map.Entry<String, Integer>> sortedReactions = reactionCounts.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .limit(3)
@@ -486,26 +475,26 @@ public class DetailsPosts {
             descriptionTextArea.setText(currentPost.getDescription());
 
             // Set Author Name
-            if (currentPost.getUser_id_id() != 0) { // ou currentPost.getId_user() si ton getter s'appelle comme ça
+            if (currentPost.getUser_id_id() != 0) {
                 try {
-                    User postAuthor = userService.getUserById(currentPost.getUser_id_id()); // Utilise TA méthode ici
+                    User postAuthor = userService.getUserById(currentPost.getUser_id_id());
                     if (postAuthor != null) {
                         String authorName = postAuthor.getNom() + " " + postAuthor.getPrenom();
                         authorLabel.setText(authorName);
-                        authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;"); // Make text bold and black
+                        authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;");
                         System.out.println("Author set to: " + authorName);
                     } else {
                         authorLabel.setText("Unknown Author");
-                        authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;"); // Make text bold and black even for unknown author
+                        authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;");
                     }
                 } catch (Exception e) {
                     System.err.println("Erreur en récupérant l'auteur : " + e.getMessage());
                     authorLabel.setText("Unknown Author");
-                    authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;"); // Make text bold and black in case of error
+                    authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;");
                 }
             } else {
                 authorLabel.setText("Unknown Author");
-                authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;"); // Make text bold and black when there's no user
+                authorLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: black;");
             }
 
             // Load image if available
@@ -523,12 +512,10 @@ public class DetailsPosts {
 
     @FXML
     void toggleCommentsSection(ActionEvent event) {
-        // Toggle visibility of comments section
         boolean isVisible = !commentsSectionContainer.isVisible();
         commentsSectionContainer.setVisible(isVisible);
         commentsSectionContainer.setManaged(isVisible);
 
-        // Focus the comment textarea if showing
         if (isVisible) {
             newCommentTextArea.requestFocus();
         }
@@ -536,24 +523,20 @@ public class DetailsPosts {
 
     private void loadComments() {
         try {
-            // Clear the existing comments container
             commentsContainer.getChildren().clear();
             if (noCommentsLabel != null) {
                 commentsContainer.getChildren().add(noCommentsLabel);
             }
 
-            // Get comments for this specific post
             List<Comment> comments = ((CommentService) commentService).getCommentsByPostId(currentPost.getId());
 
-            // Update the comments count label
+
             commentsCountLabel.setText(comments.size() + " comments");
 
-            // Display each comment
             for (Comment comment : comments) {
                 addVisualComment(comment);
             }
 
-            // Update noCommentsLabel visibility
             if (noCommentsLabel != null) {
                 noCommentsLabel.setVisible(comments.isEmpty());
             }
@@ -573,33 +556,31 @@ public class DetailsPosts {
 
         try {
             if (commentBeingEdited != null) {
-                // Update existing comment
+
                 commentBeingEdited.setContent(commentContent);
                 commentBeingEdited.setUser_commented_id(sessionManager.getInstance().getUser().getId());
 
-                // Save the updated comment
                 commentService.modifier(commentBeingEdited);
 
                 // Reset the comment being edited
                 commentBeingEdited = null;
                 addCommentButton.setGraphic(new Label("➤"));
             } else {
-                // Create a new comment
+
                 Comment comment = new Comment();
                 comment.setPost_id_id(currentPost.getId());
                 comment.setContent(commentContent);
                 comment.setUser_commented_id(sessionManager.getInstance().getUser().getId()); // Default user ID
 
-                // Set current timestamp
+                //  current timestamp
                 LocalDateTime now = LocalDateTime.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 comment.setCreated_at(now.format(formatter));
 
-                // Save the comment
+                // save the comment
                 commentService.ajouter(comment);
             }
 
-            // Clear the input field
             newCommentTextArea.clear();
 
             // Refresh comments
@@ -677,7 +658,6 @@ public class DetailsPosts {
         }
     }
 
-    // Helper method to format the timestamp in a Facebook-like way
     private String formatCommentTime(String timestamp) {
         try {
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -699,16 +679,14 @@ public class DetailsPosts {
             return commentTime.format(outputFormatter);
 
         } catch (Exception e) {
-            // Return the original timestamp if parsing fails
             return timestamp;
         }
     }
 
     private void startEditingComment(Comment comment) {
-        // Set the comment being edited
         commentBeingEdited = comment;
 
-        // Set the comment content to the textarea
+        // n7ot acomment content to the textarea
         newCommentTextArea.setText(comment.getContent());
 
         // Make the comments section visible if it's not
@@ -720,12 +698,11 @@ public class DetailsPosts {
         editIcon.setStyle("-fx-text-fill: #E65100; -fx-font-weight: bold;");
         addCommentButton.setGraphic(editIcon);
 
-        // Focus the textarea
         newCommentTextArea.requestFocus();
     }
 
     private void deleteComment(Comment comment) {
-        // Confirm deletion
+        // confirmy
         Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
         confirmDialog.setTitle("Confirmer la suppression");
         confirmDialog.setHeaderText("Supprimer le commentaire");
@@ -734,10 +711,8 @@ public class DetailsPosts {
         Optional<ButtonType> result = confirmDialog.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                // Delete the comment
                 commentService.supprimer(comment);
 
-                // Refresh the comments
                 loadComments();
 
                 // If the deleted comment was being edited, reset the edit state
