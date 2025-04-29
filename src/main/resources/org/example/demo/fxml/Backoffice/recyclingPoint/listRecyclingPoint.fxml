@@ -53,6 +53,7 @@
                     </font>
                 </Text>
                 <TextField fx:id="searchField" layoutX="1057.0" layoutY="125.0" styleClass="search-input"/>
+                <Button fx:id="micButton" layoutX="1020.0" layoutY="125.0" text="🎤" onAction="#onMicClick"/>
 
                 <!-- Add Point Button -->
                 <HBox layoutX="1085.0" layoutY="81.0" onMouseClicked="#addpoint"

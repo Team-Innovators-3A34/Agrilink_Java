@@ -19,6 +19,7 @@ module org.example.demo {
     requires itextpdf;
     requires org.apache.commons.io;
     requires com.opencsv;
+    requires okhttp3;
 
     opens org.example.demo.controller to javafx.fxml;
     opens org.example.demo.models to javafx.base;
