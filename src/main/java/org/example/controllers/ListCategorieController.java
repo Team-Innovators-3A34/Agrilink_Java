@@ -62,7 +62,7 @@ public class ListCategorieController implements Initializable {
             @Override
             public TableCell<TypeRec, TypeRec> call(TableColumn<TypeRec, TypeRec> param) {
                 return new TableCell<TypeRec, TypeRec>() {
-                    private final Button deleteBtn = new Button("Supprimerr");
+                    private final Button deleteBtn = new Button("Supprimer");
                     private final Button modifyBtn = new Button("Modifier");
                     private final HBox container = new HBox(5);
 
