@@ -1,28 +1,58 @@
 package org.example.demo.controller.backOffice.recyclingPoint;
-
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.example.demo.HelloApplication;
 import org.example.demo.models.User;
 import org.example.demo.models.recyclingpoint;
+import org.example.demo.services.recyclingpoint.GPTService;
 import org.example.demo.services.recyclingpoint.recyclingpointService;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ListRecylcingPointController {
 
     private User user;
     private recyclingpointService recyclingPointService;
+    @FXML
+    private PieChart categoryPieChart;
+    @FXML
+    private DatePicker startDatePicker;
+
+    @FXML
+    private DatePicker endDatePicker;
+    private List<recyclingpoint> allPoints;
+
+    @FXML
+    private Label totalPointsLabel;
+    @FXML
+    private VBox chatBox;
+    @FXML
+    private TextField userInput;
+
+    @FXML
+    private Label mostActiveCategoryLabel;
 
     @FXML
     private TableView<recyclingpoint> pointTable;
@@ -40,6 +70,8 @@ public class ListRecylcingPointController {
     private TableColumn<recyclingpoint, Void> actionsColumn;
 
     private static recyclingpoint selectedRecyclingpoint;
+    @FXML
+    private TextField searchField;
 
 
     public static void setSelectedRecylingPoint(recyclingpoint rc) {
@@ -64,7 +96,11 @@ public class ListRecylcingPointController {
         pointTable.getItems().setAll(points);
 
         addActionButtonsToTable();
+
+        setupSearch(points);
+        setupStatistics(points);
     }
+
 
     private void addActionButtonsToTable() {
         actionsColumn.setCellFactory(column -> new TableCell<>() {
@@ -154,6 +190,114 @@ public class ListRecylcingPointController {
 
     public void addpoint(){
         HelloApplication.changeScene("/org/example/demo/fxml/Backoffice/recyclingPoint/addRecyclingPoint.fxml");
+    }
+    private void setupSearch(List<recyclingpoint> points) {
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String lowerCaseFilter = newValue.toLowerCase().trim();
+
+            if (lowerCaseFilter.isEmpty()) {
+                pointTable.getItems().setAll(points);
+            } else {
+                List<recyclingpoint> filteredList = points.stream()
+                        .filter(p -> p.getNom().toLowerCase().contains(lowerCaseFilter) ||
+                                p.getType().toLowerCase().contains(lowerCaseFilter) ||
+                                (p.getDate() != null && p.getDate().toString().contains(lowerCaseFilter)))
+                        .toList();
+                pointTable.getItems().setAll(filteredList);
+            }
+        });
+    }
+    private void setupStatistics(List<recyclingpoint> points) {
+        totalPointsLabel.setText("Total Points: " + points.size());
+
+        Map<String, Long> categoryCount = points.stream()
+                .collect(Collectors.groupingBy(recyclingpoint::getType, Collectors.counting()));
+
+        categoryPieChart.getData().clear();
+        categoryCount.forEach((category, count) -> {
+            categoryPieChart.getData().add(new PieChart.Data(category, count));
+        });
+
+        // Find the most active category
+        String mostActiveCategory = categoryCount.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("None");
+
+        mostActiveCategoryLabel.setText("Most Active Category: " + mostActiveCategory);
+    }
+    @FXML
+    private void sendMessage() {
+        String message = userInput.getText().trim();
+        if (message.isEmpty()) return;
+
+        addMessageToChat("🧍‍♂️ You: " + message);
+        userInput.clear();
+
+        new Thread(() -> {
+            try {
+                String ecoBotReply = GPTService.askGPT(message);
+                Platform.runLater(() -> handleGPTResponse(ecoBotReply));
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> addMessageToChat("❌ EcoBot error: " + e.getMessage()));
+            }
+        }).start();
+    }
+
+    private void handleGPTResponse(String response) {
+        addMessageToChat("♻️ EcoBot: " + response);
+
+        if (response.toLowerCase().contains("add point")) {
+            addpoint();
+        } else if (response.toLowerCase().contains("show points")) {
+            pointTable.getItems().setAll(recyclingPointService.rechercher());
+        }
+    }
+
+    private void addMessageToChat(String message) {
+        Label label = new Label(message);
+        label.setWrapText(true);
+        label.setMaxWidth(380);
+        // Optional styling:
+        if (message.startsWith("♻️")) {
+            label.setStyle("-fx-background-color: #E0F7FA; -fx-padding: 8; -fx-background-radius: 5;");
+        } else {
+            label.setStyle("-fx-background-color: #FFFFFF; -fx-padding: 8; -fx-background-radius: 5;");
+        }
+        chatBox.getChildren().add(label);
+    }
+    @FXML
+    private void importCsv() {
+        FileChooser chooser = new FileChooser();
+        chooser.getExtensionFilters().add(new ExtensionFilter("CSV Files", "*.csv"));
+        File file = chooser.showOpenDialog(null);
+        if (file == null) return;
+
+        List<recyclingpoint> imported = new ArrayList<>();
+        try (CSVReader reader = new CSVReader(new FileReader(file))) {
+            String[] row;
+            // Assuming header: nom,type,date (as String)
+            reader.readNext(); // skip header
+            while ((row = reader.readNext()) != null) {
+                String nom = row[0].trim();
+                String type = row[1].trim();
+                String dateStr = row[2].trim(); // treat date as String
+
+                recyclingpoint rp = new recyclingpoint();
+                rp.setNom(nom);
+                rp.setType(type);
+                rp.setDate(dateStr);
+                recyclingPointService.ajouter(rp);
+                imported.add(rp);
+            }
+
+            pointTable.getItems().addAll(imported);
+            setupStatistics(pointTable.getItems());
+            new Alert(Alert.AlertType.INFORMATION, imported.size() + " points imported successfully.", ButtonType.OK).showAndWait();
+        } catch (IOException | CsvValidationException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to import CSV: " + e.getMessage(), ButtonType.OK).showAndWait();
+        }
     }
 
 }

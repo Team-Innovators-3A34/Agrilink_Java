@@ -18,6 +18,7 @@ module org.example.demo {
     requires java.desktop;
     requires itextpdf;
     requires org.apache.commons.io;
+    requires com.opencsv;
 
     opens org.example.demo.controller to javafx.fxml;
     opens org.example.demo.models to javafx.base;

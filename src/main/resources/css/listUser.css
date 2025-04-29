@@ -67,3 +67,26 @@
     -fx-max-height: 0;
 }
 
+/* Remove the full-width header-row background */
+.custom-switch-tabs .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+/* Style the individual tab “buttons” */
+.custom-switch-tabs .tab {
+    -fx-padding: 10px 20px;       /* bigger touch targets */
+    -fx-font-size: 15px;          /* slightly larger text */
+    -fx-background-radius: 6px;   /* rounded corners */
+    -fx-background-insets: 0;     /* no extra insets */
+}
+
+/* Highlight the selected tab */
+.custom-switch-tabs .tab:selected {
+    -fx-background-color: #32BDEA; /* your primary blue */
+    -fx-text-fill: white;
+}
+
+/* Hover effect on the tabs */
+.custom-switch-tabs .tab:hover {
+    -fx-background-color: rgba(50,186,234,0.2);
+}
