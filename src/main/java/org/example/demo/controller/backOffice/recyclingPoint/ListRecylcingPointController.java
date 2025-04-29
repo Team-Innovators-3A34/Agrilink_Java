@@ -1,5 +1,8 @@
 package org.example.demo.controller.backOffice.recyclingPoint;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.application.Platform;
@@ -7,47 +10,69 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import javax.swing.SwingUtilities;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
+import okhttp3.*;
 import org.example.demo.HelloApplication;
 import org.example.demo.models.User;
 import org.example.demo.models.recyclingpoint;
 import org.example.demo.services.recyclingpoint.GPTService;
 import org.example.demo.services.recyclingpoint.recyclingpointService;
+
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.TargetDataLine;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.concurrent.CompletableFuture;
 
 public class ListRecylcingPointController {
-
-    private User user;
     private recyclingpointService recyclingPointService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    // TODO: Set your RapidAPI host/key here
+// ✅ Corrected Constants (match your working test)
+    private static final String RAPIDAPI_HOST = "ai-api-photo-description.p.rapidapi.com";
+    private static final String RAPIDAPI_KEY  = "c4286c5e8cmshf69303343b44530p13d059jsn5101130016d8";
+    private static final String RAPIDAPI_URL  = "https://ai-api-photo-description.p.rapidapi.com/description-from-url";
 
     @FXML private PieChart categoryPieChart;
     @FXML private DatePicker startDatePicker;
@@ -62,6 +87,13 @@ public class ListRecylcingPointController {
     @FXML private TableColumn<recyclingpoint, LocalDate> dateColumn;
     @FXML private TableColumn<recyclingpoint, Void> actionsColumn;
     @FXML private TextField searchField;
+
+    // Image analysis UI
+    @FXML private Button uploadButton;
+    @FXML private Button cameraButton;
+    @FXML private ImageView analyzedImageView;
+    @FXML private TextArea descriptionArea;
+    @FXML private Label recyclableLabel;
 
     private static recyclingpoint selectedRecyclingpoint;
 
@@ -85,7 +117,233 @@ public class ListRecylcingPointController {
         addActionButtonsToTable();
         setupSearch(points);
         setupStatistics(points);
+
+        descriptionArea.setPromptText("Analysis description...");
+        recyclableLabel.setText("Recyclability: N/A");
     }
+
+    @FXML
+    private void onUploadImage() {
+        FileChooser chooser = new FileChooser();
+        chooser.getExtensionFilters()
+                .add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        File file = chooser.showOpenDialog(uploadButton.getScene().getWindow());
+        if (file == null) return;
+
+        analyzedImageView.setImage(new Image(file.toURI().toString()));
+        analyzeImage(file);
+    }
+
+
+    @FXML
+    private void onOpenCamera() {
+        CompletableFuture.runAsync(() -> {
+            try {
+                Webcam webcam = Webcam.getDefault();
+                if (webcam == null) {
+                    Platform.runLater(() -> showAlert("No webcam detected."));
+                    return;
+                }
+
+                webcam.setViewSize(new Dimension(640, 480));
+                webcam.open();
+
+                WebcamPanel webcamPanel = new WebcamPanel(webcam);
+                webcamPanel.setPreferredSize(new Dimension(640, 480));
+
+                JButton captureButton = new JButton("Capture Photo");
+                JFrame window = new JFrame("Camera Preview");
+                window.setLayout(new BorderLayout());
+                window.add(webcamPanel, BorderLayout.CENTER);
+                window.add(captureButton, BorderLayout.SOUTH);
+                window.pack();
+                window.setVisible(true);
+
+                captureButton.addActionListener(e -> {
+                    BufferedImage image = webcam.getImage();
+                    try {
+                        File tempFile = File.createTempFile("captured-", ".jpg");
+                        ImageIO.write(image, "JPG", tempFile);
+                        webcam.close();
+                        window.dispose();
+
+                        Platform.runLater(() -> {
+                            analyzedImageView.setImage(new Image(tempFile.toURI().toString()));
+                            analyzeImage(tempFile);
+                        });
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        Platform.runLater(() -> showAlert("Failed to save image."));
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> showAlert("Camera error: " + e.getMessage()));
+            }
+        });
+    }
+
+
+    // Capture the image and analyze it
+    private void captureAndAnalyze(Webcam webcam) {
+        try {
+            // Capture the image
+            BufferedImage image = webcam.getImage();
+
+            // Save temporarily to file
+            File tempFile = File.createTempFile("captured-", ".jpg");
+            ImageIO.write(image, "JPG", tempFile);
+
+            // Show the captured image in the ImageView and analyze it
+            Platform.runLater(() -> {
+                analyzedImageView.setImage(new Image(tempFile.toURI().toString()));
+                analyzeImage(tempFile);
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Platform.runLater(() -> showAlert("Error capturing photo: " + e.getMessage()));
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
+
+    private void analyzeImage(File file) {
+        descriptionArea.setText("Analyzing image...");
+        recyclableLabel.setText("Recyclability: Processing...");
+
+        CompletableFuture.runAsync(() -> {
+            try {
+                // ✅ Step 1: Upload the image to Cloudinary
+                String publicImageUrl = uploadToCloudinary(file);  // <-- Upload first and get public URL
+
+                if (publicImageUrl == null || publicImageUrl.isEmpty()) {
+                    throw new IOException("Failed to upload image.");
+                }
+
+                // ✅ Step 2: Now send the public URL to the AI API
+                String uri = RAPIDAPI_URL;
+
+                String jsonBody = "{\"url\":\"" + publicImageUrl + "\"}";
+
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(uri))
+                        .header("x-rapidapi-host", RAPIDAPI_HOST)
+                        .header("x-rapidapi-key", RAPIDAPI_KEY)
+                        .header("Content-Type", "application/json")
+                        .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+                        .build();
+
+                HttpResponse<String> resp = HttpClient.newHttpClient()
+                        .send(request, HttpResponse.BodyHandlers.ofString());
+
+                System.out.println("HTTP " + resp.statusCode() + ": " + resp.body());
+
+                JsonNode root = objectMapper.readTree(resp.body());
+
+// Get description correctly
+// Get description correctly
+                String desc = root.path("caption").asText("No description");
+
+// Remove unwanted "<error>" if it exists
+                desc = desc.replace("<error>", "").trim();
+
+// tags
+                List<String> tags = new ArrayList<>();
+                for (JsonNode t : root.path("tags")) {
+                    if (t.has("name")) tags.add(t.get("name").asText());
+                }
+
+                boolean recyclable = classifyRecyclableFromDescription(desc);
+
+
+                String finalDesc = desc;
+                Platform.runLater(() -> {
+                    descriptionArea.setText(finalDesc);
+                    recyclableLabel.setText(
+                            "Recyclability: " + (recyclable ? "♻️ Recyclable" : "🚯 Not recyclable"));
+                });
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> descriptionArea.setText("Error: " + e.getMessage()));
+            }
+        });
+    }
+
+
+    private boolean classifyRecyclableFromDescription(String description) {
+        if (description == null || description.isEmpty()) {
+            return false; // Can't decide if empty
+        }
+
+        String lowerDesc = description.toLowerCase();
+
+        // Simple rules: if it mentions these, it's recyclable
+        if (lowerDesc.contains("plastic bottle") ||
+                lowerDesc.contains("glass jar") ||
+                lowerDesc.contains("newspaper") ||
+                lowerDesc.contains("paper") ||
+                lowerDesc.contains("card") ||
+                lowerDesc.contains("bottle") ||
+                lowerDesc.contains("metal can") ||
+                lowerDesc.contains("cardboard") ||
+                lowerDesc.contains("aluminum can") ||
+                lowerDesc.contains("glass bottle")) {
+            return true;
+        }
+
+        // If it mentions these, probably not recyclable
+        if (lowerDesc.contains("food") ||
+                lowerDesc.contains("banana peel") ||
+                lowerDesc.contains("dirty") ||
+                lowerDesc.contains("trash") ||
+                lowerDesc.contains("garbage") ||
+                lowerDesc.contains("plastic bag")) {
+            return false;
+        }
+
+        // Default fallback (you can tune this)
+        return false;
+    }
+
+    private String uploadToCloudinary(File file) throws IOException {
+        String cloudName = "dcfad76uv";
+        String apiKey = "129555962825232";
+        String apiSecret = "V9Udz_RnRaTQBPw6Tnc7lmrVTpM";
+
+        String uploadUrl = "https://api.cloudinary.com/v1_1/" + cloudName + "/image/upload";
+
+        OkHttpClient client = new OkHttpClient();
+
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        builder.addFormDataPart("file", file.getName(), RequestBody.create(file, MediaType.parse("image/*")));
+        builder.addFormDataPart("upload_preset", "javafx"); // ✅ Use correct preset
+
+        RequestBody requestBody = builder.build();
+
+        Request request = new Request.Builder()
+                .url(uploadUrl)
+                .post(requestBody)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+            String responseBody = response.body().string();
+            JsonNode json = objectMapper.readTree(responseBody);
+            return json.get("secure_url").asText();
+        }
+    }
+
+
 
     private void addActionButtonsToTable() {
         actionsColumn.setCellFactory(column -> new TableCell<>() {

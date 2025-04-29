@@ -6,21 +6,24 @@ module org.example.demo {
     requires java.mail;
     requires com.google.auth.oauth2;
     requires com.google.gson;
-    requires java.sql;
     requires javafx.web;
     requires java.net.http;
     requires mysql.connector.j;
+    requires com.fasterxml.jackson.core;       // jackson-core → Automatic-Module-Name: com.fasterxml.jackson.core
+    requires com.fasterxml.jackson.databind;  // jackson-databind → Automatic-Module-Name: com.fasterxml.jackson.databind
+    requires com.fasterxml.jackson.annotation;
     requires jdk.jsobject;
     requires org.apache.httpcomponents.core5.httpcore5.h2;
     requires java.scripting;
     requires org.json;
     requires twilio;
-    requires java.desktop;
     requires itextpdf;
     requires org.apache.commons.io;
     requires com.opencsv;
     requires okhttp3;
-
+    requires java.desktop;
+    requires java.sql;
+    requires webcam.capture;
     opens org.example.demo.controller to javafx.fxml;
     opens org.example.demo.models to javafx.base;
     exports org.example.demo;

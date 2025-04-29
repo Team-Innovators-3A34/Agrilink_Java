@@ -85,7 +85,7 @@
                         </columns>
                     </TableView>
 
-                    <!-- TabPane for Statistics and Chat -->
+                    <!-- TabPane for Statistics, Chat, and Image Analysis -->
                     <TabPane fx:id="tabPane"
                              prefWidth="400.0" prefHeight="500.0"
                              styleClass="custom-switch-tabs">
@@ -139,6 +139,32 @@
                                     </VBox>
                                 </content>
                             </Tab>
+
+                            <!-- Image Analysis Tab -->
+                            <Tab text="" closable="false">
+                                <graphic>
+                                    <ImageView fitWidth="36" fitHeight="36" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../../../../icons/camera.png"/>
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                                <content>
+                                    <VBox spacing="15.0" alignment="TOP_CENTER" prefWidth="400.0" prefHeight="500.0" style="-fx-padding: 10;">
+                                        <!-- Buttons to upload or open camera -->
+                                        <HBox spacing="10">
+                                            <Button fx:id="uploadButton" text="Upload Image" onAction="#onUploadImage"/>
+                                            <Button fx:id="cameraButton" text="Open Camera" onAction="#onOpenCamera"/>
+                                        </HBox>
+                                        <!-- Display selected image -->
+                                        <ImageView fx:id="analyzedImageView" fitWidth="380.0" fitHeight="200.0" preserveRatio="true" style="-fx-border-color: #ccc; -fx-border-radius: 5px;"/>
+                                        <!-- Analysis details -->
+                                        <TextArea fx:id="descriptionArea" prefWidth="380.0" prefHeight="120.0" editable="false" wrapText="true" promptText="Analysis description..."/>
+                                        <Label fx:id="recyclableLabel" text="Recyclability: N/A" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                                    </VBox>
+                                </content>
+                            </Tab>
+
                         </tabs>
                     </TabPane>
                 </HBox>
