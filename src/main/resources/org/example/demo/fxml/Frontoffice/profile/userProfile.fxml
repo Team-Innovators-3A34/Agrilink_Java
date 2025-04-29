@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.profile.userProfileController">
+   <top>
+      <fx:include source="../topBar.fxml" />
+   </top>
+   <left>
+      <fx:include source="../sideBar.fxml" />
+   </left>
+   <right>
+      <fx:include source="../rightBar.fxml" />
+   </right>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eaf3fc;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="173.0" layoutY="29.0" prefHeight="604.0" prefWidth="714.0" style="-fx-background-color: white;" styleClass="anchor-pane" stylesheets="@../../../../../../css/sidebarFrontoffice.css">
+               <children>
+                  <ImageView fitHeight="110.0" fitWidth="678.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false">
+                     <image>
+                        <Image url="@../../../../../../images/u-bg.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="profileimage" fitHeight="73.0" fitWidth="73.0" layoutX="31.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../images/YDPL6555.JPG" />
+                     </image>
+                     <clip>
+                        <Circle centerX="36.5" centerY="36.5" radius="36.5" />
+                     </clip>
+                  </ImageView>
+                  <Text fx:id="nomprenomText" layoutX="113.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Boughdiri Mahdi" textAlignment="CENTER">
+                     <font>
+                        <Font name="Montserrat-Regular" size="15.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="emailText" fill="#adb5bd" layoutX="115.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mehdi.bouhdiri@espruit.tn">
+                     <font>
+                        <Font name="Montserrat-Regular" size="9.0" />
+                     </font>
+                  </Text>
+                  <TabPane fx:id="profilePane" layoutX="31.0" layoutY="213.0" prefHeight="379.0" prefWidth="652.0" stylesheets="@../../../../../../css/profile.css" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab text="A propos">
+                           <content>
+                              <HBox>
+                                 <children>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                                       <children>
+                                          <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="260.0" prefWidth="164.0" styleClass="anchor-pane">
+                                             <children>
+                                                <Text layoutX="16.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A Propos">
+                                                   <font>
+                                                      <Font name="Montserrat-Regular" size="10.0" />
+                                                   </font>
+                                                </Text>
+                                                <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="14.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../../../../icons/oeil.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="17.0" fitWidth="21.0" layoutX="16.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../../../../icons/placeholder-filled-point.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="15.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../../../../icons/multiple-users-silhouette.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Text layoutX="40.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visible">
+                                                   <font>
+                                                      <Font name="Montserrat-Regular" size="7.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text fill="#abaaaa" layoutX="41.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visible par tout le monde">
+                                                   <font>
+                                                      <Font name="Montserrat-Regular" size="5.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text layoutX="41.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="13 rue amor mokhta...">
+                                                   <font>
+                                                      <Font name="Montserrat-Regular" size="7.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text layoutX="43.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 Amis">
+                                                   <font>
+                                                      <Font name="Montserrat-Regular" size="7.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <VBox prefHeight="286.0" prefWidth="432.0" spacing="5.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                             <padding>
+                                                <Insets bottom="10.0" top="10.0" />
+                                             </padding>
+                                          </HBox>
+                                          <ScrollPane fitToWidth="true" prefHeight="700.0" prefWidth="980.0" style="-fx-background: transparent; -fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                                             <content>
+                                                <VBox fx:id="postsContainer" spacing="10.0" style="-fx-background-color: transparent;">
+                                                   <children>
+                                                      <VBox fx:id="postCard" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                                                         <children>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                                     <children>
+                                                                        <StackPane>
+                                                                           <children>
+                                                                              <Circle fx:id="profileCircle" fill="#1877f2" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                                                              <Label fx:id="initialLabel" style="-fx-text-fill: white; -fx-font-weight: bold;" text="A" />
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <VBox spacing="2.0">
+                                                                           <children>
+                                                                              <Label fx:id="nameLabel" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Post Title" />
+                                                                              <Label fx:id="dateLabel" style="-fx-text-fill: #65676b; -fx-font-size: 12px;" text="Date posted" />
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets bottom="5.0" left="12.0" right="12.0" top="12.0" />
+                                                                     </padding>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER_RIGHT" spacing="5.0" StackPane.alignment="CENTER_RIGHT">
+                                                                     <children>
+                                                                        <Button fx:id="detailsBtn" mnemonicParsing="false" style="-fx-background-color: #e4e6eb; -fx-background-radius: 50%; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-padding: 0;" text="👁️" />
+                                                                        <Button fx:id="editBtn" mnemonicParsing="false" style="-fx-background-color: #e4e6eb; -fx-background-radius: 50%; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-padding: 0;" text="✏️" />
+                                                                        <Button fx:id="deleteBtn" mnemonicParsing="false" style="-fx-background-color: #e4e6eb; -fx-background-radius: 50%; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-padding: 0;" text="🗑️" />
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets right="8.0" />
+                                                                     </padding>
+                                                                  </HBox>
+                                                               </children>
+                                                            </StackPane>
+                                                            <VBox spacing="8.0">
+                                                               <children>
+                                                                  <Label fx:id="typeLabel" style="-fx-background-color: #e7f3ff; -fx-text-fill: #005eff; -fx-padding: 2 8; -fx-background-radius: 10; -fx-font-size: 11px;" text="Type" />
+                                                                  <Label fx:id="descriptionLabel" style="-fx-font-size: 18; -fx-background-color: grey; -fx-text-fill: white;" text="Description" wrapText="true" />
+                                                                  <StackPane fx:id="imageContainer" alignment="CENTER" style="-fx-border-color: #e4e6eb; -fx-border-radius: 4;">
+                                                                     <children>
+                                                                        <ImageView fx:id="postImageView" fitHeight="116.0" fitWidth="362.0" pickOnBounds="true" preserveRatio="true" />
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </padding>
+                                                                  </StackPane>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets bottom="12.0" left="12.0" right="12.0" />
+                                                               </padding>
+                                                            </VBox>
+                                                            <HBox alignment="CENTER_LEFT" style="-fx-border-color: transparent transparent transparent transparent; -fx-border-width: 1 0 0 0; -fx-border-style: solid;">
+                                                               <children>
+                                                                  <Circle fx:id="statusDot" fill="#42b72a" radius="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                                                  <Label fx:id="statusLabel" style="-fx-text-fill: #65676b; -fx-font-size: 12px;" text="Status">
+                                                                     <padding>
+                                                                        <Insets left="5.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                                  <Region HBox.hgrow="ALWAYS" />
+                                                                  <Label fx:id="idLabel" style="-fx-text-fill: #cccccc; -fx-font-size: 10px;" text="ID: 123" />
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets bottom="8.0" left="12.0" right="12.0" top="8.0" />
+                                                               </padding>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="resourceTab" text="Ressources">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="67.0" prefWidth="625.0" styleClass="anchor-pane">
+                                       <children>
+                                          <Text layoutX="25.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ressoruces">
+                                             <font>
+                                                <Font name="Montserrat-Regular" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField layoutX="450.0" layoutY="18.0" prefHeight="30.0" prefWidth="161.0" style="-fx-background-color: #f5f5f5;" text="Search here .." />
+                                       </children>
+                                    </AnchorPane>
+                                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="14.0" layoutY="91.0" prefHeight="231.0" prefWidth="617.0" style="-fx-background-color:transparent; -fx-border-color: transparent;" vbarPolicy="NEVER">
+                                       <content>
+                                          <GridPane fx:id="ressourceList" prefWidth="900.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                          </GridPane>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="tabRecyclingPoints" text="Point">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="67.0" prefWidth="625.0" styleClass="anchor-pane">
+                                       <children>
+                                          <Text layoutX="25.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Point de Recyclage">
+                                             <font>
+                                                <Font name="Montserrat-Regular" size="15.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField layoutX="450.0" layoutY="18.0" prefHeight="30.0" prefWidth="161.0" style="-fx-background-color: #f5f5f5;" text="Search here .." />
+                                       </children>
+                                    </AnchorPane>
+                                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="14.0" layoutY="91.0" prefHeight="231.0" prefWidth="624.0" style="-fx-background-color:transparent; -fx-border-color: transparent;" vbarPolicy="NEVER">
+                                       <content>
+                                          <GridPane fx:id="pointList" prefWidth="900.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                          </GridPane>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+                  <Line endX="522.0" layoutX="132.0" layoutY="201.0" startX="-100.0" stroke="#e1e1e1" />
+                  <Button fx:id="downloadPdfButton" layoutX="541.0" layoutY="144.0" styleClass="download-button" text="Download PDF" />
+               </children></AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,99 @@
+/* Configuration globale */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #FCFBFB;
+}
+
+/* Carte/formulaire */
+.form-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 2);
+}
+
+/* Titres de section */
+.text {
+    -fx-fill: #2E4053;
+    -fx-font-weight: bold;
+}
+
+/* Labels pour les titres de champ */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2E4053;
+    -fx-min-width: 110;  /* largeur minimale pour aligner les titres */
+}
+
+/* Valeurs associées aux champs : texte normal, non bold */
+.value-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #42585e;
+    -fx-padding: 0 0 0 5;  /* espace à gauche */
+}
+
+/* Pour le Label du contenu afin de permettre le retour à la ligne */
+.label.content {
+    -fx-wrap-text: true;
+}
+
+/* ComboBox pour la sélection de langue */
+.combo-box {
+    -fx-background-color: #F8F9FA;
+    -fx-border-color: #DEE2E6;
+    -fx-border-radius: 4;
+}
+
+/* Style général des items du ComboBox */
+.combo-box .list-cell {
+    -fx-padding: 8 10 8 10;
+    -fx-alignment: CENTER_LEFT;
+}
+.combo-box .list-cell:filled:selected,
+.combo-box .list-cell:filled {
+    -fx-background-insets: 0;
+}
+
+/* Boutons */
+.button {
+    -fx-background-color: #1F6F8B;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 8 15 8 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 3, 0, 0, 2);
+}
+.button:hover {
+    -fx-background-color: #155E75;
+}
+
+/* Bouton retour (moins imposant) */
+#backButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1F6F8B;
+    -fx-underline: true;
+    -fx-padding: 5;
+}
+
+/* Ligne de séparation */
+.line {
+    -fx-stroke: #DEE2E6;
+    -fx-stroke-width: 1;
+}
+
+/* Espacement des conteneurs */
+.hbox {
+    -fx-spacing: 10;
+    -fx-alignment: CENTER_LEFT;
+}
+.vbox {
+    -fx-spacing: 10;
+}
+
+/* Style pour l'image associée */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 2);
+    -fx-alignment: center;
+}

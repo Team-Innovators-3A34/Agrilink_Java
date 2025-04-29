@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.AfficherRessources">
+   <children>
+      <ListView fx:id="list" layoutX="32.0" layoutY="66.0" prefHeight="309.0" prefWidth="536.0" />
+      <Label layoutX="226.0" layoutY="27.0" prefHeight="18.0" prefWidth="171.0" text="Ressources" />
+      <VBox layoutX="235.0" layoutY="81.0" prefHeight="140.0" prefWidth="104.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

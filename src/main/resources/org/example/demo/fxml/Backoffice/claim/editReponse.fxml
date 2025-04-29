@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane prefHeight="800.0" prefWidth="1535.0"
+            xmlns="http://javafx.com/javafx/20.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.demo.controller.backOffice.claim.EditReponseController">
+    <!-- Sidebar -->
+    <left>
+        <fx:include source="../sidebarBackoffice.fxml" />
+    </left>
+    <!-- Topbar -->
+    <top>
+        <fx:include source="../topbarBackoffice.fxml" />
+    </top>
+    <!-- Zone centrale : formulaire de modification -->
+    <center>
+        <AnchorPane prefHeight="690.0" prefWidth="1270.0" style="-fx-background-color: #FCFBFB;"
+                    stylesheets="@../../../../../../css/addPage.css" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Carte contenant le formulaire -->
+                <AnchorPane layoutX="22.0" layoutY="14.0" prefHeight="682.0" prefWidth="900.0" styleClass="form-card">
+                    <children>
+                        <!-- Titre du formulaire -->
+                        <Text fill="#676e8a" layoutX="38.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier la réponse">
+                            <font>
+                                <Font name="Segoe UI Bold" size="20.0" />
+                            </font>
+                        </Text>
+                        <VBox layoutX="38.0" layoutY="70.0" prefHeight="75.0" prefWidth="530.0">
+                            <children>
+                                <!-- Label affichant le sujet de la réclamation -->
+                                <Label fx:id="titleLabel" text="Modifier la réponse:" styleClass="subtitle">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" top="10.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <!-- Zone Message -->
+                        <VBox layoutX="38.0" layoutY="120.0" prefHeight="120.0" prefWidth="530.0">
+                            <children>
+                                <Label text="Message:" styleClass="section-label" />
+                                <TextArea fx:id="contentTextArea" wrapText="true" prefRowCount="8" styleClass="response-textarea" />
+                            </children>
+                        </VBox>
+                        <!-- Zone Solution -->
+                        <VBox layoutX="38.0" layoutY="260.0" prefHeight="80.0" prefWidth="530.0">
+                            <children>
+                                <Label text="Solution:" styleClass="section-label" />
+                                <TextField fx:id="solutionTextField" promptText="Indiquez la solution envisagée" styleClass="response-field" />
+                            </children>
+                        </VBox>
+                        <!-- Zone Date -->
+                        <HBox layoutX="38.0" layoutY="350.0" prefHeight="50.0" prefWidth="530.0" spacing="10">
+                            <children>
+                                <Label text="Date de modification:" styleClass="section-label" />
+                                <DatePicker fx:id="datePicker" styleClass="response-field" />
+                            </children>
+                        </HBox>
+                        <!-- Option Réponse automatique -->
+                        <HBox layoutX="38.0" layoutY="410.0" prefHeight="40.0" prefWidth="530.0">
+                            <children>
+                                <CheckBox fx:id="isAutoCheckBox" text="Réponse auto" onAction="#toggleContentField" />
+                            </children>
+                        </HBox>
+                        <!-- Boutons d'action -->
+                        <HBox layoutX="38.0" layoutY="470.0" prefHeight="50.0" prefWidth="530.0" spacing="20" alignment="CENTER_RIGHT">
+                            <children>
+                                <Button text="Enregistrer la modification" onAction="#handleSave" styleClass="submit-button" />
+                                <Button text="Retour à la liste" onAction="#handleBack" styleClass="back-button" />
+                            </children>
+                        </HBox>
+                        <!-- Ligne de séparation -->
+                        <Line endX="538.2" layoutX="101.0" layoutY="51.0" startX="-100.0" stroke="#dee2e6" />
+                    </children>
+                </AnchorPane>
+                <!-- Zone complémentaire (exemple d'aperçu, carte, etc.) -->
+                <AnchorPane layoutX="774.0" layoutY="70.0" prefHeight="571.0" prefWidth="451.0">
+                    <children>
+                        <WebView fx:id="mapView" prefHeight="572.0" prefWidth="451.0" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

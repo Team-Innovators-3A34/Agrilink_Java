@@ -1,0 +1,93 @@
+.button {
+    -fx-background-color: #32BDEA;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+    -fx-padding: 6 16;
+    -fx-background-radius: 4;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2fadd3;
+}
+
+
+
+/* Style the input container */
+.input-container {
+    -fx-padding: 8px;
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6; /* Light gray border */
+    -fx-border-radius: 8px;
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+}
+
+/* Style the TextField */
+.custom-textfield {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-font-size: 14px;
+    -fx-text-fill: #495057; /* Dark gray text */
+    -fx-background-insets: 0;
+    /* Remove background inset */
+}
+
+/* Remove focus border */
+.custom-textfield:focused {
+    -fx-border-width: 0;
+    -fx-background-color: transparent; /* Keep it transparent */
+}
+
+.form-card {
+    -fx-background-color: #FCFBFB;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+
+}
+
+.custom-datepicker {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-font-size: 14px;
+    -fx-text-fill: #495057; /* Dark gray text */
+    -fx-background-insets: 0; /* Remove background inset */
+}
+
+/* Remove the focus border and the default popup style for DatePicker */
+.custom-datepicker:focused {
+    -fx-border-width: 0;
+    -fx-background-color: transparent; /* Keep it transparent */
+}
+
+/* Style the ComboBox */
+.custom-combobox {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-font-size: 14px;
+    -fx-text-fill: #495057; /* Dark gray text */
+    -fx-background-insets: 0; /* Remove background inset */
+}
+
+/* Remove focus border */
+.custom-combobox:focused {
+    -fx-border-width: 0;
+    -fx-background-color: transparent; /* Keep it transparent */
+}
+
+.custom-datepicker {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-font-size: 14px;
+    -fx-text-fill: #495057; /* Dark gray text */
+    -fx-background-insets: 0; /* Remove background inset */
+}
+
+/* Remove the focus border and the default popup style for DatePicker */
+.custom-datepicker:focused {
+    -fx-border-width: 0;
+    -fx-background-color: transparent; /* Keep it transparent */
+}
