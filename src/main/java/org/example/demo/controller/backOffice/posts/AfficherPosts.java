@@ -156,7 +156,6 @@ public class AfficherPosts {
         // Bind sorting to the table view
         sortedPostsList.comparatorProperty().bind(postsTable.comparatorProperty());
 
-        // Set the sorted list as items to the table
         postsTable.setItems(sortedPostsList);
     }
 
@@ -164,28 +163,25 @@ public class AfficherPosts {
         // Initialize FilteredList
         filteredPostsList = new FilteredList<>(allPostsList, p -> true);
 
-        // Configure date pickers
         configDatePickers();
 
-        // Configure filter ComboBoxes
         typeFilter.getItems().add("All Types");
         typeFilter.getSelectionModel().selectFirst();
 
         statusFilter.getItems().add("All Status");
         statusFilter.getSelectionModel().selectFirst();
 
-        // Configure search field to filter as you type (optional)
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             applyFiltersAction(null);
         });
     }
 
     private void configDatePickers() {
-        // Set prompt text
+        // prompt text
         fromDatePicker.setPromptText("From Date");
         toDatePicker.setPromptText("To Date");
 
-        // Set converters to handle null values
+        //converters to handle null values
         StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
             @Override
             public String toString(LocalDate date) {

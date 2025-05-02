@@ -181,68 +181,75 @@ public class PostSentimentAPI {
     }
 
     private SentimentResult performSimpleSentimentAnalysis(String text) {
+        // Null check
         if (text == null || text.trim().isEmpty()) {
             return new SentimentResult(Posts.SENTIMENT_NEUTRAL, 0.5);
         }
 
-        text = text.toLowerCase();
+        // Basic prep - convert to lowercase
+        String lowerText = text.toLowerCase().trim();
 
-        // Simple word lists
-        String[] positiveWords = {
-                "good", "great", "excellent", "amazing", "love", "happy", "positive",
-                "awesome", "wonderful", "fantastic", "content", "pleased", "joyful",
-                "brilliant", "successful", "satisfied", "cheerful", "hopeful", "delightful",
-                "admirable", "superb", "splendid", "formidable", "incroyable", "heureux",
-                "satisfait", "joyeux", "génial", "fantastique", "épatant", "excellent",
-                "super", "positif", "agréable", "extraordinaire"
-        };
+        // Print the text we're analyzing - DEBUGGING
+        System.out.println("ANALYZING TEXT: " + lowerText);
 
-        String[] negativeWords = {
-                "bad", "terrible", "awful", "horrible", "hate", "sad", "negative",
-                "poor", "unfortunate", "disaster", "triste", "horrendous", "depressing",
-                "annoying", "disappointing", "miserable", "unhappy", "unlucky", "regretful",
-                "désastre", "négatif", "affreux", "épouvantable", "horrible", "malheureux",
-                "pessimiste", "décevant", "pathétique", "lamentable", "insatisfait", "atroce",
-                "douloureux", "catastrophique", "souffrent", "misérable"
-        };
+        /////////////////////////////////////////////
+        // DIRECT CHECK FOR SPECIFIC NEGATIVE WORDS
+        /////////////////////////////////////////////
 
+        // Specifically check for "triste" and "decu" for French
+        if (lowerText.contains("triste") ||
+                lowerText.contains("decu") ||
+                lowerText.contains("déçu") ||
+                lowerText.contains("sad") ||
+                lowerText.contains("mal") ||
+                lowerText.contains("mauvais") ||
+                lowerText.contains("terrible") ||
+                lowerText.contains("horrible") ||
+                lowerText.contains("malheureux") ||
+                lowerText.contains("nul") ||
+                lowerText.contains("affreux") ||
+                lowerText.contains("déteste") ||
+                lowerText.contains("deteste") ||
+                lowerText.contains("hate") ||
+                lowerText.contains("bad") ||
+                lowerText.contains("awful") ||
+                lowerText.contains("disappointed") ||
+                lowerText.contains("disappointing") ||
+                lowerText.contains("negative")) {
 
-        int positiveCount = 0;
-        int negativeCount = 0;
-
-        // ne7sbou bl kelmet
-        for (String word : positiveWords) {
-            if (text.contains(word)) {
-                positiveCount++;
-            }
+            System.out.println("FOUND NEGATIVE WORD! Returning NEGATIVE sentiment.");
+            return new SentimentResult(Posts.SENTIMENT_NEGATIVE, 0.1);
         }
 
-        for (String word : negativeWords) {
-            if (text.contains(word)) {
-                negativeCount++;
-            }
+        /////////////////////////////////////////////
+        // DIRECT CHECK FOR SPECIFIC POSITIVE WORDS
+        /////////////////////////////////////////////
+
+        if (lowerText.contains("heureux") ||
+                lowerText.contains("content") ||
+                lowerText.contains("j'aime") ||
+                lowerText.contains("jaime") ||
+                lowerText.contains("adore") ||
+                lowerText.contains("génial") ||
+                lowerText.contains("genial") ||
+                lowerText.contains("super") ||
+                lowerText.contains("bien") ||
+                lowerText.contains("excellent") ||
+                lowerText.contains("happy") ||
+                lowerText.contains("great") ||
+                lowerText.contains("wonderful") ||
+                lowerText.contains("good") ||
+                lowerText.contains("awesome") ||
+                lowerText.contains("love") ||
+                lowerText.contains("enjoy") ||
+                lowerText.contains("positive")) {
+
+            System.out.println("FOUND POSITIVE WORD! Returning POSITIVE sentiment.");
+            return new SentimentResult(Posts.SENTIMENT_POSITIVE, 0.9);
         }
 
-        //ne7sbou l score
-        double totalWords = positiveCount + negativeCount;
-        if (totalWords == 0) {
-            return new SentimentResult(Posts.SENTIMENT_NEUTRAL, 0.5);
-        }
-
-        double sentimentScore = (positiveCount - negativeCount) / totalWords;
-
-        // Convert to 0-1 scale for consistency with API
-        double normalizedScore = (sentimentScore + 1) / 2;
-
-        String sentimentCategory;
-        if (normalizedScore > 0.6) {
-            sentimentCategory = Posts.SENTIMENT_POSITIVE;
-        } else if (normalizedScore < 0.4) {
-            sentimentCategory = Posts.SENTIMENT_NEGATIVE;
-        } else {
-            sentimentCategory = Posts.SENTIMENT_NEUTRAL;
-        }
-
-        return new SentimentResult(sentimentCategory, normalizedScore);
+        // If no clear sentiment is found, return neutral
+        System.out.println("NO CLEAR SENTIMENT FOUND. Returning NEUTRAL.");
+        return new SentimentResult(Posts.SENTIMENT_NEUTRAL, 0.5);
     }
 }

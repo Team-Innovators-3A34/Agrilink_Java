@@ -1,7 +1,5 @@
 package org.example.demo.controller.frontOffice.posts;
 
-
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -29,6 +27,7 @@ import org.example.demo.models.Reaction;
 import org.example.demo.models.User;
 import org.example.demo.services.posts.CommentService;
 import org.example.demo.services.posts.IService;
+import org.example.demo.services.posts.ProfanityFilterService;
 import org.example.demo.services.posts.ReactionService;
 import org.example.demo.services.user.userService;
 import org.example.demo.utils.sessionManager;
@@ -110,18 +109,36 @@ public class DetailsPosts {
     private Map<String, Integer> reactionCounts;
 
     @FXML private Label authorLabel;
+    @FXML private Label profanityWarningLabel;
 
     private Posts currentPost;
     private profileController parentController;
     private IService<Comment> commentService = new CommentService();
     private Comment commentBeingEdited = null;
     User user = new User();
+    private ProfanityFilterService profanityFilter;
 
     @FXML
     private final userService userService = new userService();
 
     @FXML
     public void initialize() {
+        // Initialize the profanity filter
+        profanityFilter = new ProfanityFilterService();
+
+        // Create profanity warning label if it doesn't exist
+        if (profanityWarningLabel == null) {
+            profanityWarningLabel = new Label("Comment contains inappropriate language");
+            profanityWarningLabel.setStyle("-fx-text-fill: red; -fx-font-size: 12px;");
+            profanityWarningLabel.setVisible(false);
+            profanityWarningLabel.setManaged(false);
+
+            // Add to UI, assuming commentControlsBox is the VBox containing comment controls
+            commentsSectionContainer.getChildren().add(profanityWarningLabel);
+        }
+
+        // Set up real-time profanity checking in the text area
+        setupProfanityChecker();
         // Initialize the comments section
         commentsSectionContainer.setVisible(false);
         commentsSectionContainer.setManaged(false);
@@ -161,6 +178,22 @@ public class DetailsPosts {
         if (likeButton != null) {
             likeButton.setOnAction(this::showReactionOptions);
         }
+    }
+
+    private void setupProfanityChecker() {
+        // Add listener to the text area
+        newCommentTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (profanityFilter.containsProfanity(newValue)) {
+                profanityWarningLabel.setText("Comment contains inappropriate language");
+                profanityWarningLabel.setVisible(true);
+                profanityWarningLabel.setManaged(true);
+                addCommentButton.setDisable(true); // Disable post button when profanity detected
+            } else {
+                profanityWarningLabel.setVisible(false);
+                profanityWarningLabel.setManaged(false);
+                addCommentButton.setDisable(false);
+            }
+        });
     }
 
     @FXML
@@ -552,6 +585,43 @@ public class DetailsPosts {
         if (commentContent.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Attention", "Le commentaire ne peut pas être vide.");
             return;
+        }
+
+        // Check for profanity before posting
+        if (profanityFilter.containsProfanity(commentContent)) {
+            // Get a suggested clean version of the text
+            String suggestedText = profanityFilter.getSuggestedText(commentContent);
+
+            // Show alert with options
+            Alert profanityAlert = new Alert(Alert.AlertType.WARNING);
+            profanityAlert.setTitle("Let's mind our language dear user :)");
+            profanityAlert.setHeaderText("Agrilink is a platform for all ages !");
+
+            // Create content with options
+            VBox content = new VBox(10);
+            content.setPadding(new Insets(10, 10, 10, 10));
+
+            Label messageLabel = new Label("Please remove inappropriate language before posting.");
+            Label suggestedLabel = new Label("Would you like to proceed with the words censored ?");
+            Label suggestedTextLabel = new Label(suggestedText);
+            suggestedTextLabel.setStyle("-fx-font-weight: bold;");
+
+            content.getChildren().addAll(messageLabel, suggestedLabel, suggestedTextLabel);
+            profanityAlert.getDialogPane().setContent(content);
+
+            // Add custom buttons
+            ButtonType useButton = new ButtonType("Yes");
+            ButtonType editButton = new ButtonType("Edit Comment");
+            profanityAlert.getButtonTypes().setAll(useButton, editButton);
+
+            Optional<ButtonType> result = profanityAlert.showAndWait();
+            if (result.isPresent() && result.get() == useButton) {
+                // Use the censored version
+                commentContent = suggestedText;
+            } else {
+                // Let the user edit their comment
+                return;
+            }
         }
 
         try {

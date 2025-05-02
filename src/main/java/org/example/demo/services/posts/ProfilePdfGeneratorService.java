@@ -289,7 +289,7 @@ public class ProfilePdfGeneratorService {
                                 imageLoaded = true;
                             }
                         } catch (Exception e) {
-                            //System.out.println("Failed to load as direct file: " + e.getMessage());
+                            System.out.println("Failed to load as direct file: " + e.getMessage());
                         }
 
                         // Try 2: Resource path loading
@@ -302,12 +302,12 @@ public class ProfilePdfGeneratorService {
                                 if (resourceStream != null) {
                                     postImage = Image.getInstance(IOUtils.toByteArray(resourceStream));
                                     imageLoaded = true;
-                                    //System.out.println("Loaded from resources successfully");
+                                    System.out.println("Loaded from resources successfully");
                                 } else {
-                                    //System.out.println("Resource not found: " + resourcePath);
+                                    System.out.println("Resource not found: " + resourcePath);
                                 }
                             } catch (Exception e) {
-                                //System.out.println("Failed to load from resources: " + e.getMessage());
+                                System.out.println("Failed to load from resources: " + e.getMessage());
                             }
                         }
 
