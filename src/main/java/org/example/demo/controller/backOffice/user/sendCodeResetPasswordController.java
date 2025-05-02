@@ -27,7 +27,7 @@ public class sendCodeResetPasswordController {
             return;
         }
 
-        if (userService.checkVerifyUser(email)) {
+        if (!userService.checkVerifyUser(email)) {
             HelloApplication.error("Compte non verifie ,Vous devez verifier votre compte avant!");
             return;
         }

@@ -11,10 +11,7 @@ import org.example.demo.services.user.userService;
 import org.example.demo.utils.GoogleAuth;
 import org.example.demo.utils.sessionManager;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 public class LoginController {
@@ -193,6 +190,67 @@ public class LoginController {
             file.delete();
         }
     }
+
+    @FXML
+    void onLoginFaceIdClicked() {
+        try {
+            ProcessBuilder builder = new ProcessBuilder("python", "C:\\Users\\user\\Desktop\\test face\\detect_face_video.py");
+            builder.redirectErrorStream(true);
+            Process process = builder.start();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String output = null;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println("PYTHON: " + line);  // Debugging
+                output = line;  // Save the last printed line
+            }
+
+            int exitCode = process.waitFor();
+            if (exitCode == 0 && output != null) {
+                if (output.startsWith("email:")) {
+                    String[] parts = output.split(",");
+                    String email = parts[0].split(":")[1];
+                    String password = parts[1].split(":")[1];
+
+                    if (userService.loginGoogle(email)) {
+                        if (sessionManager.getInstance().getUser().getAccountVerification().equals("pending")) {
+                            sessionManager.getInstance().clearSession();
+                            HelloApplication.error("Votre compte n'est pas encore vérifié.");
+                            return;
+                        }
+
+                        if (sessionManager.getInstance().getUser().getStatus().equals("hide")) {
+                            sessionManager.getInstance().clearSession();
+                            HelloApplication.error("Votre compte est bloqué.");
+                            return;
+                        }
+
+                        if (sessionManager.getInstance().getUser().getRoles().equals("[\"ROLE_ADMIN\"]")) {
+                            HelloApplication.changeScene("/org/example/demo/fxml/Dashboard.fxml");
+                        } else {
+                            HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/HomePage.fxml");
+                        }
+                    }
+
+
+                    // Call your login logic here
+                    HelloApplication.succes("Logged in as: " + email);
+                } else if (output.equals("Unknown")) {
+                    HelloApplication.error("Unknown user. Please register.");
+                } else {
+                    HelloApplication.error("Unexpected output from face recognition: " + output);
+                }
+            } else {
+                HelloApplication.error("Face recognition failed.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            HelloApplication.error("An error occurred while running face recognition.");
+        }
+    }
+
 
 
 
