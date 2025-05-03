@@ -47,7 +47,8 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextField layoutX="1057.0" layoutY="125.0" styleClass="search-input" />
+            <TextField
+                    fx:id="searchField" layoutX="1057.0" layoutY="125.0" styleClass="search-input" />
             <Text fill="#8a8282" layoutX="42.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="root" text="This dashboard provides a comprehensive list of Agriculture Investors, Recycling Investors,">
                <font>
                   <Font name="Segoe UI" size="13.0" />

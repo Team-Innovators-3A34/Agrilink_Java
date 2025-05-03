@@ -7,7 +7,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.example.demo.HelloApplication;
 import org.example.demo.models.Demandes;
-import org.example.demo.services.ressource.DemandesService;
+import org.example.demo.models.User;
+import org.example.demo.services.DemandeService;
 import org.example.demo.services.user.userService;
 import org.example.demo.utils.GoogleAuth;
 import org.example.demo.utils.sessionManager;
@@ -52,13 +53,28 @@ public class LoginController {
                 HelloApplication.changeScene("/org/example/demo/fxml/Backoffice/dashboard.fxml");
             }else {
                 HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/HomePage.fxml");
-                int userId = authenticateUser(username, password);
-                DemandesService demandesService = new DemandesService();
-                // Une fois l'utilisateur connecté, vérifiez si ses demandes expirent aujourd'hui
+               //int userId = authenticateUser(username, password);
+                User user = userService.authenticate(username, password);
+                DemandeService demandesService = new DemandeService();
+                if (user != null) {
+                    int userId = user.getId(); // Récupération de l'ID utilisateur
 
-                List<Demandes> demandes = demandesService.getDemandesByUserId1(userId);
+                    boolean expireAujourdHui = demandesService.hasDemandeQuiExpireAujourdhui(user);
+                    if (expireAujourdHui) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Alerte Expiration");
+                        alert.setContentText("⚠️ Une de vos demandes expire aujourd'hui !");
+                        alert.showAndWait();
+                    }
 
-                verifierExpirationDemande(userId, demandes);
+                    // Suite : redirection vers la page principale...
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur");
+                    alert.setContentText("Nom d'utilisateur ou mot de passe incorrect !");
+                    alert.showAndWait();
+                }
             }
         }
     }

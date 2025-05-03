@@ -4,10 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
@@ -40,7 +43,8 @@ public class ListRessourceController {
 
     @FXML
     private TableColumn<Ressources, String> typeColumn;
-
+    @FXML
+    private TextField searchField;
     private final RessourcesService ressourcesService = new RessourcesService();
     private final ObservableList<Ressources> ressources = FXCollections.observableArrayList();
 
@@ -60,6 +64,22 @@ public class ListRessourceController {
         actionsColumn.setCellFactory(getDeleteCellFactory());
 
         ressourcesTable.setItems(ressources);
+        searchField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String keyword = searchField.getText().trim().toLowerCase();
+
+                ObservableList<Ressources> filteredList = FXCollections.observableArrayList();
+
+                for (Ressources ressource : ressourcesService.rechercher()) {
+                    if (ressource.getName().toLowerCase().contains(keyword)) {
+                        filteredList.add(ressource);
+                    }
+                }
+
+                ressourcesTable.setItems(filteredList);
+            }
+        });
+
     }
 
     private Callback<TableColumn<Ressources, Void>, TableCell<Ressources, Void>> getDeleteCellFactory() {

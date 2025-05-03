@@ -1,21 +1,19 @@
 package org.example.demo.services.user;
 
-import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.example.demo.HelloApplication;
 import org.example.demo.models.User;
-import org.example.demo.models.Ressources;
 import org.example.demo.utils.EmailSender;
 import org.example.demo.utils.dataBaseHelper;
 import org.example.demo.utils.sessionManager;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.mail.MessagingException;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 public class userService implements userInterface {
@@ -529,6 +527,46 @@ public class userService implements userInterface {
         }
         return false;
     }
+public User authenticate( String username, String password)
+{
+    Connection conn = dataBaseHelper.getInstance().getConnection();
+    String query = "SELECT * FROM user WHERE email = ?";
 
+    try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            String storedHashedPassword = rs.getString("password");
+            if (BCrypt.checkpw(password, storedHashedPassword)) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("adresse"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("telephone"),
+                        rs.getString("roles"),
+                        rs.getString("status"),
+                        rs.getString("description"),
+                        rs.getString("bio"),
+                        rs.getString("image"),
+                        rs.getString("account_verification"),
+                        rs.getString("country"),
+                        rs.getString("city"),
+                        rs.getFloat("longitude"),
+                        rs.getFloat("latitude"),
+                        rs.getBoolean("is2_fa"),
+                        rs.getInt("score"),
+                        rs.getTimestamp("create_at").toLocalDateTime()
+                );
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return null;
+}
 
 }

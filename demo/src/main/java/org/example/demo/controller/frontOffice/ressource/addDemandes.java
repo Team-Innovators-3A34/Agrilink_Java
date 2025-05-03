@@ -11,10 +11,13 @@ import org.example.demo.models.Demandes;
 import org.example.demo.models.Ressources;
 import org.example.demo.models.User;
 import org.example.demo.services.ressource.DemandesService;
-import org.example.demo.services.ressource.SmsService;
+import org.example.demo.services.ressource.LanguageToolValidator;
+import org.example.demo.services.ressource.PredictionService;
 import org.example.demo.utils.sessionManager;
+import org.json.JSONObject;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class addDemandes {
 
@@ -81,6 +84,48 @@ public class addDemandes {
                 return;
             }
 
+            // 🔥 Ici tu ajoutes le contrôle de correction grammaticale
+            List<String> erreurs = LanguageToolValidator.getDescriptionErrors(message);
+            if (erreurs.size() > 2) {
+                Alert alert2 = new Alert(Alert.AlertType.WARNING);
+                alert2.setTitle("Message incorrect");
+                alert2.setHeaderText("Le message contient trop d'erreurs :");
+
+                StringBuilder content = new StringBuilder();
+                for (String erreur : erreurs) {
+                    content.append(erreur).append("\n\n");
+                }
+
+                alert2.setContentText(content.toString());
+                alert2.showAndWait();
+                return; // Ne pas continuer si trop d'erreurs
+            }
+            // Appel de l'IA pour prédiction
+            String expireDateStr = expireAt.toString();
+
+
+         /*   String predictionJson = PredictionService.predictStatus(expireDateStr, message);
+
+// Extraire seulement la prédiction du JSON
+            String status = predictionJson.contains("approuvé") ? "Approuvée" :
+                    predictionJson.contains("rejetée") ? "Rejetée" : "Inconnue";*/
+            String predictionJson = PredictionService.predictStatus(expireDateStr, message);
+            System.out.println("Réponse brute : " + predictionJson);
+
+            JSONObject jsonObject = new JSONObject(predictionJson);
+            String prediction = jsonObject.getString("prediction");
+
+            String status = prediction.equalsIgnoreCase("approuve") ? "Approuvée" :
+                    prediction.equalsIgnoreCase("rejete") ? "Rejete" : "Inconnue";
+
+
+// Message d'information à l'utilisateur
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Prédiction IA");
+            alert.setHeaderText("Statut prédit pour cette demande :");
+            alert.setContentText("La demande est probablement : " + status);
+            alert.showAndWait();
+
             if (selectedDemande != null) {
                 // Mise à jour
                 selectedDemande.setMessage(message);
@@ -96,9 +141,9 @@ public class addDemandes {
                 demande.setToUserId(ressourceId.getUserId());
                 demande.setUserId(user.getId());
                 //  Envoi du SMS
-                String numeroTest = "+21698476000"; // change par ton vrai numéro de test
+             /*   String numeroTest = "+21698476000"; // change par ton vrai numéro de test
                 String contenuSms = "Votre demande a été enregistrée avec priorité : " + priorite;
-                SmsService.envoyerSms(numeroTest, contenuSms);
+                SmsService.envoyerSms(numeroTest, contenuSms);*/
                 demandeService.ajouter(demande);
                 HelloApplication.succes("Demande ajoutée avec succès !");
             }

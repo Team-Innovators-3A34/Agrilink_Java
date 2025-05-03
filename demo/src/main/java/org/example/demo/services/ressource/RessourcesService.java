@@ -101,6 +101,7 @@ public class RessourcesService implements IService<Ressources> {
     }
 
     @Override
+
     public List<Ressources> rechercher() {
         List<Ressources> ressources = new ArrayList<>();
         String sql = "SELECT * FROM ressources";
@@ -123,6 +124,10 @@ public class RessourcesService implements IService<Ressources> {
                         rs.getDouble("superficie"),
                         rs.getString("adresse")
                 );
+                // 💥 Ajout des valeurs manquantes
+                ressource.setRating(rs.getDouble("rating"));
+                ressource.setRatingCount(rs.getInt("rating_count"));
+
                 ressources.add(ressource);
             }
             System.out.println("✅ Recherche terminée, " + ressources.size() + " ressources trouvées.");
@@ -131,6 +136,7 @@ public class RessourcesService implements IService<Ressources> {
         }
         return ressources;
     }
+
 
     public void ajouter(int i, String type, String description, String status, String nom, String marque, String prix, String superficie, String adresse) {
     }
@@ -180,6 +186,10 @@ public class RessourcesService implements IService<Ressources> {
                         rs.getDouble("superficie"),
                         rs.getString("adresse")
                 );
+                // 💥 Ajout des valeurs manquantes
+                ressource.setRating(rs.getDouble("rating"));
+                ressource.setRatingCount(rs.getInt("rating_count"));
+
                 ressources.add(ressource);
             }
             System.out.println("✅ Recherche terminée, " + ressources.size() + " ressources trouvées pour l'utilisateur ID " + userId);

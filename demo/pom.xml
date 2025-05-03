@@ -92,11 +92,7 @@
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.calendarfx</groupId>
-            <artifactId>calendarfx-view</artifactId>
-            <version>11.8.0</version>
-        </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
@@ -107,6 +103,13 @@
             <artifactId>json</artifactId>
             <version>20240303</version> <!-- ou la dernière version disponible -->
         </dependency>
+        <dependency>
+            <groupId>nz.ac.waikato.cms.weka</groupId>
+            <artifactId>weka-stable</artifactId>
+            <version>3.8.6</version> <!-- tu peux aussi tester 3.9.6 -->
+        </dependency>
+
+
         <dependency>
             <groupId>com.twilio.sdk</groupId>
             <artifactId>twilio</artifactId>

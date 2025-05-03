@@ -17,6 +17,9 @@ module org.example.demo {
     requires twilio;
 
 
+  requires weka.stable;
+
+
     opens org.example.demo.controller to javafx.fxml;
     opens org.example.demo.models to javafx.base;
     exports org.example.demo;

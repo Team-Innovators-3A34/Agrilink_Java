@@ -17,7 +17,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" style="-fx-background-color: #eaf3fc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" style="-fx-background-color: #eaf3fc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.HomePage">
+
+
     <left>
         <fx:include source="sideBar.fxml" />
     </left>
@@ -100,14 +102,21 @@
                               <Font name="System Bold" size="9.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="txtAdresse" layoutX="28.0" layoutY="79.0" prefHeight="26.0" prefWidth="165.0" />
+                        <TextField fx:id="ville" layoutX="28.0" layoutY="79.0" prefHeight="26.0" prefWidth="165.0" />
                         <Button layoutX="194.0" layoutY="79.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0"  />
-                        <ImageView fx:id="btnMeteo" fitHeight="13.0" fitWidth="12.0" layoutX="201.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnMeteo" fitHeight="13.0" fitWidth="12.0" layoutX="201.0" layoutY="86.0"
+                                   onMouseClicked="#showMeteo"   pickOnBounds="true" preserveRatio="true">
+
 
                             <image>
                               <Image url="@../../../../../icons/paper-plane.png" />
                            </image>
                         </ImageView>
+                         <Text fx:id="meteo" layoutX="18.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No data found">
+                             <font>
+                                 <Font name="Arial" size="10.0" />
+                             </font>
+                         </Text>
 
                      </children>
                   </AnchorPane>

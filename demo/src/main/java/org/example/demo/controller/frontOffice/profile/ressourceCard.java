@@ -80,6 +80,12 @@ public class ressourceCard {
             ressourceService.modifierRating(ressource);
 
             System.out.println("Note soumise : " + selectedRating);
+            // 🎯 Afficher une alerte de confirmation
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+            alert.setTitle("Merci pour votre avis !");
+            alert.setHeaderText(null);
+            alert.setContentText("Votre note a été enregistrée avec succès !");
+            alert.showAndWait();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -95,13 +101,14 @@ public class ressourceCard {
             deleteRessource.setVisible(true);
             updateRessource.setVisible(true);
             demanderRessource.setVisible(false);
-            //ratingPane.setVisible(false);
             viewRessource.setVisible(true);
-            ratingPane.setVisible(true); // mettre true pour afficher
+            ratingPane.setVisible(true);
 
             ratingPane.getChildren().clear();
+            double Rating=ressource.getRating();
+            HBox starBox = createReadOnlyStarsWithImages(Rating);
+            System.out.println("Rating récupéré: " + ressource.getRating());
 
-            HBox starBox = createReadOnlyStars(ressource.getRating()); // 💡 utiliser la nouvelle méthode
             ratingPane.getChildren().add(starBox);
         } else {
             deleteRessource.setVisible(false);
@@ -109,13 +116,62 @@ public class ressourceCard {
             demanderRessource.setVisible(true);
             viewRessource.setVisible(true);
             ratingPane.setVisible(true);
+
             ratingPane.getChildren().clear();
 
-           double rating = ressource.getRating(); // récupéré directement de l'objet
+            double rating = ressource.getRating();
             HBox starBox = createStarRating(rating);
             ratingPane.getChildren().add(starBox);
         }
     }
+
+    // ✨ Nouvelle méthode pour afficher les étoiles en utilisant des images
+    /*private HBox createReadOnlyStarsWithImages(double rating) {
+        HBox starsBox = new HBox();
+        starsBox.setSpacing(5);
+
+        int fullStars = (int) Math.floor(rating);
+
+        for (int i = 1; i <= 5; i++) {
+            ImageView starImage = new ImageView();
+            starImage.setFitHeight(15);
+            starImage.setFitWidth(15);
+
+            if (i <= fullStars) {
+                starImage.setImage(new javafx.scene.image.Image("images/star.png"));
+            } else {
+                starImage.setImage(new javafx.scene.image.Image("images/star-disable.png"));
+            }
+
+            starsBox.getChildren().add(starImage);
+        }
+
+        return starsBox;
+    }*/
+    // ✨ Nouvelle méthode pour afficher les étoiles en utilisant les caractères ★ et ☆
+    private HBox createReadOnlyStarsWithImages(double rating) {
+        HBox starsBox = new HBox();
+        starsBox.setSpacing(5);
+
+        double fullStars = rating;
+
+        for (int i = 1; i <= 5; i++) {
+            Label star = new Label();
+
+            if (i <= fullStars) {
+                star.setText("★");
+                star.setStyle("-fx-font-size: 18px; -fx-text-fill: gold;");
+            } else {
+                star.setText("☆");
+                star.setStyle("-fx-font-size: 18px; -fx-text-fill: gray;");
+            }
+
+            starsBox.getChildren().add(star);
+        }
+
+        return starsBox;
+    }
+
     private HBox createReadOnlyStars(double rating) {
         HBox starsBox = new HBox();
         starsBox.setSpacing(5);
@@ -200,6 +256,23 @@ public class ressourceCard {
     public void setRefreshCallback(Runnable callback) {
         this.refreshCallback = callback;  // Set the callback from profileController
     }
+    @FXML
+    void onViewRessourceClicked() {
+        try {
+            HelloApplication.changeSceneWithController(
+                    "/org/example/demo/fxml/Frontoffice/ressources/details.fxml",
+                    controller -> {
+                        if (controller instanceof Details) {
+                            ((Details) controller).setRessource(ressource);
+                        }
+                    }
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @FXML
     void onDeleteRessourceClicked() {
