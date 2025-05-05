@@ -79,7 +79,7 @@ public class EditReponseController {
                 // Return to the list of answers
                 dashboardController.restoreCenter();
             } else {
-                System.out.println("Échecc de la modification de la réponse.");
+                System.out.println("Échec de la modification de la réponse.");
             }
         }
         dashboardController.restoreCenter();
