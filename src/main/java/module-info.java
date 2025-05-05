@@ -1,0 +1,53 @@
+module org.example.demo {
+    requires javafx.fxml;
+    requires java.management;
+    requires org.controlsfx.controls;
+    requires jbcrypt;
+    requires java.mail;
+    requires com.google.auth.oauth2;
+    requires com.google.gson;
+    requires javafx.web;
+    requires java.net.http;
+    requires mysql.connector.j;
+    requires com.fasterxml.jackson.core;       // jackson-core → Automatic-Module-Name: com.fasterxml.jackson.core
+    requires com.fasterxml.jackson.databind;  // jackson-databind → Automatic-Module-Name: com.fasterxml.jackson.databind
+    requires com.fasterxml.jackson.annotation;
+    requires jdk.jsobject;
+    requires org.apache.httpcomponents.core5.httpcore5.h2;
+    requires java.scripting;
+    requires org.json;
+    requires twilio;
+    requires itextpdf;
+    requires org.apache.commons.io;
+    requires com.opencsv;
+    requires okhttp3;
+    requires java.desktop;
+    requires java.sql;
+    requires webcam.capture;
+    requires com.google.protobuf;
+    requires com.google.api.client;
+    requires vosk;
+    requires javafx.media;
+    opens org.example.demo.controller to javafx.fxml;
+    opens org.example.demo.models to javafx.base;
+    exports org.example.demo;
+    opens org.example.demo.controller.backOffice.user to javafx.fxml;
+    opens org.example.demo.controller.backOffice.event to javafx.fxml;
+    opens org.example.demo.controller.backOffice.claim to javafx.fxml;
+    opens org.example.demo.controller.backOffice.ressource to javafx.fxml;
+    opens org.example.demo.controller.backOffice.posts to javafx.fxml;
+    opens org.example.demo.controller.backOffice.recyclingPoint to javafx.fxml;
+    opens org.example.demo.controller.backOffice to javafx.fxml;
+    opens org.example.demo.controller.frontOffice to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.settings to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.event to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.profile to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.ressource to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.claim to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.pointRecyclage to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.posts to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.features to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.badges to javafx.fxml;
+
+
+}

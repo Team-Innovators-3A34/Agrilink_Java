@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.fxml.FXML?>
+<BorderPane xmlns="http://javafx.com/javafx/20.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.demo.controller.frontOffice.chatPageController">
+
+    <top>
+        <fx:include source="topBar.fxml" />
+    </top>
+
+    <left>
+        <fx:include source="sideBar.fxml" />
+    </left>
+
+    <right>
+        <fx:include source="rightBar.fxml" />
+    </right>
+
+    <center>
+        <fx:include source="chatbot.fxml" />
+    </center>
+</BorderPane>

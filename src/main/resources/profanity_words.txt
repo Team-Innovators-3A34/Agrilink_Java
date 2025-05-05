@@ -1,0 +1,53 @@
+# Profanity words list
+# One word per line
+
+# English profanity
+fuck
+damn
+hell
+crap
+stupid
+idiot
+bastard
+bloody
+bugger
+ass
+asshole
+dumb
+moron
+screw
+jerk
+sucks
+shut up
+piss
+whore
+bitch
+dick
+fool
+loser
+shut
+
+# French profanity
+con
+connard
+connasse
+salope
+pute
+merde
+bordel
+enculé
+chiant
+chiotte
+abruti
+débile
+emmerdeur
+emmerdeuse
+taré
+crétin
+pauvre con
+nique
+zut
+minable
+bouffon
+clochard
+cul

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.badges.badgesController">
+   <top>
+      <fx:include source="../topBar.fxml" />
+   </top>
+   <left>
+      <fx:include source="../sideBar.fxml" />
+   </left>
+   <right>
+      <fx:include source="../rightBar.fxml" />
+   </right>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eaf3fc;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="88.0" layoutY="15.0" prefHeight="686.0" prefWidth="885.0" stylesheets="@../../../../../../css/sidebarFrontoffice.css">
+               <children>
+                  <AnchorPane layoutX="130.0" layoutY="14.0" prefHeight="67.0" prefWidth="625.0" styleClass="anchor-pane">
+                     <children>
+                        <Text layoutX="25.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Badges">
+                           <font>
+                              <Font name="Montserrat-Regular" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField layoutX="442.0" layoutY="18.0" prefHeight="30.0" prefWidth="161.0" style="-fx-background-color: #f5f5f5;" text="Search here .." />
+                     </children>
+                  </AnchorPane>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="102.0" layoutY="100.0" prefHeight="572.0" prefWidth="681.0" style="-fx-background-color: #eaf3fc; -fx-border-color: #eaf3fc;" vbarPolicy="NEVER">
+                     <content>
+                        <GridPane fx:id="userList" prefWidth="900.0" style="-fx-background-color: #eaf3fc;">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

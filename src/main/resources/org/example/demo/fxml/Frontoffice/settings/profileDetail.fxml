@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.settings.profileDetail">
+    <top>
+        <fx:include source="../topBar.fxml" />
+    </top>
+    <left>
+        <fx:include source="../sideBar.fxml" />
+    </left>
+    <right>
+        <fx:include source="../rightBar.fxml" />
+    </right>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eaf3fc;" stylesheets="@../../../../../../css/settings.css" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="265.0" layoutY="30.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="512.0" style="-fx-background-color: white;">
+               <children>
+                  <HBox prefHeight="66.0" prefWidth="519.0" />
+                  <VBox prefHeight="643.0" prefWidth="511.0">
+                     <children>
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="511.0" style="-fx-background-color: #0055ff;">
+                           <children>
+                              <ImageView fx:id="backtosettings" fitHeight="29.0" fitWidth="22.0" layoutX="21.0" layoutY="22.0" onMouseClicked="#backtosettings" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../icons/back%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" layoutX="66.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Details">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="584.0" prefWidth="511.0">
+                           <children>
+                              <ImageView fx:id="profileimage" fitHeight="91.0" fitWidth="78.0" layoutX="217.0" layoutY="27.0" onMouseClicked="#updateProfileImage" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../images/YDPL6555.JPG" />
+                                 </image>
+                              </ImageView>
+                              <Text fx:id="nometprenomField" layoutX="207.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Boughdiri Mehdi">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Text>
+                              <HBox layoutX="14.0" layoutY="146.0" prefHeight="42.0" prefWidth="472.0">
+                                 <children>
+                                    <VBox prefHeight="42.0" prefWidth="276.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="nomField" prefHeight="14.0" prefWidth="226.0" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="17.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="280.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="prenomField" styleClass="clean-textfield" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="14.0" layoutY="206.0" prefHeight="42.0" prefWidth="488.0">
+                                 <children>
+                                    <VBox prefHeight="42.0" prefWidth="507.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="emailField" prefHeight="26.0" prefWidth="504.0" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="17.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="14.0" layoutY="262.0" prefHeight="42.0" prefWidth="472.0">
+                                 <children>
+                                    <VBox prefHeight="42.0" prefWidth="276.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="adresseField" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="17.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="280.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="telephoneField" styleClass="clean-textfield" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="14.0" layoutY="325.0" prefHeight="42.0" prefWidth="488.0">
+                                 <children>
+                                    <VBox prefHeight="42.0" prefWidth="507.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Bio">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="bioField" prefHeight="26.0" prefWidth="504.0" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="17.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="14.0" layoutY="387.0" prefHeight="89.0" prefWidth="488.0">
+                                 <children>
+                                    <VBox prefHeight="86.0" prefWidth="471.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextArea fx:id="descriptionField" prefHeight="72.0" prefWidth="471.0" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="17.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <RadioButton fx:id="is2FAField" layoutX="14.0" layoutY="485.0" mnemonicParsing="false" text="2FA" />
+                              <Button fx:id="updateProfile" layoutX="14.0" layoutY="515.0" minWidth="96.0" mnemonicParsing="false" onAction="#onUpdateProfileClicked" prefHeight="35.0" prefWidth="96.0" text="Save" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

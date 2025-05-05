@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.features.featuresController">
+   <top>
+      <fx:include source="../topBar.fxml" />
+   </top>
+   <left>
+      <fx:include source="../sideBar.fxml" />
+   </left>
+   <right>
+      <fx:include source="../rightBar.fxml" />
+   </right>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eaf3fc;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="255.0" layoutY="60.0" prefHeight="595.0" prefWidth="530.0" style="-fx-background-color: white;" styleClass="anchor-pane" stylesheets="@../../../../../../css/settings.css">
+               <children>
+                  <Text layoutX="49.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Features">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <VBox layoutX="49.0" layoutY="85.0" prefHeight="480.0" prefWidth="426.0">
+                     <children>
+                        <!-- Crop Recommendation Button -->
+                        <HBox onMouseClicked="#onCropRecommendationClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#007fff" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="21.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/user.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Crop Recommendation">
+                                 <HBox.margin>
+                                    <Insets left="11.0" top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="18.0" prefWidth="274.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="232.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+
+                        <!-- Plant Disease Detection Button -->
+                        <HBox onMouseClicked="#onPlantDiseaseDetectionClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#4CAF50" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/plante.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Plant Disease Detection Model">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="230.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="208.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+
+                        <!-- Land Yield Prediction Button -->
+                        <HBox onMouseClicked="#onLandYieldPredictionClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#FF9800" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/rendement.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Land Yield Prediction Model">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="245.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="223.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+
+                        <!-- Soil Type Detection Button -->
+                        <HBox onMouseClicked="#onSoilTypeDetectionClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#795548" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/sol.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Soil Type Detection Model">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="250.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="228.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+
+                        <!-- Animal Disease Detection Button -->
+                        <HBox onMouseClicked="#onAnimalDiseaseDetectionClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#9C27B0" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/animal.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Animal Disease Detection Model">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="223.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="201.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+
+                        <!-- Fruit Calorie Pattern Button -->
+                        <HBox onMouseClicked="#onFruitCaloriePatternClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#E91E63" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/fruit.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fruit Calorie Pattern">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="286.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="264.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+
+                        <!-- Fruit Disease Model Button -->
+                        <HBox onMouseClicked="#onFruitDiseaseModelClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#ebc404" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/quality.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fruit Disease Model">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="300.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="278.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+
+                        <!-- Saved Address Button -->
+                        <HBox onMouseClicked="#onSavedAddressClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#3F51B5" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/location%20(1).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saved Address">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="300.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="278.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

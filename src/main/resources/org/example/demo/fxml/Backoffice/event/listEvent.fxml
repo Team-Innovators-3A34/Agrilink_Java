@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.backOffice.event.ListEventController">
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1">
+        <left>
+            <fx:include source="../sidebarBackoffice.fxml" />
+        </left>
+        <top>
+            <fx:include source="../topbarBackoffice.fxml" />
+        </top>
+        <center>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="1254.0" style="-fx-background-color: #FCFBFB;" stylesheets="@../../../../../../css/listUser.css" BorderPane.alignment="CENTER">
+                <children>
+                    <Text fill="#8a8282" layoutX="42.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="root" text="Event List">
+                        <font>
+                            <Font name="Segoe UI Bold" size="17.0" />
+                        </font>
+                    </Text>
+                    <TableView fx:id="eventTable" layoutX="37.0" layoutY="138.0" prefHeight="518.0" prefWidth="1240.0" styleClass="styled-table">
+                        <columns>
+                            <TableColumn fx:id="nomColumn" prefWidth="156.0" styleClass="table-column-header" text="Nom" />
+                            <TableColumn fx:id="categorieColumn" prefWidth="169.60003662109375" styleClass="table-column-header" text="Category" />
+                            <TableColumn fx:id="imageColumn" prefWidth="196.0" styleClass="table-column-header" text="Image" />
+                            <TableColumn fx:id="adresseColumn" prefWidth="155.20001220703125" styleClass="table-column-header" text="Address" />
+                            <TableColumn fx:id="dateColumn" prefWidth="184.00006103515625" styleClass="table-column-header" text="Date" />
+                            <TableColumn fx:id="nbrPlacesColumn" prefWidth="124.800048828125" styleClass="table-column-header" text="Max-Nbr" />
+                            <TableColumn fx:id="typeColumn" prefWidth="97.5999755859375" styleClass="table-column-header" text="Type" />
+                            <TableColumn fx:id="actionsColumn" prefWidth="152.0" styleClass="table-column-header" text="Actions" />
+                        </columns>
+                    </TableView>
+
+
+                    <Text fill="#8a8282" layoutX="1077.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Text>
+                    <TextField layoutX="1127.0" layoutY="104.0" styleClass="search-input" fx:id="searchField" />
+                    <HBox layoutX="1162.0" layoutY="56.0" onMouseClicked="#addevent" prefHeight="37.0" prefWidth="114.0" style="-fx-background-color: #32BDEA; -fx-background-radius: 10px;" styleClass="hboxbutton">
+                        <children>
+                            <ImageView fitHeight="16.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../../../../icons/plus.png" />
+                                </image>
+                                <HBox.margin>
+                                    <Insets bottom="2.0" left="6.0" top="13.0" />
+                                </HBox.margin>
+                            </ImageView>
+                            <Button onMouseClicked="#addevent" text="Add Event" />
+                        </children>
+                    </HBox>
+                    <HBox layoutX="1121.0" layoutY="56.0" onMouseClicked="#categorieList" prefHeight="38.0" prefWidth="30.0" style="-fx-background-color: #32BDEA; -fx-background-radius: 5px;" styleClass="hboxbutton">
+                        <children>
+                            <ImageView fitHeight="16.0" fitWidth="13.0" onMouseClicked="#categorieList" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../../../../icons/categorie.png" />
+                                </image>
+                                <HBox.margin>
+                                    <Insets left="9.0" top="14.0" />
+                                </HBox.margin>
+                            </ImageView>
+                        </children>
+                    </HBox>
+                </children>
+            </AnchorPane>
+        </center>
+    </BorderPane>
+</VBox>

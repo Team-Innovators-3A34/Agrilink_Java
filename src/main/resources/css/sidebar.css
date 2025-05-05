@@ -1,0 +1,67 @@
+/* Sidebar Item Style */
+.sidebar-item {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 0px;
+    -fx-alignment: center-left;
+    -fx-text-fill: #8a8282;  /* Text color */
+    -fx-font-size: 14px;
+    -fx-cursor: hand; /* Change cursor to hand when hovering */
+}
+
+.sidebar-item.active {
+    -fx-background-color: #ff5252;
+}
+
+.sidebar-item:hover {
+    -fx-background-color: #f0f0f0; /* Background color on hover */
+    -fx-text-fill: #4a4a4a; /* Darker text color on hover */
+}
+
+.sidebar-item:pressed {
+    -fx-background-color: #d0d0d0; /* Background color when clicked */
+    -fx-text-fill: #333333; /* Darker text color when clicked */
+}
+
+/* Icon color */
+.sidebar-item .icon {
+    -fx-fill: #8a8282; /* Icon color */
+}
+
+.sidebar-item:hover .icon {
+    -fx-fill: #4a4a4a; /* Darker icon color on hover */
+}
+
+
+/* Submenu container */
+.sidebar-submenu {
+    -fx-padding: 0 0 0 40px; /* Indentation pour montrer que c’est un sous-élément */
+}
+
+/* Submenu item */
+.sidebar-subitem {
+    -fx-background-color: transparent;
+    -fx-padding: 6px 0px;
+    -fx-alignment: center-left;
+    -fx-text-fill: #9e9e9e;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.sidebar-subitem:hover {
+    -fx-background-color: #f7f7f7;
+    -fx-text-fill: #5a5a5a;
+}
+
+.sidebar-subitem:pressed {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #3a3a3a;
+}
+
+/* Icon style for subitems */
+.sidebar-subitem .icon {
+    -fx-fill: #b0b0b0;
+}
+
+.sidebar-subitem:hover .icon {
+    -fx-fill: #707070;
+}

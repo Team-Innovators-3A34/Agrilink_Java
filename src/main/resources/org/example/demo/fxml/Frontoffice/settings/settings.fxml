@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.settings.settingsController">
+    <top>
+        <fx:include source="../topBar.fxml" />
+    </top>
+    <left>
+        <fx:include source="../sideBar.fxml" />
+    </left>
+    <right>
+        <fx:include source="../rightBar.fxml" />
+    </right>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eaf3fc;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="255.0" layoutY="60.0" prefHeight="595.0" prefWidth="530.0" style="-fx-background-color: white;" styleClass="anchor-pane" stylesheets="@../../../../../../css/settings.css">
+               <children>
+                  <Text layoutX="49.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#888888" layoutX="63.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="General">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <VBox layoutX="49.0" layoutY="103.0" prefHeight="83.0" prefWidth="426.0">
+                     <children>
+                        <HBox onMouseClicked="#onAcountInformationClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#007fff" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="21.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/user.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Acount Information">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="18.0" prefWidth="274.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="252.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#ebc404" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/location%20(1).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saved Address">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="10.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="300.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="278.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Text fill="#888888" layoutX="63.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acount">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <VBox layoutX="49.0" layoutY="223.0" prefHeight="124.0" prefWidth="426.0">
+                     <children>
+                        <HBox prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#ebc404" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="21.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/save-instagram%20(1).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Saved Posts">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="300.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="292.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="434.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#eb3d1a" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="21.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/recycle.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mes points de Recyclage">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="226.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="219.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" layoutX="-303.0" layoutY="89.0" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+                        <HBox layoutX="10.0" layoutY="46.0" onMouseClicked="#onUpdatePasswordClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#051bdf" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="21.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/padlock.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="322.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="300.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Text fill="#888888" layoutX="63.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Other">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <VBox layoutX="49.0" layoutY="387.0" prefHeight="170.0" prefWidth="426.0">
+                     <children>
+                        <HBox prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#ebc404" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="21.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/bell%20(3).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notification">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="304.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="294.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+                        <HBox layoutX="10.0" layoutY="10.0" onMouseClicked="#onClaimclicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#051bdf" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="21.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/writing.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Submit a Claim">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="266.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="270.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" layoutX="-303.0" layoutY="89.0" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+                        <HBox layoutX="10.0" layoutY="46.0" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#007fff" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="21.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/question.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Help">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="349.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="327.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Line endX="313.7647705078125" endY="-44.89807891845703" layoutX="-303.0" layoutY="129.0" startX="734.0578002929688" startY="-44.19099426269531" stroke="#c1c1c1" strokeWidth="0.5">
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Line>
+                        <HBox layoutX="10.0" layoutY="90.0" onMouseClicked="#onLogoutClicked" prefHeight="33.0" prefWidth="427.0" styleClass="hover-button">
+                           <children>
+                              <AnchorPane prefHeight="24.0" prefWidth="52.0">
+                                 <children>
+                                    <Circle fill="#eb3d1a" layoutX="27.0" layoutY="15.0" radius="15.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="21.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/exit%20(1).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Logout">
+                                 <HBox.margin>
+                                    <Insets top="9.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane prefHeight="33.0" prefWidth="338.0">
+                                 <children>
+                                    <ImageView fitHeight="16.0" fitWidth="20.0" layoutX="316.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../icons/next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

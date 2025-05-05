@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.frontOffice.ressource.addRessources">
+    <top>
+        <fx:include source="../topBar.fxml" />
+    </top>
+    <left>
+        <fx:include source="../sideBar.fxml" />
+    </left>
+    <right>
+        <fx:include source="../rightBar.fxml" />
+    </right>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eaf3fc;" stylesheets="@../../../../../../css/settings.css" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="265.0" layoutY="30.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="512.0" style="-fx-background-color: white;">
+               <children>
+                  <HBox prefHeight="66.0" prefWidth="519.0" />
+                  <VBox prefHeight="496.0" prefWidth="511.0">
+                     <children>
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="511.0" style="-fx-background-color: #0055ff;">
+                           <children>
+                              <ImageView fx:id="backtosettings" fitHeight="29.0" fitWidth="22.0" layoutX="21.0" layoutY="22.0" onMouseClicked="#backtosettings" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../icons/back%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Text fx:id="title" fill="WHITE" layoutX="66.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Ressource">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="433.0" prefWidth="511.0">
+                           <children>
+                              <HBox layoutX="22.0" layoutY="42.0" prefHeight="42.0" prefWidth="472.0">
+                                 <children>
+                                    <VBox prefHeight="42.0" prefWidth="276.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de ressource">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtNom" prefHeight="14.0" prefWidth="226.0" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="17.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="280.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <ComboBox fx:id="txtStatus" prefHeight="31.0" prefWidth="229.0" styleClass="clean-textfield" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="22.0" layoutY="106.0" prefHeight="42.0" prefWidth="472.0">
+                                 <children>
+                                    <VBox prefHeight="42.0" prefWidth="276.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Marque">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtMarque" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="17.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="280.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <ComboBox fx:id="txtType" prefHeight="31.0" prefWidth="229.0" styleClass="clean-textfield" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Button fx:id="ajout" layoutX="20.0" layoutY="378.0" minWidth="96.0" mnemonicParsing="false" onAction="#ajouterRessource" prefHeight="35.0" prefWidth="96.0" text="Save" />
+                              <HBox layoutX="22.0" layoutY="241.0" prefHeight="42.0" prefWidth="472.0">
+                                 <children>
+                                    <VBox prefHeight="42.0" prefWidth="276.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtPrix" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="17.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="280.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtAdresse" styleClass="clean-textfield" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="22.0" layoutY="173.0" prefHeight="42.0" prefWidth="472.0">
+                                 <children>
+                                    <VBox prefHeight="42.0" prefWidth="276.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtDescription" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="17.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="280.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Superficie">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtSuperficie" styleClass="clean-textfield" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="20.0" layoutY="309.0" prefHeight="51.0" prefWidth="318.0">
+                                 <children>
+                                    <VBox prefHeight="51.0" prefWidth="289.0">
+                                       <children>
+                                          <Text fill="#515841" strokeType="OUTSIDE" strokeWidth="0.0" text="Image">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtImage" styleClass="clean-textfield" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="3.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <Button fx:id="image" minWidth="27.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="35.0" prefWidth="27.0" styleClass="addimage" text="...">
+                                       <HBox.margin>
+                                          <Insets top="16.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" spacing="15.0"
+      xmlns="http://javafx.com/javafx/20.0.2"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.demo.controller.backOffice.claim.ListClaimController">
+    <BorderPane prefHeight="800.0" prefWidth="1535.0">
+        <left>
+            <fx:include source="../sidebarBackoffice.fxml"/>
+        </left>
+        <top>
+            <fx:include source="../topbarBackoffice.fxml"/>
+        </top>
+        <center>
+            <AnchorPane prefHeight="665.0" prefWidth="1254.0"
+                        style="-fx-background-color: #FCFBFB;"
+                        stylesheets="@../../../../../../css/listClaim.css"
+                        BorderPane.alignment="CENTER">
+                <children>
+                    <Text fill="#8a8282" layoutX="42.0" layoutY="52.0" strokeType="OUTSIDE"
+                          strokeWidth="0.0" styleClass="root" text="Claim List">
+                        <font>
+                            <Font name="Segoe UI Bold" size="17.0"/>
+                        </font>
+                    </Text>
+
+                    <Text fill="#8a8282" layoutX="42.0" layoutY="77.0" strokeType="OUTSIDE"
+                          strokeWidth="0.0" styleClass="root"
+                          text="The claim list effectively dictates claim presentation and provides space to list your claims and offering in the most appealing way.">
+                        <font>
+                            <Font name="Segoe UI" size="13.0"/>
+                        </font>
+                    </Text>
+
+                    <Text fill="#8a8282" layoutX="1008.0" layoutY="144.0" strokeType="OUTSIDE"
+                          strokeWidth="0.0" text="Search:">
+                        <font>
+                            <Font size="14.0"/>
+                        </font>
+                    </Text>
+
+                    <TextField fx:id="searchField" layoutX="1057.0" layoutY="125.0"
+                               promptText="Filter by title..." styleClass="search-input"/>
+
+                    <TableView fx:id="claimsTable" layoutX="42.0" layoutY="174.0"
+                               prefHeight="518.0" prefWidth="1162.0" styleClass="styled-table">
+                        <columns>
+                            <TableColumn fx:id="indexColumn"    text="#"         prefWidth="40"/>
+                            <TableColumn fx:id="claimColumn"    text="Claim"     prefWidth="200"/>
+                            <TableColumn fx:id="etatUserColumn" text="Etat User" prefWidth="100"/>
+                            <TableColumn fx:id="etatRecColumn"  text="Etat Rec"  prefWidth="100"/>
+                            <TableColumn fx:id="statusColumn"   text="Statut"    prefWidth="100"/>
+                            <TableColumn fx:id="typeColumn"     text="Type"      prefWidth="150"/>
+                            <TableColumn fx:id="prioriteColumn" text="Priorité"  prefWidth="100"/>
+                            <TableColumn fx:id="dateColumn"     text="Date"      prefWidth="100"/>
+                            <TableColumn fx:id="actionsColumn"  text="Action"    prefWidth="250"/>
+                        </columns>
+                    </TableView>
+                </children>
+            </AnchorPane>
+        </center>
+    </BorderPane>
+</VBox>

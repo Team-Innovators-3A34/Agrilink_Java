@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane fx:id="chatbotPane"
+            prefWidth="340.0" prefHeight="460.0"
+            style="-fx-background-color: #F9FAFB; -fx-border-color: #CDE4CD; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0.2, 0, 3);"
+            xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.demo.controller.frontOffice.chatController">
+
+    <VBox spacing="12" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <padding>
+            <Insets top="12" right="12" bottom="12" left="12"/>
+        </padding>
+
+        <!-- Chat messages -->
+        <ScrollPane fx:id="scrollPane"
+                    fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    vbarPolicy="AS_NEEDED"
+                    style="-fx-background-color: transparent; -fx-border-color: transparent;"
+                    VBox.vgrow="ALWAYS">
+            <content>
+                <VBox fx:id="chatBox" spacing="10"
+                      style="-fx-padding: 4 4 4 4;" />
+            </content>
+        </ScrollPane>
+
+        <!-- Input + Send -->
+        <HBox spacing="8">
+            <TextField fx:id="userInput"
+                       HBox.hgrow="ALWAYS"
+                       promptText="Ask AgriBot..."
+                       style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20; -fx-padding: 8 14;"/>
+            <Button text="Send"
+                    onAction="#onSendMessage"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 20; -fx-padding: 8 16;"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

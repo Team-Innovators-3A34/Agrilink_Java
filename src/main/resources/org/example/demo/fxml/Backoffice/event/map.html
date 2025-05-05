@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Carte</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        html, body, #map {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([36.8, 10.18], 7); // Tunisia centered
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    let marker = null;
+
+    // Add marker on click (still useful for manual selection)
+    map.on('click', function (e) {
+        const lat = e.latlng.lat;
+        const lng = e.latlng.lng;
+
+        console.log("Map clicked: ", lat, lng);
+
+        if (marker) {
+            marker.setLatLng(e.latlng);
+        } else {
+            marker = L.marker(e.latlng).addTo(map);
+        }
+
+        if (window.javaConnector !== undefined) {
+            console.log("Calling Java method...");
+            window.javaConnector.setCoordinates(lat, lng);
+        }
+    });
+
+    // Function exposed to Java to add event markers
+    function addEventMarker(lat, lng, nom, adresse) {
+        if (!lat || !lng) return;
+
+        const marker = L.marker([lat, lng]).addTo(map);
+        marker.bindPopup("<b>" + nom + "</b><br>" + adresse);
+    }
+
+    // Make it accessible from Java
+    window.addEventMarker = addEventMarker;
+</script>
+</body>
+</html>
