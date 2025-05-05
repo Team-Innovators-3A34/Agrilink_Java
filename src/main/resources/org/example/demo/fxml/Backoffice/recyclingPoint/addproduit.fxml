@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.backOffice.recyclingPoint.addproduit">
+<left>
+<fx:include source="../sidebarBackoffice.fxml" />
+</left>
+<top>
+<fx:include source="../topbarBackoffice.fxml" />
+</top>
+   <center>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1270.0" style="-fx-background-color: #FCFBFB;" stylesheets="@../../../../../../css/addPage.css" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="22.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="1256.0" styleClass="form-card">
+               <children>
+                  <Text fx:id="title" fill="#676e8a" layoutX="38.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Produit">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <HBox layoutX="38.0" layoutY="72.0" prefHeight="75.0" prefWidth="1202.0">
+                     <children>
+                        <VBox prefHeight="75.0" prefWidth="1229.0">
+                           <children>
+                              <Label text="Product Name*">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                 <children>
+                                    <TextField fx:id="productname" prefHeight="28.0" prefWidth="378.0" promptText="Entrer le nom" styleClass="custom-textfield" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="75.0" prefWidth="1229.0">
+                           <children>
+                              <Label text="Product Quantity*">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                 <children>
+                                    <TextField fx:id="productquantity" prefHeight="28.0" prefWidth="378.0" promptText="Entrer le nom" styleClass="custom-textfield" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Button fx:id="btnAjouter" layoutX="36.0" layoutY="399.0" mnemonicParsing="false" onAction="#addproduct" text="Confirm" textFill="#42585e" />
+                  <Line endX="1155.0" endY="1.52587890625E-5" layoutX="101.0" layoutY="51.0" startX="-100.0" stroke="#dee2e6" />
+                  <HBox layoutX="38.0" layoutY="147.0" prefHeight="75.0" prefWidth="1186.0">
+                     <children>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="736.0">
+                           <children>
+                              <Label text="Recycling Point :*">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                 <children>
+                                    <ComboBox fx:id="productrecyclingpointype" prefHeight="26.0" prefWidth="840.0" styleClass="custom-combobox" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="75.0" prefWidth="721.0">
+                           <children>
+                              <Label text="Image:">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox minHeight="35.0" prefHeight="26.0" prefWidth="883.0" styleClass="input-container">
+                                 <children>
+                                    <TextField fx:id="productimage" prefHeight="28.0" prefWidth="817.0" promptText="Entrer l'iamge" styleClass="custom-textfield" />
+                                    <Button fx:id="btnUpload" prefHeight="33.0" prefWidth="0.0" text="Parcourir..." />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox layoutX="36.0" layoutY="222.0" prefHeight="173.0" prefWidth="1190.0">
+                     <children>
+                        <Label text="Description:*">
+                           <VBox.margin>
+                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox minHeight="35.0" prefHeight="120.0" prefWidth="850.0" styleClass="input-container">
+                           <children>
+                              <TextArea fx:id="productdescription" prefHeight="102.0" prefWidth="1188.0" styleClass="custom-textarea" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

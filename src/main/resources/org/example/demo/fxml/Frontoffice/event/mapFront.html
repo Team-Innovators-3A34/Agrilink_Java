@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Carte des événements</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        html, body, #map {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([36.8, 10.18], 7); // Tunisie
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Ajout d'un marqueur depuis Java
+    function addEventMarker(lat, lng, nom, adresse) {
+        console.log("📍 addEventMarker called", lat, lng, nom, adresse);
+
+        if (!lat || !lng) return;
+
+        const marker = L.marker([lat, lng]).addTo(map);
+        marker.bindPopup("<b>" + nom + "</b><br>" + adresse);
+    }
+
+
+    window.addEventMarker = addEventMarker;
+
+    // Correction WebView JavaFX
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 300);
+</script>
+</body>
+</html>

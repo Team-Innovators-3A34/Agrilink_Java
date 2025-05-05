@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1535.0" style="-fx-background-color: #eaf3fc;" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.controller.HomePage">
+    <left>
+        <fx:include source="sideBar.fxml" />
+    </left>
+    <top>
+        <fx:include source="topBar.fxml" />
+    </top>
+    <right>
+        <fx:include source="rightBar.fxml" />
+    </right>
+    <center>
+        <ScrollPane fx:id="mainScroll" fitToHeight="true" fitToWidth="true" style="-fx-background-color: #eaf3fc;" BorderPane.alignment="CENTER">
+            <content>
+                <AnchorPane style="-fx-background-color: #eaf3fc;" stylesheets="@../../../../../css/sidebarFrontoffice.css">
+                    <HBox spacing="30" style="-fx-background-color: #eaf3fc;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <!-- Left Side: Feed -->
+                        <VBox prefHeight="714.0" prefWidth="608.0" spacing="20" HBox.hgrow="ALWAYS">
+                            <!-- Create Post -->
+                            <AnchorPane prefHeight="200.0" prefWidth="600.0" styleClass="anchor-pane">
+                                <children>
+                                    <Circle fill="#f5f5f5" layoutX="27.0" layoutY="27.0" radius="13.0" stroke="WHITE" strokeType="INSIDE" />
+                                    <ImageView fitHeight="13.0" fitWidth="12.0" layoutX="21.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../../../icons/pencil.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Text fill="#888888" layoutX="53.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Post">
+                                        <font>
+                                            <Font name="System Bold" size="9.0" />
+                                        </font>
+                                    </Text>
+                                    <TextArea layoutX="21.0" layoutY="51.0" prefHeight="110.0" prefWidth="500.0" promptText="What's on your mind ?" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" />
+                                    <Circle fill="#e8e5e5" layoutX="530.0" layoutY="179.0" radius="13.0" stroke="WHITE" strokeType="INSIDE" AnchorPane.rightAnchor="20.0" />
+                                    <ImageView fitHeight="13.0" fitWidth="12.0" layoutX="524.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="26.0">
+                                        <image>
+                                            <Image url="@../../../../../icons/paper-plane.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Button layoutX="517.0" layoutY="166.0" mnemonicParsing="false" onAction="#createpost" opacity="0.0" prefHeight="26.0" prefWidth="26.0" AnchorPane.rightAnchor="20.0" />
+                                </children>
+                                <VBox.margin>
+                                    <Insets left="20.0" right="20.0" top="10.0" />
+                                </VBox.margin>
+                            </AnchorPane>
+
+                            <!-- Posts Container -->
+                            <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                                <content>
+                                    <VBox fx:id="postsContainer" spacing="20.0" style="-fx-background-color: transparent;">
+                                        <!-- Posts will be added here programmatically -->
+                                    </VBox>
+                                </content>
+                                <VBox.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                </VBox.margin>
+                                <padding>
+                                    <Insets bottom="20.0" />
+                                </padding>
+                            </ScrollPane>
+                            <HBox.margin>
+                                <Insets left="200.0" />
+                            </HBox.margin>
+                        </VBox>
+
+                        <!-- Right Side: Sidebar -->
+                        <VBox prefWidth="245.0" spacing="20" HBox.hgrow="NEVER">
+                            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="245.0" styleClass="anchor-pane">
+                                <children>
+                                    <Text fill="#888888" layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Friend Request">
+                                        <font>
+                                            <Font name="System Bold" size="9.0" />
+                                        </font>
+                                    </Text>
+
+                                    <Text fill="#007fff" layoutX="188.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="See All">
+                                        <font>
+                                            <Font name="System Bold" size="9.0" />
+                                        </font>
+                                    </Text>
+                                    <Line endX="100.0" layoutX="122.0" layoutY="37.0" startX="-108.0" stroke="#888888" />
+                                    <ListView layoutX="15.0" layoutY="46.0" prefHeight="66.0" prefWidth="201.0" />
+                                </children>
+                                <VBox.margin>
+                                    <Insets top="22.0" />
+                                </VBox.margin>
+                            </AnchorPane>
+                            <AnchorPane layoutX="10.0" layoutY="30.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="245.0" styleClass="anchor-pane">
+                                <children>
+                                    <Text fill="#888888" layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Météo">
+                                        <font>
+                                            <Font name="System Bold" size="9.0" />
+                                        </font>
+                                    </Text>
+                                    <TextField fx:id="ville" layoutX="28.0" layoutY="79.0" prefHeight="26.0" prefWidth="165.0" />
+                                    <Button layoutX="194.0" layoutY="79.0" mnemonicParsing="false" onAction="#showMeteo" prefHeight="26.0" prefWidth="26.0" />
+                                    <ImageView fx:id="btnMeteo" fitHeight="13.0" fitWidth="12.0" layoutX="201.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../../../icons/paper-plane.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Text fx:id="meteo" layoutX="18.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No data found">
+                                        <font>
+                                            <Font name="Arial" size="10.0" />
+                                        </font>
+                                    </Text>
+                                </children>
+                            </AnchorPane>
+                            <AnchorPane layoutX="10.0" layoutY="178.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="246.0" styleClass="anchor-pane">
+                                <children>
+                                    <Text fill="#888888" layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suggérer des amis">
+                                        <font>
+                                            <Font name="System Bold" size="9.0" />
+                                        </font>
+                                    </Text>
+                                    <ListView fx:id="userSugguested" layoutX="6.0" layoutY="30.0" prefHeight="126.0" prefWidth="234.0" />
+                                </children>
+                            </AnchorPane>
+                            <HBox.margin>
+                                <Insets right="20.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </HBox>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

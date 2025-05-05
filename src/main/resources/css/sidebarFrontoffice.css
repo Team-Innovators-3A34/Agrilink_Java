@@ -1,0 +1,16 @@
+.anchor-pane {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);
+}
+
+.h {
+    -fx-cursor: hand;
+}
+
+
+
+.h:hover > .text-label {
+    -fx-fill: #2196f3; /* nice blue */
+}

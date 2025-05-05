@@ -1,0 +1,46 @@
+.hover-button {
+    -fx-cursor: hand; /* makes it look like a button */
+
+    -fx-transition: all 0.3s ease;
+}
+
+
+
+.clean-textfield {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+    -fx-border-width: 0.5px;
+}
+
+.clean-textfield:focused {
+    -fx-border-color: #999999;
+}
+
+.button{
+    -fx-background-color :  #0055ff;
+    -fx-border-color : #0036a0;
+    -fx-border-radius :5px;
+    -fx-background-radius :5px;
+    -fx-text-fill :white;
+    -fx-min-width: 115px;
+    -fx-min-height:35px ;
+}
+
+.text {
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 10px;
+}
+
+.addimage{
+    -fx-background-color :  #0055ff;
+    -fx-border-color : #0036a0;
+    -fx-border-radius :5px;
+    -fx-background-radius :5px;
+    -fx-text-fill :white;
+    -fx-min-width: 30px;
+    -fx-min-height:30px ;
+}
