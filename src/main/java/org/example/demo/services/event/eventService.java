@@ -15,7 +15,7 @@ public class eventService implements Interface<event> {
 
     @Override
     public void ajouter(event event) {
-        String req = "INSERT INTO event (categorie_id, nom, date, adresse, description, image, nbr_places, longitude, latitude, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String req = "INSERT INTO event (categorie_id, nom, date, adresse, description, image, nbr_places, longitude, latitude, type, lien_meet) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = connection.prepareStatement(req);
             pst.setInt(1, event.getCategorie().getId());
@@ -28,6 +28,7 @@ public class eventService implements Interface<event> {
             pst.setDouble(8, event.getLongitude());
             pst.setDouble(9, event.getLatitude());
             pst.setString(10, event.getType());
+            pst.setString(11, event.getMeet());
 
             pst.executeUpdate();
             System.out.println("✅ Événement ajouté !");
@@ -93,6 +94,7 @@ public class eventService implements Interface<event> {
                 double longitude = rs.getDouble("longitude");
                 double latitude = rs.getDouble("latitude");
                 String type = rs.getString("type");
+                String meet = rs.getString("lien_meet");
 
                 // Récupérer la catégorie correspondante
                 categorie cat = catService.rechercher().stream()
@@ -100,7 +102,7 @@ public class eventService implements Interface<event> {
                         .findFirst()
                         .orElse(null);
 
-                events.add(new event(id, nom, adresse, longitude, latitude, date, type, nbrPlaces, image, description, cat));
+                events.add(new event(id, nom, adresse, longitude, latitude, date, type, nbrPlaces, image, description, cat,meet));
             }
 
         } catch (SQLException e) {

@@ -60,7 +60,7 @@ public class AnimalModelController {
             .build();
 
     // URL de l’API Flask pour la prédiction
-    private final String predictApiUrl = "http://127.0.0.1:5111/predict";
+    private final String predictApiUrl = "http://127.0.0.1:5001/predict/vet";
 
     @FXML
     public void initialize() {

@@ -54,7 +54,7 @@ public class PlanteController {
             .build();
 
     // URL de l'API de prédiction et de l'API ChatGPT (à adapter)
-    private final String predictApiUrl = "http://localhost:5000/predict";
+    private final String predictApiUrl = "http://localhost:5001/predict/plant";
     private final String chatGptApiUrl = "https://chatgpt-42.p.rapidapi.com/chatgpt";
     // Votre clé API RapidAPI (remplacez "YOUR_RAPIDAPI_KEY" par votre clé)
     private final String rapidApiKey = "b87ca822cdmsh0a0c4c3c7567bd9p1824ddjsn90c4848fb6c4";

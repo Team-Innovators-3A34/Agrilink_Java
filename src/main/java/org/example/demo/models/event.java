@@ -16,6 +16,7 @@ public class event {
     private double latitude;
     private String type;
     private LocalDate d;
+    private String meet;
 
     public event() {}
 
@@ -31,6 +32,28 @@ public class event {
         this.image = image;
         this.description = description;
         this.categorie = categorie;
+    }
+    public event(int id, String nom, String adresse, double longitude, double latitude, String date, String type, int nbrPlaces, String image, String description, categorie categorie,String meet) {
+        this.id = id;
+        this.nom = nom;
+        this.adresse = adresse;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.date = date;
+        this.type = type;
+        this.nbr_Places = nbrPlaces;
+        this.image = image;
+        this.description = description;
+        this.categorie = categorie;
+        this.meet = meet;
+    }
+
+    public String getMeet() {
+        return meet;
+    }
+
+    public void setMeet(String meet) {
+        this.meet = meet;
     }
 
     public LocalDate getD() {

@@ -88,8 +88,8 @@
                                 <Label text="Jours avant récolte :" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
                                 <TextField fx:id="daysToHarvestField" GridPane.rowIndex="8" GridPane.columnIndex="1" prefWidth="350.0"/>
 
-                                <!-- Bouton centré sur deux colonnes -->
-                                <Button text="Prédire" GridPane.rowIndex="9" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                                <!-- Bouton avec l'événement onAction connecté à la méthode handlePredict -->
+                                <Button text="Prédire" onAction="#handlePredict" GridPane.rowIndex="9" GridPane.columnIndex="0" GridPane.columnSpan="2"
                                         prefWidth="200.0" GridPane.halignment="CENTER"
                                         style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 12px 30px;"/>
                             </children>

@@ -55,7 +55,7 @@ public class QualityPredictionController {
             .build();
 
     // URL de l'API de prédiction pour la qualité
-    private final String predictApiUrl = "http://127.0.0.1:5000/predict/quality";
+    private final String predictApiUrl = "http://127.0.0.1:5001/predict/quality";
 
     @FXML
     public void initialize() {

@@ -7,11 +7,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import org.example.demo.models.event;
 import org.example.demo.services.event.eventService;
+import org.example.demo.utils.EmailSender;
+import org.example.demo.utils.sessionManager;
 
+import javax.mail.MessagingException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Objects;
 
 public class CardController {
 
@@ -25,7 +29,7 @@ public class CardController {
     @FXML private Button cancelButton;
 
     private final eventService service = new eventService();
-    private final int currentUserId = 1; // à remplacer dynamiquement si besoin
+    private final int currentUserId = sessionManager.getInstance().getUser().getId(); // à remplacer dynamiquement si besoin
     private event ev;
 
     public void setEvent(event ev) {
@@ -64,6 +68,14 @@ public class CardController {
 
                 applyButton.setDisable(true);
                 cancelButton.setDisable(false);
+                if(Objects.equals(ev.getType(), "En ligne")) {
+                    try {
+                        EmailSender.send(sessionManager.getInstance().getUser().getEmail(), "Votre lien meet de l'evenement est :" + ev.getMeet());
+                    } catch (MessagingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+
             }
         });
 

@@ -55,7 +55,7 @@ public class FruitPredictionController {
             .build();
 
     // URL de l'API de prédiction pour le type et les calories
-    private final String predictApiUrl = "http://127.0.0.1:5000/predict/fruit";
+    private final String predictApiUrl = "http://127.0.0.1:5001/predict/fruit";
 
     @FXML
     public void initialize() {

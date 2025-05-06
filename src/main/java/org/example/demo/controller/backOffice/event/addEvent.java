@@ -1,5 +1,6 @@
 package org.example.demo.controller.backOffice.event;
 
+import org.example.demo.services.event.MeetLinkService;
 import org.example.demo.utils.EventValidator;
 
 import org.example.demo.HelloApplication;
@@ -21,6 +22,7 @@ import org.example.demo.models.event;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class addEvent {
     @FXML private ComboBox<categorie> eventcategorieField;
@@ -134,7 +136,29 @@ public class addEvent {
                     selectedCategorie
             );
 
-            eventService.ajouter(event);
+            if (Objects.equals(type, "En ligne")) {
+                MeetLinkService service = new MeetLinkService();
+
+                service.setOnSucceeded(e -> {
+                    String meetLink = service.getValue();
+                    event.setMeet(meetLink);
+                    System.out.println("🎥 Google Meet Link: " + meetLink);
+
+                    // Once we have the link, add the event
+                    eventService.ajouter(event);
+                });
+
+                service.setOnFailed(e -> {
+                    System.err.println("❌ Failed to get Meet link: " + service.getException().getMessage());
+                });
+
+                // Start the service to run the PHP file
+                service.start();
+            } else {
+                // If not online, just add the event directly
+                eventService.ajouter(event);
+            }
+
             System.out.println("✅ Événement ajouté avec succès !");
             HelloApplication.changeScene("/org/example/demo/fxml/Backoffice/event/listEvent.fxml");
 

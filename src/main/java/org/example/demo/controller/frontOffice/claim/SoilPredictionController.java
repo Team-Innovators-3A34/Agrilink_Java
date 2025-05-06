@@ -132,7 +132,7 @@ public class SoilPredictionController {
         String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
         String lineEnd = "\r\n";
         String twoHyphens = "--";
-        String urlString = "http://127.0.0.1:5000/predict/soil";
+        String urlString = "http://127.0.0.1:5001/predict/soil";
 
         HttpURLConnection connection = (HttpURLConnection) new URL(urlString).openConnection();
         connection.setDoOutput(true);

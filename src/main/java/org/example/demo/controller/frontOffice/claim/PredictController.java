@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -55,102 +56,91 @@ public class PredictController {
 
     @FXML
     private void handlePredict() {
-        // Récupérer les valeurs saisies dans le formulaire
-        String region = regionComboBox.getValue();
-        String soilType = soilTypeComboBox.getValue();
-        String crop = cropComboBox.getValue();
-        String rainfallStr = rainfallField.getText();
-        String temperatureStr = temperatureField.getText();
-        boolean fertilizerUsed = fertilizerCheckBox.isSelected();
-        boolean irrigationUsed = irrigationCheckBox.isSelected();
-        String weatherCondition = weatherComboBox.getValue();
-        String daysToHarvestStr = daysToHarvestField.getText();
-
-        // Validation basique des champs numériques
-        if(rainfallStr.isEmpty() || temperatureStr.isEmpty() || daysToHarvestStr.isEmpty()){
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Veuillez remplir tous les champs numériques.");
-            return;
-        }
-
         try {
-            double rainfall = Double.parseDouble(rainfallStr);
-            double temperature = Double.parseDouble(temperatureStr);
-            int daysToHarvest = Integer.parseInt(daysToHarvestStr);
+            // Lecture des valeurs du formulaire
+            String region = regionComboBox.getValue();
+            String soilType = soilTypeComboBox.getValue();
+            String crop = cropComboBox.getValue();
 
-            // Création de l'objet JSON avec les données du formulaire
-            JsonObject jsonData = new JsonObject();
-            jsonData.addProperty("Region", region);
-            jsonData.addProperty("Soil_Type", soilType);
-            jsonData.addProperty("Crop", crop);
-            jsonData.addProperty("Rainfall_mm", rainfall);
-            jsonData.addProperty("Temperature_Celsius", temperature);
-            jsonData.addProperty("Fertilizer_Used", fertilizerUsed);
-            jsonData.addProperty("Irrigation_Used", irrigationUsed);
-            jsonData.addProperty("Weather_Condition", weatherCondition);
-            jsonData.addProperty("Days_to_Harvest", daysToHarvest);
-
-            // Appel à l'API de prédiction via HTTP POST
-            String predictionStr = callPredictionAPI(jsonData.toString());
-            double predictionValue = 0.0;
-            try {
-                predictionValue = Double.parseDouble(predictionStr);
-            } catch(NumberFormatException e) {
-                // On peut gérer ici un éventuel message d'erreur spécifique.
-                predictionStr = "Erreur de conversion";
+            // Validation des champs numériques
+            if (rainfallField.getText().isEmpty() || temperatureField.getText().isEmpty() || daysToHarvestField.getText().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erreur", "Veuillez remplir tous les champs numériques.");
+                return;
             }
-            // Formatage à deux décimales
-            String formattedPrediction = String.format("%.2f", predictionValue);
 
-            // Affichage du résultat dans une alerte personnalisée
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Résultat de la prédiction");
-            alert.setHeaderText(null);
-            // Personnalisation du contenu et du style
-            Label contentLabel = new Label("Le rendement estimé est : " + formattedPrediction + " tonnes par hectare");
-            contentLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2e7d32;");
-            alert.getDialogPane().setContent(contentLabel);
-            alert.getDialogPane().setStyle("-fx-padding: 20; -fx-background-color: #f1f8e9;");
-            alert.showAndWait();
+            double rainfall;
+            double temperature;
+            int daysToHarvest;
 
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Veuillez entrer des valeurs numériques valides.");
+            try {
+                rainfall = Double.parseDouble(rainfallField.getText());
+                temperature = Double.parseDouble(temperatureField.getText());
+                daysToHarvest = Integer.parseInt(daysToHarvestField.getText());
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Erreur de format", "Les valeurs numériques doivent être des nombres valides.");
+                return;
+            }
+
+            boolean fertilizer = fertilizerCheckBox.isSelected();
+            boolean irrigation = irrigationCheckBox.isSelected();
+            String weather = weatherComboBox.getValue();
+
+            // Création de l'objet JSON à envoyer (correspondant au format de l'API)
+            JsonObject json = new JsonObject();
+            json.addProperty("Region", region);
+            json.addProperty("Soil_Type", soilType);
+            json.addProperty("Crop", crop);
+            json.addProperty("Rainfall_mm", rainfall);
+            json.addProperty("Temperature_Celsius", temperature);
+            json.addProperty("Fertilizer_Used", fertilizer);
+            json.addProperty("Irrigation_Used", irrigation);
+            json.addProperty("Weather_Condition", weather);
+            json.addProperty("Days_to_Harvest", daysToHarvest);
+
+            // Appel à l'API et récupération du résultat
+            String result = callPredictionAPI(json.toString());
+
+            // Affichage du résultat
+            showAlert(Alert.AlertType.INFORMATION, "Résultat de la prédiction", "Le rendement prévu est : " + result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue : " + e.getMessage());
         }
     }
 
-
     private String callPredictionAPI(String jsonData) {
         try {
-            // Remplacez l'URL par votre endpoint d'API
-            URL url = new URL("http://localhost:5100/predict");
+            // Utilisation de l'URL correcte du serveur Flask
+            URL url = new URL("http://localhost:5100/predict/rendement");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json; utf-8");
+            connection.setRequestProperty("Content-Type", "application/json");
             connection.setDoOutput(true);
 
             // Envoyer les données JSON
-            connection.getOutputStream().write(jsonData.getBytes(StandardCharsets.UTF_8));
-            connection.getOutputStream().flush();
-            connection.getOutputStream().close();
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonData.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
 
-            // Lire la réponse de l'API
+            // Lire la réponse
             int responseCode = connection.getResponseCode();
-            if(responseCode == HttpURLConnection.HTTP_OK) {
-                Scanner scanner = new Scanner(connection.getInputStream());
-                StringBuilder responseBuilder = new StringBuilder();
-                while(scanner.hasNext()){
-                    responseBuilder.append(scanner.nextLine());
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try (Scanner scanner = new Scanner(connection.getInputStream(), StandardCharsets.UTF_8)) {
+                    StringBuilder responseBuilder = new StringBuilder();
+                    while (scanner.hasNext()) {
+                        responseBuilder.append(scanner.nextLine());
+                    }
+                    JsonObject responseJson = new Gson().fromJson(responseBuilder.toString(), JsonObject.class);
+                    return responseJson.has("prediction") ? responseJson.get("prediction").getAsString() : "Aucune prédiction reçue";
                 }
-                scanner.close();
-
-                // Supposons que la réponse JSON contient une propriété "prediction"
-                JsonObject responseJson = new Gson().fromJson(responseBuilder.toString(), JsonObject.class);
-                return responseJson.has("prediction") ? responseJson.get("prediction").getAsString() : "Aucune prédiction reçue";
             } else {
                 return "Erreur lors de l'appel à l'API: " + responseCode;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "Erreur lors de l'appel à l'API";
+            return "Erreur lors de l'appel à l'API: " + e.getMessage();
         }
     }
 

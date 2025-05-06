@@ -19,36 +19,13 @@ import java.util.function.Consumer;
 public class HelloApplication extends Application {
 
     private static Stage primaryStage;
-    userService userService = new userService();
-
 
     @Override
     public void start(Stage stage)  {
-//        MeetLinkService service = new MeetLinkService();
-//        service.setOnSucceeded(e -> {
-//            String meetLink = service.getValue();
-//            System.out.println("🎥 Google Meet Link: " + meetLink);
-//            // show in UI
-//        });
-//        service.setOnFailed(e -> {
-//            System.err.println("❌ Error: " + service.getException().getMessage());
-//        });
-//
-//        service.start();
+
         primaryStage = stage;
         primaryStage.setTitle("Agrilink");
-        //userService.login("mehdiboughdiri75@gmail.com", "Mehdiboughdiri75");
-        //userService.login("monsef.boughdiri@esprit.tn", "Mehdiboughdiri75");//point investor
-        //userService.login("jemaimedmalek@gmail.com", "Mehdiboughdiri75");//admin
-        //userService.login("aaa@esprit.tn", "Aaabbb123");
-        //userService.login("chirine.dardouri@esprit.tn", "Aaabbb123");
-        //changeScene("/org/example/demo/fxml/Frontoffice/HomePage.fxml");
-        //changeScene("/org/example/demo/fxml/Frontoffice/profile/profile.fxml");
         changeScene("/org/example/demo/fxml/Security/Login.fxml");
-        //changeScene("/org/example/demo/fxml/Backoffice/recyclingPoint/listproduit.fxml");
-        //changeScene("/org/example/demo/fxml/Frontoffice/pointRecyclage/addRecyclingPoint.fxml");
-        //userService.login("ghodbane.mohamed@esprit.tn", "Ahmedmohsen7");
-        //userService.login("admin@gmail.com", "Ahmedmohsen7");
         primaryStage.show();
     }
 
