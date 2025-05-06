@@ -28,9 +28,12 @@ module org.example.demo {
     requires com.google.api.client;
     requires vosk;
     requires javafx.media;
+    requires async.http.client;
     opens org.example.demo.controller to javafx.fxml;
     opens org.example.demo.models to javafx.base;
     exports org.example.demo;
+    exports org.example.demo.controller.frontOffice.recycling;
+    exports org.example.demo.controller.frontOffice.RecyclingChat;
     opens org.example.demo.controller.backOffice.user to javafx.fxml;
     opens org.example.demo.controller.backOffice.event to javafx.fxml;
     opens org.example.demo.controller.backOffice.claim to javafx.fxml;
@@ -48,6 +51,6 @@ module org.example.demo {
     opens org.example.demo.controller.frontOffice.posts to javafx.fxml;
     opens org.example.demo.controller.frontOffice.features to javafx.fxml;
     opens org.example.demo.controller.frontOffice.badges to javafx.fxml;
-
-
+    opens org.example.demo.controller.frontOffice.recycling to javafx.fxml;
+    opens org.example.demo.controller.frontOffice.RecyclingChat to javafx.fxml;
 }

@@ -37,7 +37,11 @@ public class sideBarController {
             HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/settings/settings.fxml");
         }
     }
+    @FXML
+    public void onVirtualRealityClicked() {
+        HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/recycling/Recycling.fxml");
 
+    }
     public void onProfileClicked() {
         HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/profile/profile.fxml");
     }

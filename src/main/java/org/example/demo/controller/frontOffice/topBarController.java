@@ -74,6 +74,12 @@ public class topBarController {
 
     @FXML
     public void onVirtualRealityClicked() {
-        HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/vr/vr.fxml");
+        HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/recycling/Recycling.fxml");
+
+    }
+    @FXML
+    public void onChatbot() {
+        HelloApplication.changeScene("/org/example/demo/fxml/Frontoffice/Recyclingchat/Chat.fxml");
+
     }
 }

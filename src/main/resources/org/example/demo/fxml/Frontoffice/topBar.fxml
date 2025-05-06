@@ -82,11 +82,13 @@
          </image>
       </ImageView>
 
-      <!-- VR Button -->
+      <!-- Image scan -->
+
+      <!-- Chatbot -->
       <Circle fill="#f3f3f3" layoutX="855.0" layoutY="43.0" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
-      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="844.0" layoutY="32.0" onMouseClicked="#onVirtualRealityClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="844.0" layoutY="32.0" onMouseClicked="#onChatbot" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../icons/virtual-reality.png" />
+            <Image url="@../../../../../icons/ecoBot.png" />
          </image>
       </ImageView>
 
