@@ -1,7 +1,7 @@
 # Projet Agrilink JavaFX
 
 Gestion complète d'une exploitation agricole via une application desktop JavaFX, intégrant 6 modules de gestion, un ensemble de métiers (API et fonctionnalités) et plusieurs modèles d’IA pour l’analyse et la recommandation.
-
+For a quick demo of our application check this link https://res.cloudinary.com/dw8lxfsv0/video/upload/v1747124485/Agrilinkpromo2_zwzzci.mp4
 ---
 
 ## Table des matières
